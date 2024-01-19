@@ -9,8 +9,26 @@ CREATE TABLE users (
 CREATE table chapters (
     chapter_number INT PRIMARY KEY,
     chapter_name VARCHAR(255),
-    chapter_arabic_name VARCHAR(255),
+    chapter_arabic_name VARCHAR(255)
 );
+
+INSERT INTO chapters (chapter_number, chapter_name, chapter_arabic_name) VALUES
+    (1, 'Acquaintance', 'التَّعَارُفُ'),
+    (2, 'Family', 'الأُسْرَةُ'),
+    (3, 'Living', 'السَّكَنُ'),
+    (4, 'Daily Life', 'الحَيَاةُ اليَوْمِيَّةُ'),
+    (5, 'Food & Drink', 'الطَّعَامُ وَالشَّرَابُ'),
+    (6, 'The Prayer', 'الصَّلَاةُ'),
+    (7, 'Study', 'الدِّرَاسَةُ'),
+    (8, 'Work', 'العَمَلُ'),
+    (9, 'Shopping', 'التَّسَوُّقُ'),
+    (10, 'Weather', 'الجَوُّ'),
+    (11, 'People & Places', 'النَّاسُ وَالأَمَاكِنُ'),
+    (12, 'Hobbies', 'الهِوَايَاتُ'),
+    (13, 'Travel', 'السَّفَرُ'),
+    (14, 'Hajj & Umrah', 'الحَجُّ وَالعُمْرَةُ'),
+    (15, 'Health', 'الصِّحَّةُ'),
+    (16, 'Vacation', 'العُطْلَةُ');
 
 CREATE TABLE chapter_one_verbs (
     id SERIAL PRIMARY KEY,

@@ -6,20 +6,7 @@ bayna yadayk book has 16 chapters
     name of the chapters 
     1. greetings
     2. family
-    3. food
-    4. clothes
-    5. colors
-    6. numbers
-    7. days of the week
-    8. months of the year
-    9. weather
-    10. animals
-    11. body parts
-    12. professions
-    13. countries
-    14. cities
-    15. directions
-    16. transportation
+    ... 16.  
 
 2. user can take quiz
 3. user can see his score
