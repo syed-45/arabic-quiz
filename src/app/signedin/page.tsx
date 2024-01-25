@@ -6,7 +6,7 @@ export default async function SignedIn() {
     
     const quizzesCompleted = 0
     const averageScore = 0
-    const res = await fetch('http:localhost:3000/api/get-chapter-names')
+    const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`)
     const data = await res.json()
     const allChapters: IChapterData[] = data.result.rows
 
