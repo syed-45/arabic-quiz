@@ -6,9 +6,9 @@ export default async function SignedIn() {
     
     const quizzesCompleted = 0
     const averageScore = 0
-    // const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`)
-    // const data = await res.json()
-    // const allChapters: IChapterData[] = data.result.rows
+    const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`)
+    const data = await res.json()
+    const allChapters: IChapterData[] = data.result.rows
 
     return (
         <>
@@ -21,9 +21,9 @@ export default async function SignedIn() {
                 Average score: {averageScore+'%'}
             </div>
             <main className='grid grid-cols-2 gap-4 mt-10 px-5'>
-                {/* {allChapters.map((chapter) => (
+                {allChapters.map((chapter) => (
                     <ChapterCard {...chapter} key={chapter.chapter_number} />
-                ))} */}
+                ))}
             </main>
         </>
     )
