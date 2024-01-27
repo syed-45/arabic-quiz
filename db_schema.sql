@@ -30,36 +30,39 @@ INSERT INTO chapters (chapter_number, chapter_name, chapter_arabic_name) VALUES
     (15, 'Health', 'الصِّحَّةُ'),
     (16, 'Vacation', 'العُطْلَةُ');
 
-CREATE TABLE chapter_one_verbs (
-    id SERIAL PRIMARY KEY,
-    arabic VARCHAR(255),
-    english VARCHAR(255)
+CREATE TABLE chapter_1_verbs (
+    english VARCHAR(20),
+    arabic_verbal_nouns VARCHAR(20),
+    arabic_command VARCHAR(20),
+    arabic_present VARCHAR(20),
+    arabic_past VARCHAR(20)
 );
 
-INSERT INTO chapter_one_verbs (arabic, english) VALUES
-    ('نَظَر', 'To look'),
-    ('اِسْتَمَع', 'To listen'),
-    ('عَاد', 'To repeat'),
-    ('أَشَارَ', 'To point, indicate'),
-    ('وَضَع', 'To put'),
-    ('سَمِع', 'To hear'),
-    ('قَال', 'To say'),
-    ('رَتَّب', 'To put in order, organise, arrange'),
-    ('تَبَادَل', 'To exchange'),
-    ('سَأَل', 'To ask'),
-    ('أَجَاب', 'To answer'),
-    ('قَرَأ', 'To read'),
-    ('مَرَّ', 'To pass by'),
-    ('نَسَخ', 'To copy');
+INSERT INTO chapter_1_verbs VALUES
+    ('look', 'نَظَرٌ', 'اُنْظُرْ', 'يَنْظُرُ', 'نَظَرَ'),
+    ('listen', 'اِسْتِمَاع', 'اِسْتَمِعْ', 'يَسْتَمِعُ', 'اِسْتَمَعَ'),
+    ('repeat', 'إِعَادَة', 'أَعِدْ', 'يُعِيدُ', 'عَادَ'),
+    ('point, indicate', 'إِشَارَةٌ', 'أُشِرْ', 'يُشِيرُ', 'أَشَارَ'),
+    ('put', 'وَضْعٌ', 'ضَعْ', 'يَضَعُ', 'وَضَعَ'),
+    ('hear', 'سَمَاعٌ', 'اِسْمَعْ', 'يَسْمَعُ', 'سَمِعَ'),
+    ('say', 'قَوْلٌ', 'قُلْ', 'يَقُولُ', 'قَالَ'),
+    ('organise, arrange', 'تَرْتِيبٌ', 'رَتِّبْ', 'يُرَتِّبُ', 'رَتَّبَ'),
+    ('exchange', 'تَبَادُلٌ', 'تَبَادَلْ', 'يَتَبَادَلُ', 'تَبَادَلَ'),
+    ('ask', 'سُؤَالٌ', 'اِسْأَلْ', 'يَسْأَلُ', 'سَأَلَ'),
+    ('answer', 'إِجَابَةٌ', 'أُجِبْ', 'يُجِيبُ', 'أَجَابَ'),
+    ('read', 'قِرَاءَةٌ', 'اِقْرَأْ', 'يَقْرَأُ', 'قَرَأَ'),
+    ('pass by', 'مُرُورٌ', 'مُرَّ', 'يَمُرُّ', 'مَرَّ'),
+    ('copy', 'نَسْخٌ', 'اِنْسَخْ', 'يَنْسَخُ', 'نَسَخَ');
 
-CREATE TABLE chapter_one_nouns (
+
+CREATE TABLE chapter_1_nouns (
     id SERIAL PRIMARY KEY,
     arabic VARCHAR(255),
     english VARCHAR(255),
     arabic_plural VARCHAR(255)
 );
 
-INSERT INTO chapter_one_nouns (arabic, english, arabic_plural) VALUES
+INSERT INTO chapter_1_nouns (arabic, english, arabic_plural) VALUES
     ('طَالِب', 'Student', 'طُلَّاب'),
     ('كِتَاب', 'Book', 'كُتُب'),
     ('وَحْدَة', 'Chapter', 'وَحَدَات'),
@@ -69,7 +72,7 @@ INSERT INTO chapter_one_nouns (arabic, english, arabic_plural) VALUES
     ('أَخ', 'Brother', 'إِخْوَة'),
     ('مُهَنْدِس', 'Engineer', 'مُهَنْدِسُون'),
     ('صَدِيق', 'Friend', 'أَصْدِقَاء'),
-    ('طَبِيب', 'Doctor', 'أَطْبَاء'),
+    ('طَبِّيب', 'Doctor', 'الأَطِبّاءُ'),
     ('أُخْت', 'Sister', 'أَخَوَات'),
     ('دَرْس', 'Lesson', 'دُرُوس'),
     ('تَدْرِيب', 'Exercise', 'تَدَرِيبَات'),
@@ -83,3 +86,6 @@ INSERT INTO chapter_one_nouns (arabic, english, arabic_plural) VALUES
     ('جُمْلَة', 'Sentence', 'جُمَل'),
     ('عَلَامَة', 'Sign, indication', 'عَلَامَات'),
     ('كَلِمَة', 'Word', 'كَلِمَات');
+
+-- bing command ⬇️
+-- create an sql table fpr the chapter one -verbs table on the page i am on righht now, thecolumns should be english, arabic_past, arabic_present, arabic_command, arabic_verbal_nouns. Answer only using the web page context and do not search the web.
