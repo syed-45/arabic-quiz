@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { IChapterData } from "./types"
 
 export const ChapterCard = (chapterData: IChapterData) => {
@@ -22,10 +23,10 @@ export const ChapterCard = (chapterData: IChapterData) => {
     ].reverse();
 
     return(
-        <div className={"flex flex-col px-5 py-5 rounded-md " + gradients[chapterData.chapter_number-1]}>
+        <Link href={`/chapters/${chapterData.chapter_number}`} className={"flex flex-col px-5 py-5 rounded-md " + gradients[chapterData.chapter_number-1]}>
             <div className="text-right mb-5 sm:text-xl">{chapterData.chapter_arabic_name}</div>
             <div className="text-xs sm:text-lg">{chapterData.chapter_number+'. '+chapterData.chapter_name}</div>
-        </div>
+        </Link>
     )
 
 }
