@@ -1,0 +1,248 @@
+import { INounsData, IVerbsData } from "./types";
+
+export const spareVerbs: IVerbsData[] = [
+    {
+        english: "to be",
+        arabic_verbal_nouns: "كَانَ",
+        arabic_command: "كُنْ",
+        arabic_present: "يَكُونُ",
+        arabic_past: "كَانَ",
+    },
+    {
+        english: "to eat",
+        arabic_verbal_nouns: "أَكَلَ",
+        arabic_command: "كُلْ",
+        arabic_present: "يَأْكُلُ",
+        arabic_past: "أَكَلَ",
+    },
+    {
+        english: "to drink",
+        arabic_verbal_nouns: "شَرِبَ",
+        arabic_command: "اشْرَبْ",
+        arabic_present: "يَشْرَبُ",
+        arabic_past: "شَرِبَ",
+    },
+    {
+        english: "to sleep",
+        arabic_verbal_nouns: "نَامَ",
+        arabic_command: "نَمْ",
+        arabic_present: "يَنَامُ",
+        arabic_past: "نَامَ",
+    },
+    {
+        english: "to walk",
+        arabic_verbal_nouns: "مَشَى",
+        arabic_command: "امْشِ",
+        arabic_present: "يَمْشِي",
+        arabic_past: "مَشَى",
+    },
+    {
+        english: "to read",
+        arabic_verbal_nouns: "قَرَأَ",
+        arabic_command: "اقْرَأْ",
+        arabic_present: "يَقْرَأُ",
+        arabic_past: "قَرَأَ",
+    },
+    {
+        english: "to write",
+        arabic_verbal_nouns: "كَتَبَ",
+        arabic_command: "اكْتُبْ",
+        arabic_present: "يَكْتُبُ",
+        arabic_past: "كَتَبَ",
+    },
+    {
+        english: "to speak",
+        arabic_verbal_nouns: "تَكَلَّمَ",
+        arabic_command: "تَكَلَّمْ",
+        arabic_present: "يَتَكَلَّمُ",
+        arabic_past: "تَكَلَّمَ",
+    },
+    {
+        english: "to listen",
+        arabic_verbal_nouns: "اِسْتَمَعَ",
+        arabic_command: "اسْتَمِعْ",
+        arabic_present: "يَسْتَمِعُ",
+        arabic_past: "اِسْتَمَعَ",
+    },
+    {
+        english: "to learn",
+        arabic_verbal_nouns: "تَعَلَّمَ",
+        arabic_command: "تَعَلَّمْ",
+        arabic_present: "يَتَعَلَّمُ",
+        arabic_past: "تَعَلَّمَ",
+    },
+    {
+        english: "to love",
+        arabic_verbal_nouns: "حَبَّ",
+        arabic_command: "أَحِبُّ",
+        arabic_present: "يُحِبُّ",
+        arabic_past: "حَبَّ",
+    },
+    {
+        english: "to see",
+        arabic_verbal_nouns: "رَأَى",
+        arabic_command: "ارَ",
+        arabic_present: "يَرَى",
+        arabic_past: "رَأَى",
+    },
+    {
+        english: "to hear",
+        arabic_verbal_nouns: "سَمِعَ",
+        arabic_command: "اسْمَعْ",
+        arabic_present: "يَسْمَعُ",
+        arabic_past: "سَمِعَ",
+    },
+    {
+        english: "to understand",
+        arabic_verbal_nouns: "فَهِمَ",
+        arabic_command: "افْهَمْ",
+        arabic_present: "يَفْهَمُ",
+        arabic_past: "فَهِمَ",
+    },
+    {
+        english: "to speak",
+        arabic_verbal_nouns: "تَكَلَّمَ",
+        arabic_command: "تَكَلَّمْ",
+        arabic_present: "يَتَكَلَّمُ",
+        arabic_past: "تَكَلَّمَ",
+    },
+    {
+        english: "to write",
+        arabic_verbal_nouns: "كَتَبَ",
+        arabic_command: "اكْتُبْ",
+        arabic_present: "يَكْتُبُ",
+        arabic_past: "كَتَبَ",
+    },
+    {
+        english: "to run",
+        arabic_verbal_nouns: "رَكِضَ",
+        arabic_command: "ارْكُضْ",
+        arabic_present: "يَرْكُضُ",
+        arabic_past: "رَكِضَ",
+    },
+    {
+        english: "to laugh",
+        arabic_verbal_nouns: "ضَحِكَ",
+        arabic_command: "اضْحَكْ",
+        arabic_present: "يَضْحَكُ",
+        arabic_past: "ضَحِكَ",
+    },
+    {
+        english: "to cry",
+        arabic_verbal_nouns: "بَكَى",
+        arabic_command: "ابْكِ",
+        arabic_present: "يَبْكِي",
+        arabic_past: "بَكَى",
+    },
+    {
+        english: "to think",
+        arabic_verbal_nouns: "فَكَّرَ",
+        arabic_command: "فَكِّرْ",
+        arabic_present: "يَفَكَّرُ",
+        arabic_past: "فَكَّرَ",
+    },
+]
+
+export const spareNouns: INounsData[] = [
+    {
+        english: "book",
+        arabic: "كِتَاب",
+        arabic_plural: "كُتُب",
+    },
+    {
+        english: "pen",
+        arabic: "قَلَم",
+        arabic_plural: "أَقْلام",
+    },
+    {
+        english: "table",
+        arabic: "طَاوِلَة",
+        arabic_plural: "طَاوِلَات",
+    },
+    {
+        english: "chair",
+        arabic: "كُرْسِيّ",
+        arabic_plural: "كُرَاسِيّ",
+    },
+    {
+        english: "door",
+        arabic: "بَاب",
+        arabic_plural: "أَبْوَاب",
+    },
+    {
+        english: "window",
+        arabic: "نَافِذَة",
+        arabic_plural: "نَوَافِذ",
+    },
+    {
+        english: "car",
+        arabic: "سَيَّارَة",
+        arabic_plural: "سَيَّارَات",
+    },
+    {
+        english: "tree",
+        arabic: "شَجَرَة",
+        arabic_plural: "أَشْجَار",
+    },
+    {
+        english: "flower",
+        arabic: "زَهْرَة",
+        arabic_plural: "زُهُور",
+    },
+    {
+        english: "sun",
+        arabic: "شَمْس",
+        arabic_plural: "شُمُوس",
+    },
+    {
+        english: "moon",
+        arabic: "قَمَر",
+        arabic_plural: "أَقْمَار",
+    },
+    {
+        english: "star",
+        arabic: "نَجْمَة",
+        arabic_plural: "نُجُوم",
+    },
+    {
+        english: "sky",
+        arabic: "سَمَاء",
+        arabic_plural: "سَمَاوَات",
+    },
+    {
+        english: "earth",
+        arabic: "أَرْض",
+        arabic_plural: "أَرَاضِي",
+    },
+    {
+        english: "mountain",
+        arabic: "جَبَل",
+        arabic_plural: "جِبَال",
+    },
+    {
+        english: "river",
+        arabic: "نَهْر",
+        arabic_plural: "أَنْهَار",
+    },
+    {
+        english: "sea",
+        arabic: "بَحْر",
+        arabic_plural: "بِحَار",
+    },
+    {
+        english: "cloud",
+        arabic: "سَحَابَة",
+        arabic_plural: "سُحُب",
+    },
+    {
+        english: "rain",
+        arabic: "مَطَر",
+        arabic_plural: "أَمْطَار",
+    },
+    {
+        english: "snow",
+        arabic: "ثَلْج",
+        arabic_plural: "ثُلُوج",
+    },
+];
+

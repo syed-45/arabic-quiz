@@ -1,6 +1,6 @@
 
-import { ChapterCard } from '../ChapterCard'
-import { IChapterData } from '../types'
+import { ChapterCard } from '../components/ChapterCard'
+import { IChapterData } from '../utils/types'
 
 export default async function SignedIn() {
     

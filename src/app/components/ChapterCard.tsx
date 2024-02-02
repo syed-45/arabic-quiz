@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IChapterData } from "./types"
+import { IChapterData } from "../utils/types"
 
 export const ChapterCard = (chapterData: IChapterData) => {
 
