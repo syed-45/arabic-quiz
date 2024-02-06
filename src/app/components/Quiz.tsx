@@ -11,9 +11,9 @@ export default function Quiz(props: QuizProps):JSX.Element {
     const [verbOrNoun, setVerbOrNoun] = useState<'verb' | 'noun'>(generateRandomOption(['verb', 'noun']))
     const [questionIsEnglish, setQuestionIsEnglish] = useState<boolean>(generateRandomOption([true, false]))
     const noOfQuestions = verbs.length + nouns.length > 12 ? 12 : verbs.length + nouns.length
-    const [questions, setQuestions] = useState<IQuestion[]>([])
-    const [question, setQuestion] = useState<IQuestion>({question: '', option1: '', option2: '', option3: '', answer_option4: '', user_answer: '', is_correct: false,})
-    const shuffledOptions = shuffleArray(Object.entries(question).slice(1,5))
+    const [questions, setQuestions] = useState<IQuestion[]>([{question: '', options:[], answer:'', user_answer: 'foo', is_correct: false,}])
+    const [questionNum, setQuestionNum] = useState<number>(0)
+    const currentQuestion = questions[questionNum]
 
     useEffect(() => {
         let [questionWord, option1, option2, option3, answer_option4]: string[] = []
@@ -76,18 +76,16 @@ export default function Quiz(props: QuizProps):JSX.Element {
                 }
             }
         }
-        console.log(verbOrNoun)
-        setQuestion({
+
+        setQuestions(prev => [...prev, {
             question: questionWord,
-            option1: option1,
-            option2: option2,
-            option3: option3,
-            answer_option4: answer_option4,
+            options: shuffleArray([option1, option2, option3, answer_option4]),
+            answer: answer_option4,
             user_answer: '',
             is_correct: false
-        })
+        }])
 
-    }, [verbs, nouns, verbOrNoun, questionIsEnglish])    
+    }, [verbs, nouns])    
     // e.g 2 verbs, 8 nouns or 10 verbs, 10 nouns
     // set verb or noun Rnadomly => verb
     // set question to random {verb}, then options to random verbs, if no more verbs then random nouns
@@ -98,24 +96,81 @@ export default function Quiz(props: QuizProps):JSX.Element {
     // setQuestions(prevQuestions => [...prevQuestions, question])
     // repeat until 10 questions 
 
-    const handleOptionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const user_answer = e.currentTarget.value
+    const handleOptionClick = (option: string) => {
+        console.log(questions)
+        if (currentQuestion.user_answer === option) {
+            setQuestions((prev: IQuestion[]):IQuestion[] => {
+                // Create a new array with the same elements
+                const newQuestions = [...prev];
+        
+                // Update the user_answer of the current question
+                newQuestions[questionNum].user_answer = '';
+
+                // Update the is_correct of the current question
+                newQuestions[questionNum].is_correct = false;
+        
+                // Return the new array
+                return newQuestions;
+            });
+        }
+        else {
+            setQuestions((prev: IQuestion[]):IQuestion[] => {
+            // Create a new array with the same elements
+            const newQuestions = [...prev];
+    
+            // Update the user_answer of the current question
+            newQuestions[questionNum].user_answer = option;
+
+            // Update the is_correct of the current question
+            newQuestions[questionNum].is_correct = option === newQuestions[questionNum].answer
+    
+            // Return the new array
+            return newQuestions;
+            });
+        }
+    }
+
+    const handleNextClick = () => {
+        if (currentQuestion.user_answer === '') {
+            alert('Please select an option')
+        } else if (questionNum === noOfQuestions) {
+            alert('Quiz complete')
+            // send questions to server and get results
+        }
+        else {
+            if (verbOrNoun === 'verb') {
+                setVerbs(prev => prev.filter(verb => verb[questionIsEnglish ? 'english' : 'arabic_past'] !== currentQuestion.question));
+            } else {
+                setNouns(prev => prev.filter(noun => noun[questionIsEnglish ? 'english' : 'arabic'] !== currentQuestion.question));
+            }
+               setQuestionNum(prev => prev + 1)
+            setVerbOrNoun(generateRandomOption(['verb', 'noun']))
+            setQuestionIsEnglish(generateRandomOption([true, false]))
+            
+        }
     }
 
     return (
-        <main className='text-center mx-5 border-2 border-green-700 rounded-md mt-10 p-5 max-w-3xl sm:mx-auto'>
-            <div className="mt-7 text-5xl">{question.question}</div>
-            <div className="grid grid-cols-2 gap-0 mt-5">
-                {shuffledOptions.map(([optionNum, option]) => {
-                    return (
-                        <button key={optionNum} onClick={handleOptionClick} value={option} className="bg-blue-500 h-32">{option}</button>
-                    )
-                })}
-
-                {/* need a way to randomise which order the options appear */}
-                
-            </div>
-                   
-        </main>
+            (questionNum === 0) ?
+            <main className="text-center mx-5 mt-10 p-5 max-w-3xl sm:mx-auto">
+                <button className="border-2 p-5 rounded-md border-yellow-500" onClick={handleNextClick} >START CHAPTER 1 QUIZ</button>
+            </main>
+            : <main className='text-center mx-5 border-2 border-green-700 rounded-md mt-10 p-5 max-w-3xl sm:mx-auto'>
+                <div className="my-7 text-5xl">{currentQuestion.question}</div>
+                <div className="grid grid-cols-2 gap-0 mt-5">
+                    {currentQuestion.options.map((option:string):JSX.Element => {
+                        return (
+                            <button
+                                key={option}
+                                onClick={() => handleOptionClick(option)}
+                                className={"h-32" + (currentQuestion.user_answer === option ? " bg-blue-300" : " bg-blue-500")}
+                            >
+                                {option}
+                            </button>
+                        )
+                    })}
+                </div>
+                <button className="bg-blue-900 h-12 mt-10" onClick={handleNextClick}>Next</button>
+            </main>
     )
 }

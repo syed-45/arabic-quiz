@@ -1,4 +1,3 @@
-import Button from "@/app/components/Button"
 import Quiz from "@/app/components/Quiz"
 import { INounsData, IQuestion, IVerbsData } from "@/app/utils/types"
 
@@ -29,7 +28,6 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
                     Need to generate quiz for chapter {params.chapter_number}
                 </div>
                 <Quiz verbs={verbs} nouns={nouns} />
-                <Button text={verbs[0].arabic_past}></Button>
             </>
         )
     }

@@ -20,10 +20,8 @@ export interface INounsData {
 
 export interface IQuestion {
     question: string;
-    option1: string;
-    option2: string;
-    option3: string;
-    answer_option4: string;
+    options: string[];
+    answer: string;
     user_answer: string;
     is_correct: boolean;
 }
