@@ -19,62 +19,19 @@ export default function Quiz(props: QuizProps):JSX.Element {
         let [questionWord, option1, option2, option3, answer_option4]: string[] = []
 
         if (verbOrNoun === 'verb' && verbs.length > 0) {
-            if (questionIsEnglish) {
                 const questionVerb: IVerbsData = generateRandomOption(verbs);
-                questionWord = questionVerb.english
-                answer_option4 = questionVerb.arabic_past
-                if (verbs.length < 3) {
-                   option1 = generateRandomOption(spareVerbs).arabic_past
-                   option2 = generateRandomOption(spareVerbs.filter((verb) => verb.arabic_past !== option1)).arabic_past
-                   option3 = generateRandomOption(spareVerbs.filter((verb) => verb.arabic_past !== option1 && verb.arabic_past !== option2)).arabic_past
-                } else {
-                    option1 = generateRandomOption(verbs.filter((verb) => verb.arabic_past !== answer_option4)).arabic_past
-                    option2 = generateRandomOption(verbs.filter((verb) => verb.arabic_past !== answer_option4 && verb.arabic_past !== option1)).arabic_past
-                    option3 = generateRandomOption(verbs.filter((verb) => verb.arabic_past !== answer_option4 && verb.arabic_past !== option1 && verb.arabic_past !== option2)).arabic_past
-                }
-                
-            } else {
-                const questionVerb: IVerbsData = generateRandomOption(verbs);
-                questionWord = questionVerb.arabic_past
-                answer_option4 = questionVerb.english
-                if (verbs.length < 3) {
-                    option1 = generateRandomOption(spareVerbs).english
-                    option2 = generateRandomOption(spareVerbs.filter((verb) => verb.english !== option1)).english
-                    option3 = generateRandomOption(spareVerbs.filter((verb) => verb.english !== option1 && verb.english !== option2)).english
-                } else {
-                    option1 = generateRandomOption(verbs.filter((verb) => verb.english !== answer_option4)).english
-                    option2 = generateRandomOption(verbs.filter((verb) => verb.english !== answer_option4 && verb.english !== option1)).english
-                    option3 = generateRandomOption(verbs.filter((verb) => verb.english !== answer_option4 && verb.english !== option1 && verb.english !== option2)).english
-                }
-            }
+                questionWord = questionVerb[questionIsEnglish ? 'english' : 'arabic_past']
+                answer_option4 = questionVerb[questionIsEnglish ? 'arabic_past' : 'english']
+                   option1 = generateRandomOption((verbs.length < 3 ? spareVerbs : verbs))[questionIsEnglish ? 'arabic_past' : 'english']
+                   option2 = generateRandomOption((verbs.length < 3 ? spareVerbs : verbs).filter((verb) => verb[questionIsEnglish ? 'arabic_past' : 'english'] !== option1))[questionIsEnglish ? 'arabic_past' : 'english']
+                   option3 = generateRandomOption((verbs.length < 3 ? spareVerbs : verbs).filter((verb) => verb[questionIsEnglish ? 'arabic_past' : 'english'] !== option1 && verb[questionIsEnglish ? 'arabic_past' : 'english'] !== option2))[questionIsEnglish ? 'arabic_past' : 'english']                
         } else if (verbOrNoun === 'noun' && nouns.length > 0) {
-            if (questionIsEnglish) {
                 const questionNoun: INounsData = generateRandomOption(nouns);
-                questionWord = questionNoun.english
-                answer_option4 = questionNoun.arabic
-                if (nouns.length < 3) {
-                    option1 = generateRandomOption(spareNouns).arabic
-                    option2 = generateRandomOption(spareNouns.filter((noun) => noun.arabic !== option1)).arabic
-                    option3 = generateRandomOption(spareNouns.filter((noun) => noun.arabic !== option1 && noun.arabic !== option2)).arabic
-                } else {
-                    option1 = generateRandomOption(nouns.filter((noun) => noun.arabic !== answer_option4)).arabic
-                    option2 = generateRandomOption(nouns.filter((noun) => noun.arabic !== answer_option4 && noun.arabic !== option1)).arabic
-                    option3 = generateRandomOption(nouns.filter((noun) => noun.arabic !== answer_option4 && noun.arabic !== option1 && noun.arabic !== option2)).arabic
-                }
-            } else {
-                const questionNoun: INounsData = generateRandomOption(nouns);
-                questionWord = questionNoun.arabic
-                answer_option4 = questionNoun.english
-                if (nouns.length < 3) {
-                    option1 = generateRandomOption(spareNouns).english
-                    option2 = generateRandomOption(spareNouns.filter((noun) => noun.english !== option1)).english
-                    option3 = generateRandomOption(spareNouns.filter((noun) => noun.english !== option1 && noun.english !== option2)).english
-                } else {
-                    option1 = generateRandomOption(nouns.filter((noun) => noun.english !== answer_option4)).english
-                    option2 = generateRandomOption(nouns.filter((noun) => noun.english !== answer_option4 && noun.english !== option1)).english
-                    option3 = generateRandomOption(nouns.filter((noun) => noun.english !== answer_option4 && noun.english !== option1 && noun.english !== option2)).english
-                }
-            }
+                questionWord = questionNoun[questionIsEnglish ? 'english' : 'arabic']
+                answer_option4 = questionNoun[questionIsEnglish ? 'arabic' : 'english']
+                    option1 = generateRandomOption(nouns.length < 3 ? spareNouns : nouns)[questionIsEnglish ? 'arabic' : 'english']
+                    option2 = generateRandomOption((nouns.length < 3 ? spareNouns : nouns).filter((noun) => noun[questionIsEnglish ? 'arabic' : 'english'] !== option1))[questionIsEnglish ? 'arabic' : 'english']
+                    option3 = generateRandomOption((nouns.length < 3 ? spareNouns : nouns).filter((noun) => noun[questionIsEnglish ? 'arabic' : 'english'] !== option1 && noun[questionIsEnglish ? 'arabic' : 'english'] !== option2))[questionIsEnglish ? 'arabic' : 'english']
         }
 
         setQuestions(prev => [...prev, {
@@ -100,31 +57,17 @@ export default function Quiz(props: QuizProps):JSX.Element {
         console.log(questions)
         if (currentQuestion.user_answer === option) {
             setQuestions((prev: IQuestion[]):IQuestion[] => {
-                // Create a new array with the same elements
                 const newQuestions = [...prev];
-        
-                // Update the user_answer of the current question
                 newQuestions[questionNum].user_answer = '';
-
-                // Update the is_correct of the current question
                 newQuestions[questionNum].is_correct = false;
-        
-                // Return the new array
                 return newQuestions;
             });
         }
         else {
             setQuestions((prev: IQuestion[]):IQuestion[] => {
-            // Create a new array with the same elements
             const newQuestions = [...prev];
-    
-            // Update the user_answer of the current question
             newQuestions[questionNum].user_answer = option;
-
-            // Update the is_correct of the current question
             newQuestions[questionNum].is_correct = option === newQuestions[questionNum].answer
-    
-            // Return the new array
             return newQuestions;
             });
         }
