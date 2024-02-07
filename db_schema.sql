@@ -39,20 +39,21 @@ CREATE TABLE chapter_1_verbs (
 );
 
 INSERT INTO chapter_1_verbs VALUES
-    ('look', 'نَظَرٌ', 'اُنْظُرْ', 'يَنْظُرُ', 'نَظَرَ'),
-    ('listen', 'اِسْتِمَاع', 'اِسْتَمِعْ', 'يَسْتَمِعُ', 'اِسْتَمَعَ'),
-    ('repeat', 'إِعَادَة', 'أَعِدْ', 'يُعِيدُ', 'عَادَ'),
-    ('point, indicate', 'إِشَارَةٌ', 'أُشِرْ', 'يُشِيرُ', 'أَشَارَ'),
-    ('put', 'وَضْعٌ', 'ضَعْ', 'يَضَعُ', 'وَضَعَ'),
-    ('hear', 'سَمَاعٌ', 'اِسْمَعْ', 'يَسْمَعُ', 'سَمِعَ'),
-    ('say', 'قَوْلٌ', 'قُلْ', 'يَقُولُ', 'قَالَ'),
-    ('organise, arrange', 'تَرْتِيبٌ', 'رَتِّبْ', 'يُرَتِّبُ', 'رَتَّبَ'),
-    ('exchange', 'تَبَادُلٌ', 'تَبَادَلْ', 'يَتَبَادَلُ', 'تَبَادَلَ'),
-    ('ask', 'سُؤَالٌ', 'اِسْأَلْ', 'يَسْأَلُ', 'سَأَلَ'),
-    ('answer', 'إِجَابَةٌ', 'أُجِبْ', 'يُجِيبُ', 'أَجَابَ'),
-    ('read', 'قِرَاءَةٌ', 'اِقْرَأْ', 'يَقْرَأُ', 'قَرَأَ'),
-    ('pass by', 'مُرُورٌ', 'مُرَّ', 'يَمُرُّ', 'مَرَّ'),
-    ('copy', 'نَسْخٌ', 'اِنْسَخْ', 'يَنْسَخُ', 'نَسَخَ');
+    ('To look', 'نَظَرٌ', 'اُنْظُرْ', 'يَنْظُرُ', 'نَظَرَ'),
+    ('To listen', 'اِسْتِمَاع', 'اِسْتَمِعْ', 'يَسْتَمِعُ', 'اِسْتَمَعَ'),
+    ('To repeat', 'إِعَادَة', 'أَعِدْ', 'يُعِيدُ', 'عَادَ'),
+    ('To point, indicate', 'إِشَارَةٌ', 'أُشِرْ', 'يُشِيرُ', 'أَشَارَ'),
+    ('To put', 'وَضْعٌ', 'ضَعْ', 'يَضَعُ', 'وَضَعَ'),
+    ('To hear', 'سَمَاعٌ', 'اِسْمَعْ', 'يَسْمَعُ', 'سَمِعَ'),
+    ('To say', 'قَوْلٌ', 'قُلْ', 'يَقُولُ', 'قَالَ'),
+    ('To organise, arrange', 'تَرْتِيبٌ', 'رَتِّبْ', 'يُرَتِّبُ', 'رَتَّبَ'),
+    ('To exchange', 'تَبَادُلٌ', 'تَبَادَلْ', 'يَتَبَادَلُ', 'تَبَادَلَ'),
+    ('To ask', 'سُؤَالٌ', 'اِسْأَلْ', 'يَسْأَلُ', 'سَأَلَ'),
+    ('To answer', 'إِجَابَةٌ', 'أُجِبْ', 'يُجِيبُ', 'أَجَابَ'),
+    ('To read', 'قِرَاءَةٌ', 'اِقْرَأْ', 'يَقْرَأُ', 'قَرَأَ'),
+    ('To pass by', 'مُرُورٌ', 'مُرَّ', 'يَمُرُّ', 'مَرَّ'),
+    ('To copy', 'نَسْخٌ', 'اِنْسَخْ', 'يَنْسَخُ', 'نَسَخَ');
+
 
 
 CREATE TABLE chapter_1_nouns (
@@ -82,10 +83,44 @@ INSERT INTO chapter_1_nouns (arabic, english, arabic_plural) VALUES
     ('سُؤَال', 'Question', 'أَسْئِلَة'),
     ('مِثَال', 'Example', 'أَمْثِلَة'),
     ('زَمِيل', 'Colleague, classmate', 'زُمَلَاء'),
-    ('رِقْم', 'Number', 'أَرْقَام'),
+    ('رَقْمٌ', 'Number', 'أَرْقَام'),
     ('جُمْلَة', 'Sentence', 'جُمَل'),
     ('عَلَامَة', 'Sign, indication', 'عَلَامَات'),
     ('كَلِمَة', 'Word', 'كَلِمَات');
 
+CREATE TABLE chapter_2_verbs (
+    english VARCHAR(20),
+    arabic_verbal_nouns VARCHAR(20),
+    arabic_command VARCHAR(20),
+    arabic_present VARCHAR(20),
+    arabic_past VARCHAR(20)
+);
+
+INSERT INTO chapter_2_verbs VALUES
+  ('To perform wudoo (ablution)', 'الوضوء', 'ائتوضأ', 'توضأ', 'يتوضأ'),
+  ('To pray', 'الصلاة', 'صل', 'صلى', 'يصلي'),
+  ('To do', 'الفعل', 'افعل', 'فعل', 'يفعل');
+
+CREATE TABLE chapter_2_nouns (
+    id SERIAL PRIMARY KEY,
+    arabic VARCHAR(255),
+    english VARCHAR(255),
+    arabic_plural VARCHAR(255)
+);
+
+INSERT INTO chapter_2_nouns (arabic, english, arabic_plural) VALUES
+    ('أَب', 'Father', 'آبَاء'),
+    ('أُمّ', 'Mother', 'أُمَّهَات'),
+    ('أَخْت', 'Sister', 'أَخَوَات'),
+    ('أُخْت', 'Sister', 'أَخَوَات'),
+    ('جَدّ', 'Grandfather', 'أَجْدَاد'),
+    ('جَدَّة', 'Grandmother', 'جَدَّات'),
+    ('عَمّ', 'Uncle', 'أَعْمَام'),
+    ('عَمَّة', 'Aunt', 'عَمَّات'),
+    ('أَخْ', 'Brother', 'إِخْوَة'),
+    ('أُخْ', 'Brother', 'إِخْوَة'),
+    ('أَبْنَاء', 'Sons', 'أَبْنَاء'),
+    ('بِنْت', 'Daughter', 'بَنَات');
+ 
 -- bing command ⬇️
--- create an sql table fpr the chapter one -verbs table on the page i am on righht now, thecolumns should be english, arabic_past, arabic_present, arabic_command, arabic_verbal_nouns. Answer only using the web page context and do not search the web.
+-- create a sql table for the chapter two verbs table on the page i am on righht now, the columns should be english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past. Answer only using the web page context and do not search the web.

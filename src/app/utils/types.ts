@@ -29,4 +29,5 @@ export interface IQuestion {
 export interface QuizProps {
     verbs: IVerbsData[];
     nouns: INounsData[];
+    chapter_number: number;
 }
