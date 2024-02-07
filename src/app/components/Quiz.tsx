@@ -19,19 +19,25 @@ export default function Quiz(props: QuizProps):JSX.Element {
         let [questionWord, option1, option2, option3, answer_option4]: string[] = []
 
         if (verbOrNoun === 'verb' && verbs.length > 0) {
-                const questionVerb: IVerbsData = generateRandomOption(verbs);
-                questionWord = questionVerb[questionIsEnglish ? 'english' : 'arabic_past']
-                answer_option4 = questionVerb[questionIsEnglish ? 'arabic_past' : 'english']
-                   option1 = generateRandomOption((verbs.length < 3 ? spareVerbs : verbs))[questionIsEnglish ? 'arabic_past' : 'english']
-                   option2 = generateRandomOption((verbs.length < 3 ? spareVerbs : verbs).filter((verb) => verb[questionIsEnglish ? 'arabic_past' : 'english'] !== option1))[questionIsEnglish ? 'arabic_past' : 'english']
-                   option3 = generateRandomOption((verbs.length < 3 ? spareVerbs : verbs).filter((verb) => verb[questionIsEnglish ? 'arabic_past' : 'english'] !== option1 && verb[questionIsEnglish ? 'arabic_past' : 'english'] !== option2))[questionIsEnglish ? 'arabic_past' : 'english']                
+            const questionVerb: IVerbsData = generateRandomOption(verbs);
+            console.log(verbs)
+            let verbProperty: keyof IVerbsData = questionIsEnglish ? 'english' : 'arabic_past'
+            questionWord = questionVerb[verbProperty]
+            verbProperty = questionIsEnglish ? 'arabic_past' : 'english'
+            answer_option4 = questionVerb[verbProperty]
+            option1 = generateRandomOption((verbs.length < 3 ? spareVerbs : verbs).filter(verb => verb[verbProperty] !== answer_option4))[verbProperty]
+            option2 = generateRandomOption((verbs.length < 3 ? spareVerbs : verbs).filter(verb => ![option1, answer_option4].includes(verb[verbProperty])))[verbProperty]
+            option3 = generateRandomOption((verbs.length < 3 ? spareVerbs : verbs).filter(verb => ![option1, option2, answer_option4].includes(verb[verbProperty])))[verbProperty]                
         } else if (verbOrNoun === 'noun' && nouns.length > 0) {
-                const questionNoun: INounsData = generateRandomOption(nouns);
-                questionWord = questionNoun[questionIsEnglish ? 'english' : 'arabic']
-                answer_option4 = questionNoun[questionIsEnglish ? 'arabic' : 'english']
-                    option1 = generateRandomOption(nouns.length < 3 ? spareNouns : nouns)[questionIsEnglish ? 'arabic' : 'english']
-                    option2 = generateRandomOption((nouns.length < 3 ? spareNouns : nouns).filter((noun) => noun[questionIsEnglish ? 'arabic' : 'english'] !== option1))[questionIsEnglish ? 'arabic' : 'english']
-                    option3 = generateRandomOption((nouns.length < 3 ? spareNouns : nouns).filter((noun) => noun[questionIsEnglish ? 'arabic' : 'english'] !== option1 && noun[questionIsEnglish ? 'arabic' : 'english'] !== option2))[questionIsEnglish ? 'arabic' : 'english']
+            const questionNoun: INounsData = generateRandomOption(nouns);
+            let nounProperty: keyof INounsData = questionIsEnglish ? 'english' : 'arabic'
+            console.log(nouns)
+            questionWord = questionNoun[nounProperty]
+            nounProperty = questionIsEnglish ? 'arabic' : 'english'
+            answer_option4 = questionNoun[nounProperty]
+            option1 = generateRandomOption((nouns.length < 3 ? spareNouns : nouns).filter(noun => noun[nounProperty] !== answer_option4))[nounProperty]
+            option2 = generateRandomOption((nouns.length < 3 ? spareNouns : nouns).filter(noun => ![option1, answer_option4].includes(noun[nounProperty])))[nounProperty]
+            option3 = generateRandomOption((nouns.length < 3 ? spareNouns : nouns).filter(noun => ![option1, option2, answer_option4].includes(noun[nounProperty])))[nounProperty]
         }
 
         setQuestions(prev => [...prev, {
@@ -43,15 +49,6 @@ export default function Quiz(props: QuizProps):JSX.Element {
         }])
 
     }, [verbs, nouns])    
-    // e.g 2 verbs, 8 nouns or 10 verbs, 10 nouns
-    // set verb or noun Rnadomly => verb
-    // set question to random {verb}, then options to random verbs, if no more verbs then random nouns
-    // setVerbs(verbs.filter(verb => verb !== question))
-    // render question and options
-    // user selects option
-    // record user answer => question.user_answer
-    // setQuestions(prevQuestions => [...prevQuestions, question])
-    // repeat until 10 questions 
 
     const handleOptionClick = (option: string) => {
         console.log(questions)
@@ -86,10 +83,9 @@ export default function Quiz(props: QuizProps):JSX.Element {
             } else {
                 setNouns(prev => prev.filter(noun => noun[questionIsEnglish ? 'english' : 'arabic'] !== currentQuestion.question));
             }
-               setQuestionNum(prev => prev + 1)
+            setQuestionNum(prev => prev + 1)
             setVerbOrNoun(generateRandomOption(['verb', 'noun']))
             setQuestionIsEnglish(generateRandomOption([true, false]))
-            
         }
     }
 
