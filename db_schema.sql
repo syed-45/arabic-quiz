@@ -97,30 +97,43 @@ CREATE TABLE chapter_2_verbs (
 );
 
 INSERT INTO chapter_2_verbs VALUES
-  ('To perform wudoo (ablution)', 'الوضوء', 'ائتوضأ', 'توضأ', 'يتوضأ'),
-  ('To pray', 'الصلاة', 'صل', 'صلى', 'يصلي'),
-  ('To do', 'الفعل', 'افعل', 'فعل', 'يفعل');
+('To perform wudoo (ablution)', 'تَوَضُّأٌ', 'تَوَضَّأْ',  'يَتَوَضَّأُ', 'تَوَضَّأَ'),
+('To pray', 'صَلاةٌ', 'صَلِّ', 'يُصَلِّي', 'صَلَّى'),
+('To do', 'فِعْلٌ', 'إفْعَلْ', 'يَفْعَلُ', 'فَعَلَ');
 
 CREATE TABLE chapter_2_nouns (
     id SERIAL PRIMARY KEY,
     arabic VARCHAR(255),
     english VARCHAR(255),
-    arabic_plural VARCHAR(255)
+    arabic_plural VARCHAR(255),
+    english_plural VARCHAR(255)
 );
 
-INSERT INTO chapter_2_nouns (arabic, english, arabic_plural) VALUES
-    ('أَب', 'Father', 'آبَاء'),
-    ('أُمّ', 'Mother', 'أُمَّهَات'),
-    ('أَخْت', 'Sister', 'أَخَوَات'),
-    ('أُخْت', 'Sister', 'أَخَوَات'),
-    ('جَدّ', 'Grandfather', 'أَجْدَاد'),
-    ('جَدَّة', 'Grandmother', 'جَدَّات'),
-    ('عَمّ', 'Uncle', 'أَعْمَام'),
-    ('عَمَّة', 'Aunt', 'عَمَّات'),
-    ('أَخْ', 'Brother', 'إِخْوَة'),
-    ('أُخْ', 'Brother', 'إِخْوَة'),
-    ('أَبْنَاء', 'Sons', 'أَبْنَاء'),
-    ('بِنْت', 'Daughter', 'بَنَات');
+-- Family, Paternal uncle, Paternal aunt, Mother, Grandmother, Grandfather, Daughter, Son, Teacher, Child, Tree, Bathroom, Coat, Room, Mosque, Glasses, Messenger, Father.
+-- need to create insert statements for the chapter 2 nouns table with the above values
+INSERT INTO chapter_2_nouns (arabic, english, arabic_plural, english_plural) VALUES
+    ('أُسْرَةٌ', 'Family', 'أُسَرٌ', 'Families'),
+    ('عَمٌّ', 'Paternal uncle', 'أَعْمَامٌ', 'Paternal uncles'),
+    ('عَمَّةٌ', 'Paternal aunt', 'عَمَّاتٌ', 'Paternal aunts'),
+    ('أُمٌّ', 'Mother', 'أُمَّهَاتٌ', 'Mothers'),
+    ('جَدَّةٌ', 'Grandmother', 'جَدَّاتٌ', 'Grandmothers'),
+    ('جَدٌّ', 'Grandfather', 'أَجْدَادٌ', 'Grandfathers'),
+    ('اِبْنَةٌ', 'Daughter', 'بَنَاتٌ', 'Daughters'),
+    ('ابْنٌ', 'Son', 'أَبْنَاءٌ', 'Sons'),
+    ('مُدَرِّسٌ', 'Teacher', 'مُدَرِّسُون', 'Teachers'),
+    ('وَلَدٌ', 'Child', 'أَوْلَادٌ', 'Children'),
+    ('شَجَرَةٌ', 'Tree', 'أَشْجَارٌ', 'Trees'),
+    ('حَمَّامٌ', 'Bathroom', 'حَمَّامَاتٌ', 'Bathrooms'),
+    ('مِعْطَفٌ', 'Coat', 'مَعَاطِفٌ', 'Coats'),
+    ('غُرْفَةٌ', 'Room', 'غُرَفٌ', 'Rooms'),
+    ('مَسْجِدٌ', 'Mosque', 'مَسَاجِدٌ', 'Mosques'),
+    ('نَظَّارَةٌ', 'Glasses', 'نَظَّارَاتٌ', 'Glasses'),
+    ('رَسُولٌ', 'Messenger', 'رُسُلٌ', 'Messengers'),
+    ('أَبٌ', 'Father', 'آبَاءٌ', 'Fathers'),
+    ('وَالِدَةٌ', 'Mother', 'وَالِدَاتٌ', 'Mothers')
+    ('وَالِدٌ', 'Father', 'وَالِدُونَ', 'Fathers');
+
+-- child/boy/son whose transilteartion is walad amd in arabic is وَلَدٌ, the plural of walad is أَوْلَادٌ
  
 -- bing command ⬇️
 -- create a sql table for the chapter two verbs table on the page i am on righht now, the columns should be english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past. Answer only using the web page context and do not search the web.
