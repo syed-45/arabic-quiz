@@ -89,11 +89,11 @@ INSERT INTO chapter_1_nouns (arabic, english, arabic_plural) VALUES
     ('كَلِمَة', 'Word', 'كَلِمَات');
 
 CREATE TABLE chapter_2_verbs (
-    english VARCHAR(20),
-    arabic_verbal_nouns VARCHAR(20),
-    arabic_command VARCHAR(20),
-    arabic_present VARCHAR(20),
-    arabic_past VARCHAR(20)
+    english VARCHAR(255),
+    arabic_verbal_nouns VARCHAR(255),
+    arabic_command VARCHAR(255),
+    arabic_present VARCHAR(255),
+    arabic_past VARCHAR(255)
 );
 
 INSERT INTO chapter_2_verbs VALUES
@@ -109,8 +109,6 @@ CREATE TABLE chapter_2_nouns (
     english_plural VARCHAR(255)
 );
 
--- Family, Paternal uncle, Paternal aunt, Mother, Grandmother, Grandfather, Daughter, Son, Teacher, Child, Tree, Bathroom, Coat, Room, Mosque, Glasses, Messenger, Father.
--- need to create insert statements for the chapter 2 nouns table with the above values
 INSERT INTO chapter_2_nouns (arabic, english, arabic_plural, english_plural) VALUES
     ('أُسْرَةٌ', 'Family', 'أُسَرٌ', 'Families'),
     ('عَمٌّ', 'Paternal uncle', 'أَعْمَامٌ', 'Paternal uncles'),
@@ -130,10 +128,8 @@ INSERT INTO chapter_2_nouns (arabic, english, arabic_plural, english_plural) VAL
     ('نَظَّارَةٌ', 'Glasses', 'نَظَّارَاتٌ', 'Glasses'),
     ('رَسُولٌ', 'Messenger', 'رُسُلٌ', 'Messengers'),
     ('أَبٌ', 'Father', 'آبَاءٌ', 'Fathers'),
-    ('وَالِدَةٌ', 'Mother', 'وَالِدَاتٌ', 'Mothers')
+    ('وَالِدَةٌ', 'Mother', 'وَالِدَاتٌ', 'Mothers'),
     ('وَالِدٌ', 'Father', 'وَالِدُونَ', 'Fathers');
 
--- child/boy/son whose transilteartion is walad amd in arabic is وَلَدٌ, the plural of walad is أَوْلَادٌ
- 
 -- bing command ⬇️
 -- create a sql table for the chapter two verbs table on the page i am on righht now, the columns should be english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past. Answer only using the web page context and do not search the web.
