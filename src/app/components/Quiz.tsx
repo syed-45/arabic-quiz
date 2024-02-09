@@ -10,7 +10,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
     const [nouns, setNouns] = useState<INounsData[]>(props.nouns)
     const [verbOrNoun, setVerbOrNoun] = useState<'verb' | 'noun'>(generateRandomOption(['verb', 'noun']))
     const [questionIsEnglish, setQuestionIsEnglish] = useState<boolean>(generateRandomOption([true, false]))
-    const noOfQuestions = verbs.length + nouns.length > 12 ? 12 : verbs.length + nouns.length
+    const noOfQuestions = props.verbs.length + props.nouns.length > 12 ? 12 : props.verbs.length + props.nouns.length
     const [questions, setQuestions] = useState<IQuestion[]>([{question: '', options:[], answer:'', user_answer: 'foo', is_correct: false,}])
     const [questionNum, setQuestionNum] = useState<number>(0)
     const currentQuestion = questions[questionNum]
@@ -18,7 +18,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
     useEffect(() => {
         let [questionWord, option1, option2, option3, answer_option4]: string[] = []
 
-        if (verbOrNoun === 'verb' && verbs.length > 0) {
+        if (verbOrNoun === 'verb') {
             const questionVerb: IVerbsData = generateRandomOption(verbs);
             console.log('currrent verbs ',verbs)
             let verbProperty: keyof IVerbsData = questionIsEnglish ? 'english' : 'arabic_past'
@@ -28,7 +28,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
             option1 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => verb[verbProperty] !== answer_option4))[verbProperty]
             option2 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => ![option1, answer_option4].includes(verb[verbProperty])))[verbProperty]
             option3 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => ![option1, option2, answer_option4].includes(verb[verbProperty])))[verbProperty]                
-        } else if (verbOrNoun === 'noun' && nouns.length > 0) {
+        } else {
             const questionNoun: INounsData = generateRandomOption(nouns);
             let nounProperty: keyof INounsData = questionIsEnglish ? 'english' : 'arabic'
             console.log('current nouns ', nouns)
@@ -79,38 +79,51 @@ export default function Quiz(props: QuizProps):JSX.Element {
         }
         else {
             if (verbOrNoun === 'verb') {
-                setVerbs(prev => prev.filter(verb => verb[questionIsEnglish ? 'english' : 'arabic_past'] !== questions[questionNum+1].question));
+                setVerbs(prev => prev.filter(verb => verb[questionIsEnglish ? 'english' : 'arabic_past'] !== questions[questionNum+1]?.question));
             } else {
-                setNouns(prev => prev.filter(noun => noun[questionIsEnglish ? 'english' : 'arabic'] !== questions[questionNum+1].question));
+                setNouns(prev => prev.filter(noun => noun[questionIsEnglish ? 'english' : 'arabic'] !== questions[questionNum+1]?.question));
             }
-            setQuestionNum(prev => prev + 1)
-            setVerbOrNoun(generateRandomOption(['verb', 'noun']))
-            setQuestionIsEnglish(generateRandomOption([true, false]))
+            setQuestionNum(prev => prev + 1);
+            setQuestionIsEnglish(generateRandomOption([true, false]));
+            if (verbs.length <= 1) setVerbOrNoun('noun');  
+            else if (nouns.length <= 1) setVerbOrNoun('verb');
+            else setVerbOrNoun(generateRandomOption(['verb', 'noun']));
+        }
+    }
+
+    const handlePreviousClick = () => {
+        if (questionNum === 1) {
+            alert('This is the first question')
+        } else {
+            setQuestionNum(prev => prev - 1);
         }
     }
 
     return (
-            (questionNum === 0) ?
-            <main className="text-center mx-5 mt-6 p-5 max-w-3xl sm:mx-auto">
-                <button className="border-2 p-5 rounded-md border-yellow-500" onClick={handleNextClick} >START CHAPTER {props.chapter_number} QUIZ</button>
-            </main>
-            : <main className='text-center mx-5 border-2 border-green-700 rounded-md mt-6 p-5 max-w-3xl sm:mx-auto'>
-                <div className="text-lg bg-orange-700 rounded-md py-3">Question {questionNum} of {noOfQuestions}</div>
-                <div className="mb-7 mt-7 text-5xl">{currentQuestion.question}</div>
-                <div className="grid grid-cols-2 gap-0 mt-5">
-                    {currentQuestion.options.map((option:string):JSX.Element => {
-                        return (
-                            <button
-                                key={option}
-                                onClick={() => handleOptionClick(option)}
-                                className={"h-32" + (currentQuestion.user_answer === option ? " bg-blue-300" : " bg-blue-500")}
-                            >
-                                {option}
-                            </button>
-                        )
-                    })}
-                </div>
-                <button className="bg-blue-900 h-12 mt-10" onClick={handleNextClick}>Next</button>
-            </main>
+        (questionNum === 0) ?
+        <main className="text-center mx-5 mt-6 p-5 max-w-3xl sm:mx-auto">
+            <button className="border-2 p-5 rounded-md border-yellow-500" onClick={handleNextClick} >START CHAPTER {props.chapter_number} QUIZ</button>
+        </main>
+        : <main className='text-center mx-5 mt-6 p-5 max-w-3xl sm:mx-auto'>
+            <div className="text-lg bg-orange-700 rounded-md py-3">Question {questionNum} of {noOfQuestions}</div>
+            <div className="mb-7 mt-7 text-5xl">{currentQuestion.question}</div>
+            <div className="grid grid-cols-2 gap-0 mt-5">
+                {currentQuestion.options.map((option:string):JSX.Element => {
+                    return (
+                        <button
+                            key={option}
+                            onClick={() => handleOptionClick(option)}
+                            className={"h-32" + (currentQuestion.user_answer === option ? " bg-blue-300" : " bg-blue-500")}
+                        >
+                            {option}
+                        </button>
+                    )
+                })}
+            </div>
+            <div className="flex justify-between">
+                <button className="bg-red-700 h-12 w-16 mt-10 p-2 rounded-md text-xs" onClick={handlePreviousClick}>Previous</button>
+                <button className="bg-purple-700 h-12 w-16 mt-10 p-2 rounded-md text-xs" onClick={handleNextClick}>{questionNum < noOfQuestions ? 'Next' : 'Finish'}</button>
+            </div>
+        </main>
     )
 }

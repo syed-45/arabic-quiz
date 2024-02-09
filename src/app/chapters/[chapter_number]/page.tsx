@@ -24,9 +24,6 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
             <>
                 <h1 className="text-center mt-14 text-2xl">Arabic Quiz</h1>
                 <h4 className="text-center">Based on Al Arabiyyah Bayna Yadayk Series</h4>
-                <div className="text-center mx-5 border-2 border-green-700 rounded-md mt-10 py-5 max-w-3xl sm:mx-auto">
-                    Need to generate quiz for chapter {params.chapter_number}
-                </div>
                 <Quiz verbs={verbs} nouns={nouns} chapter_number={params.chapter_number}/>
             </>
         )

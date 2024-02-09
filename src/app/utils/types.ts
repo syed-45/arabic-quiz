@@ -16,6 +16,8 @@ export interface INounsData {
     arabic: string;
     english: string;
     arabic_plural: string;
+    // english_plural: string; 
+    // above exists just for chapter 2 atm
 }
 
 export interface IQuestion {
