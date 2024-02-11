@@ -4,6 +4,7 @@ import { IVerbsData, INounsData, IQuestion, QuizProps } from "../utils/types"
 import generateRandomOption from "../utils/generateRandomOption"
 import { spareNouns, spareVerbs } from "../utils/spareVocab"
 import shuffleArray from "../utils/shuffleArray"
+import { Finish } from "./Finish"
 
 export default function Quiz(props: QuizProps):JSX.Element {
     const [verbs, setVerbs] = useState<IVerbsData[]>(props.verbs)
@@ -48,7 +49,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
             is_correct: false
         }])
 
-    }, [verbs, nouns])    
+    }, [verbs, nouns, verbOrNoun, questionIsEnglish, questionNum])    
 
     const handleOptionClick = (option: string) => {
         console.log('current questions',questions)
@@ -74,9 +75,8 @@ export default function Quiz(props: QuizProps):JSX.Element {
         if (currentQuestion.user_answer === '') {
             alert('Please select an option')
         } else if (questionNum === noOfQuestions) {
-            alert('Quiz complete')
-            // send questions to server and get results
-        }
+            setQuestionNum(prev => prev + 1);
+        } 
         else {
             if (verbOrNoun === 'verb') {
                 setVerbs(prev => prev.filter(verb => verb[questionIsEnglish ? 'english' : 'arabic_past'] !== questions[questionNum+1]?.question));
@@ -99,12 +99,20 @@ export default function Quiz(props: QuizProps):JSX.Element {
         }
     }
 
-    return (
-        (questionNum === 0) ?
-        <main className="text-center mx-5 mt-6 p-5 max-w-3xl sm:mx-auto">
-            <button className="border-2 p-5 rounded-md border-yellow-500" onClick={handleNextClick} >START CHAPTER {props.chapter_number} QUIZ</button>
-        </main>
-        : <main className='text-center mx-5 mt-6 p-5 max-w-3xl sm:mx-auto'>
+    if (questionNum === noOfQuestions + 1) {
+        return (
+            <Finish questions={questions} noOfQuestions={noOfQuestions} />
+        )
+    }
+    else if (questionNum === 0) {
+        return (
+            <main className="text-center mx-5 mt-6 p-5 max-w-3xl sm:mx-auto">
+                <button className="border-2 p-5 rounded-md border-yellow-500" onClick={handleNextClick} >START CHAPTER {props.chapter_number} QUIZ</button>
+            </main>
+        )
+    }
+    return ( 
+        <main className='text-center mx-5 mt-6 p-5 max-w-3xl sm:mx-auto'>
             <div className="text-lg bg-orange-700 rounded-md py-3">Question {questionNum} of {noOfQuestions}</div>
             <div className="mb-7 mt-7 text-5xl">{currentQuestion.question}</div>
             <div className="grid grid-cols-2 gap-0 mt-5">

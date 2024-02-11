@@ -33,3 +33,8 @@ export interface QuizProps {
     nouns: INounsData[];
     chapter_number: number;
 }
+
+export interface FinishProps {
+    questions: IQuestion[];
+    noOfQuestions: number;
+}
