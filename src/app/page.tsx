@@ -1,20 +1,55 @@
-export default  function Home() {
+'use client'
+import { getAuth, signInWithPopup, GoogleAuthProvider,
+        createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {auth} from "./firebase/config"
+import { useState } from "react";
+import Link from "next/link";
+
+// createUserWithEmailAndPassword(auth, email, password)
+//             .then((userCredential) => {
+//               // Signed up 
+//               const user = userCredential.user;
+//               // ...
+//             })
+//             .catch((error) => {
+//               const errorCode = error.code;
+//               const errorMessage = error.message;
+//               // ..
+//             });
+
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     // User is signed in, see docs for a list of available properties
+//     // https://firebase.google.com/docs/reference/js/auth.user
+//     const uid = user.uid;
+//     window.location.href = "/signedin";
+//   } else {
+//     // User is signed out
+//     // ...
+//   }
+// });
+
+export default function Home() {
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          THIS IS TITLE!
-          <code className="font-mono font-bold ml-5">src/app/page.tsx</code>
-        </p>
-        <div className="flex space-x-4 justify-center">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg">
-            Sign In
-          </button>
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-lg">
-            Register
-          </button>
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div> 
+          <main className="mb-10"> 
+            <h1 className="text-5xl font-bold text-center">Arabic Quiz App</h1>
+            <p className="text-center mt-5">Based on The Arabiyyah Bayna Yadayk Series</p>
+          </main>
+          <div className="flex flex-row gap-5 mt-10 mx-10 justify-center w-80">
+            <Link href="/signin"
+              className="text-center border-2 border-gray-200 bg-gradient-to-tr from-black to-gray-700  text-white font-bold py-4 px-6 rounded-lg w-1/2"
+              >
+              Sign In
+            </Link>
+            <Link href="/signup"
+            className="text-center bg-white text-black font-bold py-4 px-6 rounded-lg w-1/2">
+              Register
+            </Link>
+          </div> 
         </div>
-      </div>
-    </main>
+    </div>
   )
 }

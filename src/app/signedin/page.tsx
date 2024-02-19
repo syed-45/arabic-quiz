@@ -1,5 +1,4 @@
-
-import { ChapterCard } from '../components/ChapterCard'
+import { ChapterCard } from './ChapterCard'
 import { IChapterData } from '../utils/types'
 
 export default async function SignedIn() {
@@ -14,7 +13,8 @@ export default async function SignedIn() {
         <>
             <h1 className="text-center mt-14 text-2xl">Arabic Quiz</h1>
             <h4 className="text-center">Based on Al Arabiyyah Bayna Yadayk Series</h4>
-            <div className="text-center mx-5 border-2 border-green-700 rounded-md mt-10 py-5 max-w-3xl sm:mx-auto">
+            <h3 className="text-center mt-8">Welcome back, {'...'}</h3>
+            <div className="text-center mx-5 border-2 border-green-700 rounded-md mt-2 py-5 max-w-3xl sm:mx-auto">
                 Quizzes completed: {quizzesCompleted+' / 16'}
             </div>
             <div className="text-center mx-5 border-2 border-green-700 rounded-md mt-5 py-5 max-w-3xl sm:mx-auto">

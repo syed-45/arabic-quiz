@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from "react"
-import { IVerbsData, INounsData, IQuestion, QuizProps } from "../utils/types"
-import generateRandomOption from "../utils/generateRandomOption"
-import { spareNouns, spareVerbs } from "../utils/spareVocab"
-import shuffleArray from "../utils/shuffleArray"
+import { IVerbsData, INounsData, IQuestion, QuizProps } from "../../utils/types"
+import generateRandomOption from "../../utils/generateRandomOption"
+import { spareNouns, spareVerbs } from "../../utils/spareVocab"
+import shuffleArray from "../../utils/shuffleArray"
 import { Finish } from "./Finish"
 
 export default function Quiz(props: QuizProps):JSX.Element {

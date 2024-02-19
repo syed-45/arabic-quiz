@@ -24,7 +24,7 @@ export const ChapterCard = (chapterData: IChapterData) => {
 
     return(
         <Link href={`/chapters/${chapterData.chapter_number}`} className={"flex flex-col px-5 py-5 rounded-md " + gradients[chapterData.chapter_number-1]}>
-            <div className="text-right mb-5 sm:text-xl">{chapterData.chapter_arabic_name}</div>
+            <div className="text-right mb-5 sm:text-xl" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{chapterData.chapter_arabic_name}</div>
             <div className="text-xs sm:text-lg">{chapterData.chapter_number+'. '+chapterData.chapter_name}</div>
         </Link>
     )

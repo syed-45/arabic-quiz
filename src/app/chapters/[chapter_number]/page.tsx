@@ -1,4 +1,4 @@
-import Quiz from "@/app/components/Quiz"
+import Quiz from "@/app/chapters/[chapter_number]/Quiz"
 import { INounsData, IQuestion, IVerbsData } from "@/app/utils/types"
 
 export default async function ChapterQuiz({ params }: { params: { chapter_number: number } }) {
