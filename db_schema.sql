@@ -1,14 +1,14 @@
-CREATE TABLE users (
-    id INT PRIMARY KEY,
-    -- The 'VARCHAR' data type is used to store variable-length character strings.
-    username VARCHAR(255),
-    email VARCHAR(255),
-    password VARCHAR(255)
+CREATE TABLE "Users" (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(64) NOT NULL,
+  password VARCHAR(64) NOT NULL
 );
+
 
 CREATE table chapters (
     chapter_number INT PRIMARY KEY,
     chapter_name VARCHAR(255),
+    -- The 'VARCHAR' data type is used to store variable-length character strings.
     chapter_arabic_name VARCHAR(255)
 );
 

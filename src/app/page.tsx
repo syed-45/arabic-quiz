@@ -1,34 +1,4 @@
-'use client'
-import { getAuth, signInWithPopup, GoogleAuthProvider,
-        createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import {auth} from "./firebase/config"
-import { useState } from "react";
-import Link from "next/link";
-
-// createUserWithEmailAndPassword(auth, email, password)
-//             .then((userCredential) => {
-//               // Signed up 
-//               const user = userCredential.user;
-//               // ...
-//             })
-//             .catch((error) => {
-//               const errorCode = error.code;
-//               const errorMessage = error.message;
-//               // ..
-//             });
-
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     // User is signed in, see docs for a list of available properties
-//     // https://firebase.google.com/docs/reference/js/auth.user
-//     const uid = user.uid;
-//     window.location.href = "/signedin";
-//   } else {
-//     // User is signed out
-//     // ...
-//   }
-// });
-
+import Link from 'next/link'
 export default function Home() {
 
   return (
@@ -39,12 +9,12 @@ export default function Home() {
             <p className="text-center mt-5">Based on The Arabiyyah Bayna Yadayk Series</p>
           </main>
           <div className="flex flex-row gap-5 mt-10 mx-10 justify-center w-80">
-            <Link href="/signin"
+            <Link href="/login"
               className="text-center border-2 border-gray-200 bg-gradient-to-tr from-black to-gray-700  text-white font-bold py-4 px-6 rounded-lg w-1/2"
               >
-              Sign In
+              Log In
             </Link>
-            <Link href="/signup"
+            <Link href="/register"
             className="text-center bg-white text-black font-bold py-4 px-6 rounded-lg w-1/2">
               Register
             </Link>

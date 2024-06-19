@@ -1,5 +1,5 @@
-import Quiz from "@/app/chapters/[chapter_number]/Quiz"
-import { INounsData, IQuestion, IVerbsData } from "@/app/utils/types"
+import Quiz from "./Quiz"
+import { INounsData, IQuestion, IVerbsData } from "../../utils/types"
 
 export default async function ChapterQuiz({ params }: { params: { chapter_number: number } }) {
     if (params.chapter_number < 0 || params.chapter_number > 17) {
