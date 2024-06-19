@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function Login() {
     return (
         <div className="flex flex-col justify-center items-center h-screen">
-            <div className="max-w-md w-full px-10 py-12 border-2 border-gray-200 bg-gradient-to-tr from-black to-gray-700 shadow-md rounded-md puff-in-center">
+            <div className="w-min-content sm:w-[500px] px-10 py-12 border-2 border-gray-200 bg-gradient-to-tr from-black to-gray-700 shadow-md rounded-md">
                 <h2 className="text-2xl font-semibold mb-6">Sign In</h2>                
                 <Form 
                     action={async (formData: FormData) => {
