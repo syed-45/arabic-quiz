@@ -1,0 +1,77 @@
+{
+  "id": "c5f1c728-323b-4daa-8547-86d8e0f30e7f",
+  "prevId": "066642f2-05f6-430b-a32f-380eaa2981d1",
+  "version": "6",
+  "dialect": "postgresql",
+  "tables": {
+    "public.chapters": {
+      "name": "chapters",
+      "schema": "",
+      "columns": {
+        "chapter_number": {
+          "name": "chapter_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "chapter_name": {
+          "name": "chapter_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "chapter_arabic_name": {
+          "name": "chapter_arabic_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.User": {
+      "name": "User",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

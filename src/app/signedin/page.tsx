@@ -28,7 +28,7 @@ export default async function SignedIn() {
             </Link>
             <h1 className="text-center mt-2 text-2xl">Arabic Quiz</h1>
             <h4 className="text-center">Based on Al Arabiyyah Bayna Yadayk Series</h4>
-            <h3 className="text-center mt-8">Welcome back, {session?.user?.email}</h3>
+            <h3 className="text-center mt-8">Welcome back, {session?.user?.name}</h3>
             <div className="text-center mx-5 border-2 border-green-700 rounded-md mt-2 py-5 max-w-3xl sm:mx-auto">
                 Quizzes completed: {quizzesCompleted+' / 16'}
             </div>
