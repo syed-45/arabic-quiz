@@ -5,6 +5,7 @@ import generateRandomOption from "../../utils/generateRandomOption"
 import { spareNouns, spareVerbs } from "../../utils/spareVocab"
 import shuffleArray from "../../utils/shuffleArray"
 import { Finish } from "./Finish"
+import axios from "axios"
 
 export default function Quiz(props: QuizProps):JSX.Element {
     const [verbs, setVerbs] = useState<IVerbsData[]>(props.verbs)
@@ -49,7 +50,21 @@ export default function Quiz(props: QuizProps):JSX.Element {
             is_correct: false
         }])
 
-    }, [verbs, nouns, verbOrNoun, questionIsEnglish, questionNum])    
+        if (questionNum === noOfQuestions + 1) {
+            axios.post(`/api/post-score`, {
+                    score: questions.filter(question => question.is_correct).length,
+                    chapter_number: props.chapter_number,
+                    user_email: props.user_email
+            })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            })        
+        };
+
+    }, [verbs, nouns, verbOrNoun, questionIsEnglish, questionNum, noOfQuestions, props.chapter_number, props.user_email, questions])    
 
     const handleOptionClick = (option: string) => {
         console.log('current questions',questions)

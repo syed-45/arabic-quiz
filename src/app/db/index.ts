@@ -8,7 +8,7 @@ import { users, chapterNames } from './schema';
 // use the Drizzle adapter for Auth.js / NextAuth
 // https://authjs.dev/reference/adapter/drizzle
 let client = postgres(process.env.POSTGRES_URL!);
-let db = drizzle(client);
+export let db = drizzle(client);
 
 export async function getUser(email: string) {
   return await db.select().from(users).where(eq(users.email, email));

@@ -12,3 +12,9 @@ export const chapterNames = pgTable('chapters',{
     chapter_name: varchar('chapter_name'),
     chapter_arabic_name: varchar('chapter_arabic_name')
 })
+
+export const userScores = pgTable('user_scores', {
+  user_email: varchar('user_email'),
+  chapter_number: integer('chapter_number'),
+  last_score: integer('last_score')
+})
