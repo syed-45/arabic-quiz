@@ -12,6 +12,7 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       let isLoggedIn = !!auth?.user;
       let isOnDashboard = nextUrl.pathname.startsWith('/signedin');
+      //TODO: prevent unauthorized users from accessing the api routes
 
       if (isOnDashboard) {
         if (isLoggedIn) return true;

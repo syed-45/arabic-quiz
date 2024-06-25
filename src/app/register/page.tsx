@@ -4,6 +4,9 @@ import Link from "next/link";
 import { Form } from "../form";
 import { SubmitButton } from "../submit-button";
 
+// TODO 1. add name field
+//      2. inform user creation has been successfull somehow
+
 const Register = () => {
     async function register(formData: FormData) {
         'use server'

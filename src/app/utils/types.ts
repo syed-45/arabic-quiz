@@ -39,3 +39,14 @@ export interface FinishProps {
     questions: IQuestion[];
     noOfQuestions: number;
 }
+
+export interface IUserScores {
+    user_email: string;
+    last_score: number;
+    chapter_number: number;
+}
+
+export interface IChapterCard {
+    chapterData: IChapterData;
+    last_score? : number;
+}

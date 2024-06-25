@@ -1,17 +1,21 @@
 import { ChapterCard } from './ChapterCard'
-import { IChapterData } from '../utils/types'
+import { IChapterData, IUserScores } from '../utils/types'
 import { auth } from '../auth';
 import Link from 'next/link';
 
 export default async function SignedIn() {
     let session = await auth();
 
-    const quizzesCompleted = 0
-    const averageScore = 0
     const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`)
     const data = await res.json()
     const allChapters: IChapterData[] = data.result.rows
-
+    
+    const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results?user-email=${session?.user?.email}`)
+    const quizResults: IUserScores[] = await res2.json()
+    const quizzesCompleted: number = quizResults.length
+    const averageScore = quizzesCompleted ? quizResults.reduce((acc, curr) => acc + curr.last_score, 0) / quizResults.length : 0
+    const percentageScore = quizzesCompleted && (100 * averageScore / 12).toFixed(2)
+    
     return (
         <>
             <Link href="/signedin/profile" className='flex justify-end'>
@@ -29,15 +33,20 @@ export default async function SignedIn() {
             <h1 className="text-center mt-2 text-2xl">Arabic Quiz</h1>
             <h4 className="text-center">Based on Al Arabiyyah Bayna Yadayk Series</h4>
             <h3 className="text-center mt-8">Welcome back, {session?.user?.name}</h3>
-            <div className="text-center mx-5 border-2 border-green-700 rounded-md mt-2 py-5 max-w-3xl sm:mx-auto">
-                Quizzes completed: {quizzesCompleted+' / 16'}
+            <div className="text-center h-16 mx-5 border-2 border-green-800 rounded-md mt-2 max-w-3xl sm:mx-auto relative flex justify-center items-center">
+                <div className={`h-full bg-gradient-to-r from-green-400 to-green-800 rounded z-[-1] absolute left-0`} style={{width: (100*quizzesCompleted/16)+'%'}}></div>
+                <span className=''>Quizzes completed: {quizzesCompleted+' / 16'}</span>
             </div>
-            <div className="text-center mx-5 border-2 border-green-700 rounded-md mt-5 py-5 max-w-3xl sm:mx-auto">
-                Average score: {averageScore+'%'}
+            <div className="text-center mx-5 border-2 border-blue-400 rounded-md mt-5 h-16 content-center max-w-3xl sm:mx-auto">
+                Average score: {percentageScore+'%'}
             </div>
-            <main className='grid grid-cols-2 gap-4 mt-10 px-5'>
-                {allChapters.map((chapter) => (
-                    <ChapterCard {...chapter} key={chapter.chapter_number} />
+            <main className='grid grid-cols-2 sm:grid-cols-2 gap-4 mt-10 px-5'>
+                {allChapters.map((chapter,index) => (
+                    <ChapterCard 
+                        chapterData={chapter}
+                        last_score={quizResults[index] ? quizResults[index].last_score : undefined}
+                        key={chapter.chapter_number} 
+                    />
                 ))}
             </main>
         </>
