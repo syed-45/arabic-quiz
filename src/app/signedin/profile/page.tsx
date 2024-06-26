@@ -8,6 +8,7 @@ export default async function Profile() {
         <div className="w-screen h-screen flex flex-col space-y-5 justify-center items-center text-white">
           You are logged in as {session?.user?.email}
           <SignOut />
+          {/* TODO: redirect to home once signed out */}
         </div>
       </div>
     );

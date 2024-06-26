@@ -2,6 +2,7 @@ import { ChapterCard } from './ChapterCard'
 import { IChapterData, IUserScores } from '../utils/types'
 import { auth } from '../auth';
 import Link from 'next/link';
+import { titleCase } from '../utils/TitleCaseKata'
 
 export default async function SignedIn() {
     let session = await auth();
@@ -32,7 +33,7 @@ export default async function SignedIn() {
             </Link>
             <h1 className="text-center mt-2 text-2xl">Arabic Quiz</h1>
             <h4 className="text-center">Based on Al Arabiyyah Bayna Yadayk Series</h4>
-            <h3 className="text-center mt-8">Welcome back, {session?.user?.name}</h3>
+            <h3 className="text-center mt-8">Welcome back, {titleCase(session?.user?.name!)}</h3>
             <div className="text-center h-16 mx-5 border-2 border-green-800 rounded-md mt-2 max-w-3xl sm:mx-auto relative flex justify-center items-center">
                 <div className={`h-full bg-gradient-to-r from-green-400 to-green-800 rounded z-[-1] absolute left-0`} style={{width: (100*quizzesCompleted/16)+'%'}}></div>
                 <span className=''>Quizzes completed: {quizzesCompleted+' / 16'}</span>
@@ -48,6 +49,7 @@ export default async function SignedIn() {
                         key={chapter.chapter_number} 
                     />
                 ))}
+                {/* TODO: for chapters with no data yet, show a message */}
             </main>
         </>
     )
