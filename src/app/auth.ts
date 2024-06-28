@@ -3,15 +3,12 @@ import Credentials from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt-ts';
 import { getUser } from './db/index';
 import { authConfig } from '../../auth.config';
+import Google from 'next-auth/providers/google';
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
+export const { handlers, auth, signIn, signOut,} = NextAuth({
   ...authConfig,
   providers: [
+    Google,
     Credentials({
       async authorize({ email, password }: any) {
         let user = await getUser(email);

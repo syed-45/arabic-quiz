@@ -1,8 +1,10 @@
 import { redirect } from "next/navigation";
 import { getUser, createUser } from "../db";
 import Link from "next/link";
+import Image from "next/image";
 import { RegisterForm } from "../RegisterForm";
 import { SubmitButton } from "../submit-button";
+import { signIn } from "../auth";
 
 
 const Register = () => {
@@ -27,15 +29,31 @@ const Register = () => {
                 <h2 className="text-2xl font-semibold mb-6"></h2>     
                     <RegisterForm action={register} >
                         <SubmitButton>Sign Up</SubmitButton>
-                        <p className="text-center text-sm text-gray-400">
-                            {'Already have an account? '}
-                            <Link href="/login" className="font-semibold text-gray-200">
-                            Sign in
-                            </Link>
-                            {' instead.'}
-                        </p>                        
                     </RegisterForm>
-            </div>
+                <form 
+                    className='mt-4 mb-4'
+                    action={async () => { 
+                        'use server';
+                        await signIn('google')
+                        // add production url to google console
+                    }}
+                >
+                    <button
+                        type="submit"
+                        className="w-full py-2 px-4 bg-gradient-to-r from-gray-800 via-gray-700 to bg-gray-800 text-white rounded-md transition-colors flex items-center justify-center gap-2"
+                    >
+                        <Image src="https://img.icons8.com/color/48/000000/google-logo.png" alt="google logo" width={20} height={20} />
+                        Sign Up with Google
+                    </button>
+                </form>
+                <p className="text-center text-sm text-gray-400">
+                    {'Already have an account? '}
+                    <Link href="/login" className="font-semibold text-gray-200">
+                    Sign in
+                    </Link>
+                    {' instead.'}
+                </p>                        
+        </div>
         </div>
     );
 };

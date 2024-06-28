@@ -1,5 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
+//TODO: update api routes to use drizzle
  
 export async function GET(request: Request) {
   try {

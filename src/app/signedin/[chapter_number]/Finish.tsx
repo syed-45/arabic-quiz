@@ -3,6 +3,7 @@ import { FinishProps, IQuestion } from "../../utils/types"
 
 export const Finish = ({questions,noOfQuestions}: FinishProps):JSX.Element => {
     const [openedQuestionNum, setOpenedQuestionNum] = useState<number | undefined>()
+    //TODO: add back to home option
 
     const handleQuestionClick = (questionNum: number):void => {
        if (questionNum === openedQuestionNum) {

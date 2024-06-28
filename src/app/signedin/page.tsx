@@ -3,7 +3,7 @@ import { IChapterData, IUserScores } from '../utils/types'
 import { auth } from '../auth';
 import Link from 'next/link';
 import { titleCase } from '../utils/TitleCaseKata'
-
+//TODO: add nav menu 
 export default async function SignedIn() {
     let session = await auth();
 
@@ -49,7 +49,6 @@ export default async function SignedIn() {
                         key={chapter.chapter_number} 
                     />
                 ))}
-                {/* TODO: for chapters with no data yet, show a message */}
             </main>
         </>
     )

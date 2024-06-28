@@ -19,55 +19,30 @@ export default function Login() {
                         });
                     }} >
                     <SubmitButton>Sign In</SubmitButton>
+                </Form>               
+                <form 
+                    className='mt-4 mb-4'
+                    action={async () => { 
+                        'use server';
+                        await signIn('google')
+                    }}
+                >
                     <button
-                        type="button"
-                        className="w-full py-2 px-4 bg-gradient-to-r from-gray-800 via-gray-700 to bg-gray-800 text-white rounded-md transition-colors flex items-center justify-center gap-3"
+                        type="submit"
+                        className="w-full py-2 px-4 bg-gradient-to-r from-gray-800 via-gray-700 to bg-gray-800 text-white rounded-md transition-colors flex items-center justify-center gap-2"
                     >
                         <Image src="https://img.icons8.com/color/48/000000/google-logo.png" alt="google logo" width={20} height={20} />
                         Sign In with Google
-                        <div></div>
                     </button>
-                    <p className="text-center text-sm text-gray-400">
-                        {"Don't have an account? "}
-                        <Link href="/register" className="font-semibold text-gray-200">
-                        Sign up
-                        </Link>
-                        {' for free.'}
-                    </p>
-                </Form>
+                </form>
+                <p className="text-center text-sm text-gray-400">
+                    {"Don't have an account? "}
+                    <Link href="/register" className="font-semibold text-gray-200">
+                    Sign up
+                    </Link>
+                    {' for free.'}
+                </p>
             </div>
         </div>
     );
 };
-
-// onClick={() => {
-    //   const provider = new GoogleAuthProvider();
-    //   signInWithPopup(auth, provider)
-    //     .then((result) => {
-    //       // This gives you a Google Access Token. You can use it to access the Google API.
-    //       const credential = GoogleAuthProvider.credentialFromResult(result);
-    //       // what can i do with the token
-
-    //       const token = credential?.accessToken;
-    //       // The signed-in user info.
-    //       const user = result.user;
-    //       console.log(user);
-    //       // redirect to signedin page
-    //       // window.location.href = "/signedin";
-
-    //       //how to access user data
-    //       // const {displayName, email, photoURL} = user;
-    //       // how can i get the user data to the signedin page
-
-    //     })
-    //     .catch((error) => {
-    //       // Handle Errors here.
-    //       const errorCode = error.code;
-    //       const errorMessage = error.message;
-    //       // The email of the user's account used.
-    //       const email = error.email;
-    //       // The AuthCredential type that was used.
-    //       const credential = GoogleAuthProvider.credentialFromError(error);
-    //       console.log(error);
-    //     });
-    //   }} 
