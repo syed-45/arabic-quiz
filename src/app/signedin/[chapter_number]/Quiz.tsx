@@ -22,7 +22,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
 
         if (verbOrNoun === 'verb') {
             const questionVerb: IVerbsData = generateRandomOption(verbs);
-            console.log('currrent verbs ',verbs)
+            console.log('currrent verbs ',verbs) //TODO: remove console.logs
             let verbProperty: keyof IVerbsData = questionIsEnglish ? 'english' : 'arabic_past'
             questionWord = questionVerb[verbProperty]
             verbProperty = questionIsEnglish ? 'arabic_past' : 'english'
@@ -56,15 +56,13 @@ export default function Quiz(props: QuizProps):JSX.Element {
                     chapter_number: props.chapter_number,
                     user_email: props.user_email
             })
-            .then((response) => {
-                console.log(response);
-            })
             .catch((error) => {
                 console.log(error);
+                alert('Something went wrong submitting your user score.')
             })        
         };
 
-    }, [verbs, nouns, verbOrNoun, questionIsEnglish, questionNum, noOfQuestions, props.chapter_number, props.user_email, questions])    
+    }, [verbs, nouns, verbOrNoun, questionIsEnglish])    
 
     const handleOptionClick = (option: string) => {
         console.log('current questions',questions)
