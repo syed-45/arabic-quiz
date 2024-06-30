@@ -4,6 +4,11 @@ CREATE TABLE "Users" (
   password VARCHAR(64) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS user_scores (
+	user_id integer,
+	chapter_number integer,
+	last_score integer
+);
 
 CREATE table chapters (
     chapter_number INT PRIMARY KEY,
@@ -40,11 +45,11 @@ CREATE TABLE chapter_1_verbs (
 
 INSERT INTO chapter_1_verbs VALUES
     ('To look', 'نَظَرٌ', 'اُنْظُرْ', 'يَنْظُرُ', 'نَظَرَ'),
-    ('To listen', 'اِسْتِمَاع', 'اِسْتَمِعْ', 'يَسْتَمِعُ', 'اِسْتَمَعَ'),
     ('To repeat', 'إِعَادَة', 'أَعِدْ', 'يُعِيدُ', 'عَادَ'),
     ('To point, indicate', 'إِشَارَةٌ', 'أُشِرْ', 'يُشِيرُ', 'أَشَارَ'),
     ('To put', 'وَضْعٌ', 'ضَعْ', 'يَضَعُ', 'وَضَعَ'),
-    ('To hear', 'سَمَاعٌ', 'اِسْمَعْ', 'يَسْمَعُ', 'سَمِعَ'),
+    ('To listen', 'اِسْتِمَاع', 'اِسْتَمِعْ', 'يَسْتَمِعُ', 'اِسْتَمَعَ'),
+    -- ('To hear', 'سَمَاعٌ', 'اِسْمَعْ', 'يَسْمَعُ', 'سَمِعَ'), -- deleted from table due to similiarity with above verb
     ('To say', 'قَوْلٌ', 'قُلْ', 'يَقُولُ', 'قَالَ'),
     ('To organise, arrange', 'تَرْتِيبٌ', 'رَتِّبْ', 'يُرَتِّبُ', 'رَتَّبَ'),
     ('To exchange', 'تَبَادُلٌ', 'تَبَادَلْ', 'يَتَبَادَلُ', 'تَبَادَلَ'),
