@@ -2,7 +2,10 @@ import { ChapterCard } from './ChapterCard'
 import { IChapterData, IUserScores } from '../utils/types'
 import { auth } from '../auth';
 import Link from 'next/link';
-import { titleCase } from '../utils/TitleCaseKata'
+import { TitleCase } from '../utils/TitleCaseKata'
+import LogoHeader from '../LogoHeader';
+
+
 //TODO: add nav menu 
 export default async function SignedIn() {
     let session = await auth();
@@ -20,28 +23,20 @@ export default async function SignedIn() {
     return (
         <>
             <Link href="/signedin/profile" className='flex justify-end'>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="65px"
-                    viewBox="0 -960 960 960"
-                    width="65px"
-                    fill="#e8eaed"
-                    className='mr-7 mt-7'
-                >
-                    <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-16 mt-7 mr-7 text-black dark:text-white">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>
             </Link>
-            <h1 className="text-center mt-2 text-2xl">Arabic Quiz</h1>
-            <h4 className="text-center">Based on Al Arabiyyah Bayna Yadayk Series</h4>
-            <h3 className="text-center mt-8">Welcome back, {titleCase(session?.user?.name!)}</h3>
-            <div className="text-center h-16 mx-5 border-2 border-green-800 rounded-md mt-2 max-w-3xl sm:mx-auto relative flex justify-center items-center">
-                <div className={`h-full bg-gradient-to-r from-green-400 to-green-800 rounded z-[-1] absolute left-0`} style={{width: (100*quizzesCompleted/16)+'%'}}></div>
+            <LogoHeader/>
+            <h3 className="text-center mt-8">Welcome back {TitleCase(session?.user?.name!)}</h3>
+            <div className="text-center h-12 mx-5 border-2 dark:border-green-800 border-green-600 rounded-md mt-3 max-w-md min-[448px]:mx-auto relative flex justify-center items-center">
+                <div className={`h-full bg-gradient-to-r from-green-300 to-green-500 dark:from-green-500 dark:to-green-800  rounded z-[-1] absolute left-0`} style={{width: (100*quizzesCompleted/16)+'%'}}></div>
                 <span className=''>Quizzes completed: {quizzesCompleted+' / 16'}</span>
             </div>
-            <div className="text-center mx-5 border-2 border-blue-400 rounded-md mt-5 h-16 content-center max-w-3xl sm:mx-auto">
+            <div className="text-center mx-5 border-2 border-blue-400 dark:border-blue-800 rounded-md mt-3 h-12 content-center max-w-md min-[448px]:mx-auto">
                 Average score: {percentageScore+'%'}
             </div>
-            <main className='grid grid-cols-2 sm:grid-cols-2 gap-4 mt-10 px-5'>
+            <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mt-5 mb-12 px-5'>
                 {allChapters.map((chapter,index) => (
                     <ChapterCard 
                         chapterData={chapter}

@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm';
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const user_email = searchParams.get('user-email')!;
-
+  //TODO: not recieving results from haque_45@hotmail.co.uk email after completing quiz
     try {
       const result = 
       await db.select().from(userScores)

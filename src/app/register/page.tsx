@@ -25,7 +25,8 @@ const Register = () => {
 
     return (
         <div className="flex flex-col justify-center items-center h-screen">
-            <div className="w-min-content sm:w-[500px] px-10 py-12 border-2 border-gray-200 bg-gradient-to-tr from-black to-gray-700 shadow-md rounded-md">
+            <div className="w-min-content sm:w-[500px] px-10 py-12 border-2 border-gray-700 dark:border-gray-200 dark:bg-gradient-to-tr dark:from-black dark:to-gray-700 bg-gradient-to-t from-gray-200 via-gray-100 to-gray-200 shadow-md rounded-md">
+                <h1 className="text-2xl font-semibold mb-6">Register a new account</h1>
                 <h2 className="text-2xl font-semibold mb-6"></h2>     
                     <RegisterForm action={register} >
                         <SubmitButton>Sign Up</SubmitButton>
@@ -46,9 +47,9 @@ const Register = () => {
                         Sign Up with Google
                     </button>
                 </form>
-                <p className="text-center text-sm text-gray-400">
+                <p className="text-center text-sm text-gray-600 dark:text-gray-400">
                     {'Already have an account? '}
-                    <Link href="/login" className="font-semibold text-gray-200">
+                    <Link href="/login" className="font-semibold dark:text-gray-200">
                     Sign in
                     </Link>
                     {' instead.'}

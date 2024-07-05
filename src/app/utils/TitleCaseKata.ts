@@ -1,4 +1,4 @@
-export function titleCase(title: string, minorWords?: string) {
+export function TitleCase(title: string, minorWords?: string) {
   if (!title) return ""; // Handle empty title
   
   // Convert minor words to a set of lowercase words for quick lookup

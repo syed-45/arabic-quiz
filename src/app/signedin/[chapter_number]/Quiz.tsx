@@ -6,13 +6,17 @@ import { spareNouns, spareVerbs } from "../../utils/spareVocab"
 import shuffleArray from "../../utils/shuffleArray"
 import { Finish } from "./Finish"
 import axios from "axios"
+import { darkGradientColors, gradientColors } from "@/app/utils/chapterGradientColours"
+const optionButtonStyles = ['border ','border-y border-r ','border-x border-b ','border-r border-b ']
+const optionRoundedCornerStyles = ['rounded-tl-md','rounded-tr-md','rounded-bl-md','rounded-br-md']
 
 export default function Quiz(props: QuizProps):JSX.Element {
     const [verbs, setVerbs] = useState<IVerbsData[]>(props.verbs)
     const [nouns, setNouns] = useState<INounsData[]>(props.nouns)
     const [verbOrNoun, setVerbOrNoun] = useState<'verb' | 'noun'>(generateRandomOption(['verb', 'noun']))
-    const [questionIsEnglish, setQuestionIsEnglish] = useState<boolean>(generateRandomOption([true, false]))
+    const [questionIsEnglish, setQuestionIsEnglish] = useState<boolean>(generateRandomOption([true, false])) //TODO: add weighting so english questions is more frequent
     const noOfQuestions = props.verbs.length + props.nouns.length > 12 ? 12 : props.verbs.length + props.nouns.length
+    // TODO: increase noOfQuestions
     const [questions, setQuestions] = useState<IQuestion[]>([{question: '', options:[], answer:'', user_answer: 'foo', is_correct: false,}])
     const [questionNum, setQuestionNum] = useState<number>(0)
     const currentQuestion = questions[questionNum]
@@ -62,6 +66,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
             })        
         };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [verbs, nouns, verbOrNoun, questionIsEnglish])    
 
     const handleOptionClick = (option: string) => {
@@ -76,15 +81,17 @@ export default function Quiz(props: QuizProps):JSX.Element {
         }
         else {
             setQuestions((prev: IQuestion[]):IQuestion[] => {
-            const newQuestions = [...prev];
-            newQuestions[questionNum].user_answer = option;
-            newQuestions[questionNum].is_correct = option === newQuestions[questionNum].answer
-            return newQuestions;
+                const newQuestions = [...prev];
+                newQuestions[questionNum].user_answer = option;
+                newQuestions[questionNum].is_correct = option === newQuestions[questionNum].answer
+                return newQuestions;
             });
         }
     }
 
     const handleNextClick = () => {
+        //TODO: need to handle when on previous question and clicking next, need no reandom generation of new question
+        // producing errors of same questions appearing
         if (currentQuestion.user_answer === '') {
             alert('Please select an option')
         } else if (questionNum === noOfQuestions) {
@@ -107,6 +114,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
     const handlePreviousClick = () => {
         if (questionNum === 1) {
             alert('This is the first question')
+            //TODO: possibly get rid of this, allow user to see start screen?
         } else {
             setQuestionNum(prev => prev - 1);
         }
@@ -119,31 +127,45 @@ export default function Quiz(props: QuizProps):JSX.Element {
     }
     else if (questionNum === 0) {
         return (
-            <main className="text-center mx-5 mt-6 p-5 max-w-3xl sm:mx-auto">
-                <button className="border-2 p-5 rounded-md border-yellow-500" onClick={handleNextClick} >START CHAPTER {props.chapter_number} QUIZ</button>
+            <main className="text-center mx-auto mt-10 max-w-screen-lg pb-[600px] flex flex-col gap-10 items-center">
+                <h3 className={"py-2 text-gray-100 px-10 w-max-content rounded-md flex items-center justify-center font-semibold shadow-xl"+gradientColors[props.chapter_number-1]+darkGradientColors[props.chapter_number-1]} >
+                    Chapter <span className="backdrop-blur-xl drop-shadow-2xl size-7 rounded-md flex justify-center items-center mr-1">{props.chapter_number}</span>Quiz
+                </h3>
+                <div className="text-left px-5">
+                    <h4 className="font-extrabold mb-3 text-lg">Quiz Information</h4>
+                    <div className="mb-3"> This quiz will test you on verbs and nouns which are specific to this chapter. You will be asked to select the correct translation etiher from english to arabic or english to arabic.</div>
+                    <div>There are {noOfQuestions} questions in this chapter.</div>
+                </div>
+                <button onClick={handleNextClick} className="bg-white font-bold text-red-600 dark:bg-gradient-to-bl dark:from-gray-300 dark:to-white p-2 w-32 rounded-md drop-shadow-xl">
+                        Start
+                </button>
             </main>
         )
     }
     return ( 
-        <main className='text-center mx-5 mt-6 p-5 max-w-3xl sm:mx-auto'>
-            <div className="text-lg bg-orange-700 rounded-md py-3">Question {questionNum} of {noOfQuestions}</div>
-            <div className="mb-7 mt-7 text-5xl">{currentQuestion.question}</div>
-            <div className="grid grid-cols-2 gap-0 mt-5">
-                {currentQuestion.options.map((option:string):JSX.Element => {
+        <main className='text-center mx-5 mt-10 max-w-screen-lg sm:mx-auto sm:px-5 pb-36'>
+            <h3 className={"py-2 text-gray-100 px-10 rounded-md flex items-center justify-center font-semibold shadow-xl w-[210px] mx-auto"+gradientColors[props.chapter_number-1]+darkGradientColors[props.chapter_number-1]} >
+                    Chapter <span className="backdrop-blur-xl drop-shadow-2xl size-7 rounded-[7px] flex justify-center items-center mr-1">{props.chapter_number}</span>Quiz
+            </h3>
+            <div className={'mb-10 mt-10 text-3xl'}>{currentQuestion.question}</div>
+            <div className="grid grid-cols-2 gap-0 mt-5 bg-gradient-to-bl text-white from-sky-950 via-sky-400 via-70% to-sky-200 h-72 rounded-md text-xl">
+                {currentQuestion.options.map((option:string, index:number):JSX.Element => {
                     return (
                         <button
                             key={option}
-                            onClick={() => handleOptionClick(option)}
-                            className={"h-32" + (currentQuestion.user_answer === option ? " bg-blue-300" : " bg-blue-500")}
+                            onClick={() => handleOptionClick(option)}                           
+                            style={{backgroundColor:currentQuestion.user_answer === option ? "rgb(0 0 0 / 50%)" : "rgb(0 0 0 / 0%)"}}
+                            className={`shadow-2xl ${optionRoundedCornerStyles[index]}  ${currentQuestion.user_answer === option ?  "border" : "border-sky-900 " + optionButtonStyles[index]}` }
                         >
                             {option}
                         </button>
                     )
                 })}
             </div>
-            <div className="flex justify-between">
-                <button className="bg-red-700 h-12 w-16 mt-10 p-2 rounded-md text-xs" onClick={handlePreviousClick}>Previous</button>
-                <button className="bg-purple-700 h-12 w-16 mt-10 p-2 rounded-md text-xs" onClick={handleNextClick}>{questionNum < noOfQuestions ? 'Next' : 'Finish'}</button>
+            <div className="flex justify-between items-center mt-10 relative">
+                <button className="" onClick={handlePreviousClick}>Previous</button>
+                <div className="absolute text-center mx-auto left-0 right-0 text-lg z-[-1]">Question {questionNum}</div>
+                <button className="" onClick={handleNextClick}>{questionNum < noOfQuestions ? 'Next' : 'Finish'}</button>
             </div>
         </main>
     )
