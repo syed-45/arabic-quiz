@@ -7,7 +7,6 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Navbar(): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -64,20 +63,6 @@ export default function Navbar(): JSX.Element {
                   href='/dashboard'
                 >
                   Dashboard
-                </Link>
-                <Link
-                  scroll={false}
-                  className='smooth-scroll -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:hover:bg-gray-900 hover:bg-gray-50'
-                  href=''
-                >
-                  Projects
-                </Link>
-                <Link
-                  scroll={false}
-                  className='smooth-scroll -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:hover:bg-gray-900 hover:bg-gray-50'
-                  href=''
-                >
-                  Contact
                 </Link>
               </div>
             </div>
