@@ -7,6 +7,7 @@ import shuffleArray from "../../utils/shuffleArray"
 import { Finish } from "./Finish"
 import axios from "axios"
 import { darkGradientColors, gradientColors } from "@/app/utils/chapterGradientColours"
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
 const optionButtonStyles = ['border ','border-y border-r ','border-x border-b ','border-r border-b ']
 const optionRoundedCornerStyles = ['rounded-tl-md','rounded-tr-md','rounded-bl-md','rounded-br-md']
 
@@ -147,15 +148,15 @@ export default function Quiz(props: QuizProps):JSX.Element {
             <h3 className={"py-2 text-gray-100 px-10 rounded-md flex items-center justify-center font-semibold shadow-xl w-[210px] mx-auto"+gradientColors[props.chapter_number-1]+darkGradientColors[props.chapter_number-1]} >
                     Chapter <span className="backdrop-blur-xl drop-shadow-2xl size-7 rounded-[7px] flex justify-center items-center mr-1">{props.chapter_number}</span>Quiz
             </h3>
-            <div className={'mb-10 mt-10 text-3xl'}>{currentQuestion.question}</div>
-            <div className="grid grid-cols-2 gap-0 mt-5 bg-gradient-to-bl text-white from-sky-950 via-sky-400 via-70% to-sky-200 h-72 rounded-md text-xl">
+            <div className={`mb-10 mt-10 ${currentQuestion.question.length > 20 ? "text-2xl" : "text-3xl"}`}>{currentQuestion.question}</div>
+            <div className="grid grid-cols-2 gap-0 mt-5 bg-gradient-to-bl text-white from-sky-950 via-sky-400 via-70% to-sky-200 rounded-md text-xl">
                 {currentQuestion.options.map((option:string, index:number):JSX.Element => {
                     return (
                         <button
                             key={option}
                             onClick={() => handleOptionClick(option)}                           
                             style={{backgroundColor:currentQuestion.user_answer === option ? "rgb(0 0 0 / 50%)" : "rgb(0 0 0 / 0%)"}}
-                            className={`shadow-2xl ${optionRoundedCornerStyles[index]}  ${currentQuestion.user_answer === option ?  "border" : "border-sky-900 " + optionButtonStyles[index]}` }
+                            className={`h-36 shadow-2xl ${optionRoundedCornerStyles[index]}  ${currentQuestion.user_answer === option ?  "border" : "border-sky-900 " + optionButtonStyles[index]}` }
                         >
                             {option}
                         </button>
@@ -163,9 +164,19 @@ export default function Quiz(props: QuizProps):JSX.Element {
                 })}
             </div>
             <div className="flex justify-between items-center mt-10 relative">
-                <button className="" onClick={handlePreviousClick}>Previous</button>
-                <div className="absolute text-center mx-auto left-0 right-0 text-lg z-[-1]">Question {questionNum}</div>
-                <button className="" onClick={handleNextClick}>{questionNum < noOfQuestions ? 'Next' : 'Finish'}</button>
+                <button className="flex flex-row items-center" onClick={handlePreviousClick}>
+                    <ChevronLeftIcon className="size-5"/>
+                    Previous
+                </button>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="size-10 rounded-[7px] flex justify-center items-center bg-gradient-to-bl text-white from-sky-950 via-sky-400 via-70% to-sky-200" style={{boxShadow:"rgba(100, 100, 111, 0.4) 0px 7px 29px 0px"}} >
+                        {questionNum}
+                    </div>
+                </div>
+                <button className="flex flex-row items-center" onClick={handleNextClick}>
+                    {questionNum < noOfQuestions ? 'Next' : 'Finish'}
+                    <ChevronRightIcon className="size-5"/>
+                </button>
             </div>
         </main>
     )

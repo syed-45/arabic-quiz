@@ -6,7 +6,7 @@ export const ChapterCard = ({chapterData, last_score}: IChapterCard) => {
     
 
     return(
-        <Link href={`/signedin/${chapterData.chapter_number}`} className={"flex flex-col px-3 pt-2 sm:px-5 sm:pt-5 h-32 sm:h-40 rounded-md relative text-white shadow-md" + gradientColors[chapterData.chapter_number-1] + darkGradientColors[chapterData.chapter_number-1] }>
+        <Link href={`/dashboard/${chapterData.chapter_number}`} className={"flex flex-col px-3 pt-2 sm:px-5 sm:pt-5 h-32 sm:h-40 rounded-md relative text-white shadow-md" + gradientColors[chapterData.chapter_number-1] + darkGradientColors[chapterData.chapter_number-1] }>
             <div className="text-xs sm:text-lg font-semibold flex items-center gap-2">
                 <div className="text-gray-200 backdrop-blur-xl shadow-xl size-8 rounded-md flex justify-center items-center">{chapterData.chapter_number}</div>
                 {chapterData.chapter_name}

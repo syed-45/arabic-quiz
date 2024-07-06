@@ -2,6 +2,7 @@ import Quiz from "./Quiz"
 import { INounsData, IQuestion, IVerbsData } from "../../utils/types"
 import { auth } from "../../auth"
 import LogoHeader from "@/app/LogoHeader";
+import Navbar from "@/app/Navbar";
 
 export default async function ChapterQuiz({ params }: { params: { chapter_number: string } }) {
     const chapter_number = parseInt(params.chapter_number)
@@ -11,7 +12,7 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
 
     if (chapter_number > 2 && chapter_number < 17) {
         return (
-            <div className="pt-12">
+            <div>
                 <LogoHeader/>
                 <div className="text-center pt-10 text-yellow-700 dark:bg-yellow-300">This chapter is being worked on and not ready yet. <br></br> Available chapters are 1-2</div>
             </div>
@@ -26,7 +27,8 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
         const nouns : INounsData[] = data.nouns.rows
         
         return (
-            <div className="pt-12">
+            <div>
+                <Navbar/>
                 <LogoHeader/>
                 <Quiz verbs={verbs} nouns={nouns} chapter_number={chapter_number} user_email={user_email}/>
             </div>
