@@ -4,6 +4,7 @@ import { compare } from 'bcrypt-ts';
 import { getUser } from './db/index';
 import { authConfig } from '../../auth.config';
 import Google from 'next-auth/providers/google';
+//TODO: piblish app on google console to allow non test users
 
 export const { handlers, auth, signIn, signOut,} = NextAuth({
   ...authConfig,

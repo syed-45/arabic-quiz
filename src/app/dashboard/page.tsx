@@ -1,7 +1,6 @@
 import { ChapterCard } from './ChapterCard'
 import { IChapterData, IUserScores } from '../utils/types'
 import { auth } from '../auth';
-import Link from 'next/link';
 import { TitleCase } from '../utils/TitleCaseKata'
 import LogoHeader from '../LogoHeader';
 import Navbar from '../Navbar'
@@ -23,7 +22,7 @@ export default async function Dashboard() {
         <>
             <Navbar/>
             <LogoHeader/>
-            <h3 className="text-center mt-8">Welcome back {TitleCase(session?.user?.name!)}</h3>
+            <h3 className="text-center mt-8">Welcome back <span className='font-bold'>{TitleCase(session?.user?.name!, true)}</span></h3>
             <div className="text-center h-12 mx-5 border-2 dark:border-green-800 border-green-600 rounded-md mt-3 max-w-md min-[448px]:mx-auto relative flex justify-center items-center">
                 <div className={`h-full bg-gradient-to-r from-green-300 to-green-500 dark:from-green-500 dark:to-green-800  rounded z-[-1] absolute left-0`} style={{width: (100*quizzesCompleted/16)+'%'}}></div>
                 <span className=''>🎯 Quizzes Completed {quizzesCompleted+' / 16'}</span>

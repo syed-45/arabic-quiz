@@ -1,4 +1,4 @@
-export function TitleCase(title: string, minorWords?: string) {
+export function TitleCase(title: string, firstWordOnly: boolean, minorWords?: string,) {
   if (!title) return ""; // Handle empty title
   
   // Convert minor words to a set of lowercase words for quick lookup
@@ -10,6 +10,9 @@ export function TitleCase(title: string, minorWords?: string) {
   // capitalise the first word
   let newTitle = [capitalise(words[0])];
   
+  //Return first word only
+  if (firstWordOnly) return newTitle
+  
   // Process the remaining words
   for (let i = 1; i < words.length; i++) {
     const word = words[i].toLowerCase();
@@ -19,7 +22,8 @@ export function TitleCase(title: string, minorWords?: string) {
       newTitle.push(capitalise(word));
     }
   }
-  
+
+
   // Join the words into the final title case string
   return newTitle.join(' ');
 }
