@@ -82,13 +82,13 @@ INSERT INTO chapter_1_nouns (arabic, english, arabic_plural) VALUES
     ('أُخْت', 'Sister', 'أَخَوَات'),
     ('دَرْس', 'Lesson', 'دُرُوس'),
     ('تَدْرِيب', 'Exercise', 'تَدَرِيبَات'),
-    ('عَدَد', 'Number', 'أَعْدَاد'),
+    ('عَدَد', 'Number', 'أَعْدَاد'), -- TODO: rid of "duplicate" number
     ('صُورَة', 'Picture', 'صُوَر'),
     ('جَوَاب', 'Answer', 'أَجْوِبَة'),
     ('سُؤَال', 'Question', 'أَسْئِلَة'),
     ('مِثَال', 'Example', 'أَمْثِلَة'),
     ('زَمِيل', 'Colleague, classmate', 'زُمَلَاء'),
-    ('رَقْمٌ', 'Number', 'أَرْقَام'),
+    ('رَقْمٌ', 'Number', 'أَرْقَام'),      -- DUPL. HERE.
     ('جُمْلَة', 'Sentence', 'جُمَل'),
     ('عَلَامَة', 'Sign, indication', 'عَلَامَات'),
     ('كَلِمَة', 'Word', 'كَلِمَات');

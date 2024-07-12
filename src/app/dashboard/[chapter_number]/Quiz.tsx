@@ -128,7 +128,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
     }
     else if (questionNum === 0) {
         return (
-            <main className="text-center mx-auto mt-10 max-w-screen-lg pb-[600px] flex flex-col gap-10 items-center">
+            <main className="text-center mx-auto mt-10 max-w-screen-lg flex flex-col gap-10 items-center">
                 <h3 className={"py-2 text-gray-100 px-10 w-max-content rounded-md flex items-center justify-center font-semibold shadow-xl"+gradientColors[props.chapter_number-1]+darkGradientColors[props.chapter_number-1]} >
                     Chapter <span className="backdrop-blur-xl drop-shadow-2xl size-7 rounded-md flex justify-center items-center mr-1">{props.chapter_number}</span>Quiz
                 </h3>
@@ -137,25 +137,26 @@ export default function Quiz(props: QuizProps):JSX.Element {
                     <div className="mb-3"> This quiz will test you on verbs and nouns which are specific to this chapter. You will be asked to select the correct translation etiher from english to arabic or english to arabic.</div>
                     <div>There are {noOfQuestions} questions in this chapter.</div>
                 </div>
-                <button onClick={handleNextClick} className="bg-white font-bold text-red-600 dark:bg-gradient-to-bl dark:from-gray-300 dark:to-white p-2 w-32 rounded-md drop-shadow-xl">
+                <button onClick={handleNextClick} className="bg-white font-bold text-sky-800 dark:bg-gradient-to-bl dark:from-gray-300 dark:to-white p-2 w-32 rounded-md drop-shadow-xl">
                         Start
                 </button>
             </main>
         )
     }
     return ( 
-        <main className='text-center mx-5 mt-10 max-w-screen-lg sm:mx-auto sm:px-5 pb-36'>
+        <main className='text-center mx-5 mt-10 max-w-screen-lg sm:mx-auto sm:px-5 pb-10'>
             <h3 className={"py-2 text-gray-100 px-10 rounded-md flex items-center justify-center font-semibold shadow-xl w-[210px] mx-auto"+gradientColors[props.chapter_number-1]+darkGradientColors[props.chapter_number-1]} >
                     Chapter <span className="backdrop-blur-xl drop-shadow-2xl size-7 rounded-[7px] flex justify-center items-center mr-1">{props.chapter_number}</span>Quiz
             </h3>
             <div className={`mb-10 mt-10 ${currentQuestion.question.length > 20 ? "text-2xl" : "text-3xl"}`}>{currentQuestion.question}</div>
-            <div className="grid grid-cols-2 gap-0 mt-5 bg-gradient-to-bl text-white from-sky-950 via-sky-400 via-70% to-sky-200 rounded-md text-xl">
+            <div className="grid grid-cols-2 gap-0 mt-5 bg-gradient-to-bl text-white from-sky-950 via-sky-500 via-70% to-sky-200 dark:from-sky-800 dark:to-transparent rounded-md text-xl">
                 {currentQuestion.options.map((option:string, index:number):JSX.Element => {
                     return (
                         <button
                             key={option}
-                            onClick={() => handleOptionClick(option)}                           
-                            style={{backgroundColor:currentQuestion.user_answer === option ? "rgb(0 0 0 / 50%)" : "rgb(0 0 0 / 0%)"}}
+                            onClick={() => handleOptionClick(option)}
+                            //TODO borders are still overlapping NOT URGENT                           
+                            style={{backgroundColor:currentQuestion.user_answer === option ? "rgb(80 80 80 / 60%)" : "rgb(0 0 0 / 0%)"}}
                             className={`h-36 shadow-2xl ${optionRoundedCornerStyles[index]}  ${currentQuestion.user_answer === option ?  "border" : "border-sky-900 " + optionButtonStyles[index]}` }
                         >
                             {option}
@@ -169,11 +170,12 @@ export default function Quiz(props: QuizProps):JSX.Element {
                     Previous
                 </button>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="size-10 rounded-[7px] flex justify-center items-center bg-gradient-to-bl text-white from-sky-950 via-sky-400 via-70% to-sky-200" style={{boxShadow:"rgba(100, 100, 111, 0.4) 0px 7px 29px 0px"}} >
+                    <div className="size-10 rounded-[7px] flex justify-center items-center bg-gradient-to-bl text-white from-sky-950 via-sky-500 via-70% to-sky-200 dark:from-sky-800 dark:to-transparent dark:border border-sky-950" style={{boxShadow:"rgba(100, 100, 111, 0.4) 0px 7px 29px 0px"}} >
                         {questionNum}
                     </div>
                 </div>
                 <button className="flex flex-row items-center" onClick={handleNextClick}>
+                    {/* T0DO: change above onclick to questionNum < noOfQuestions ? handleNextClick : () => setQuestionNum((prev) => prev+1) */}
                     {questionNum < noOfQuestions ? 'Next' : 'Finish'}
                     <ChevronRightIcon className="size-5"/>
                 </button>
