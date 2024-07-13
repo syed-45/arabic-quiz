@@ -134,7 +134,7 @@ INSERT INTO chapter_2_nouns (arabic, english, arabic_plural, english_plural) VAL
     ('رَسُولٌ', 'Messenger', 'رُسُلٌ', 'Messengers'),
     ('أَبٌ', 'Father', 'آبَاءٌ', 'Fathers'),
     ('وَالِدَةٌ', 'Mother', 'وَالِدَاتٌ', 'Mothers'),
-    ('وَالِدٌ', 'Father', 'وَالِدُونَ', 'Fathers');
+    ('وَالِدٌ', 'Father', 'وَالِدُونَ', 'Fathers'); --TODO: get rid of "2nd" father
 
 -- bing command ⬇️
 -- create a sql table for the chapter two verbs table on the page i am on righht now, the columns should be english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past. Answer only using the web page context and do not search the web.

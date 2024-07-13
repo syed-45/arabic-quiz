@@ -46,7 +46,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
             option2 = generateRandomOption((nouns.length < 4 ? spareNouns : nouns).filter(noun => ![option1, answer_option4].includes(noun[nounProperty])))[nounProperty]
             option3 = generateRandomOption((nouns.length < 4 ? spareNouns : nouns).filter(noun => ![option1, option2, answer_option4].includes(noun[nounProperty])))[nounProperty]
         }
-
+        
         setQuestions(prev => [...prev, {
             question: questionWord,
             options: shuffleArray([option1, option2, option3, answer_option4]),
@@ -54,22 +54,10 @@ export default function Quiz(props: QuizProps):JSX.Element {
             user_answer: '',
             is_correct: false
         }])
-
-        if (questionNum === noOfQuestions + 1) {
-            axios.post(`/api/post-score`, {
-                    score: questions.filter(question => question.is_correct).length,
-                    chapter_number: props.chapter_number,
-                    user_email: props.user_email
-            })
-            .catch((error) => {
-                console.log(error);
-                alert('Something went wrong submitting your user score.')
-            })        
-        };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [verbs, nouns, verbOrNoun, questionIsEnglish])    
-
+    
     const handleOptionClick = (option: string) => {
         console.log('current questions',questions)
         if (currentQuestion.user_answer === option) {
@@ -91,11 +79,9 @@ export default function Quiz(props: QuizProps):JSX.Element {
     }
 
     const handleNextClick = () => {
-        //TODO: need to handle when on previous question and clicking next, need no reandom generation of new question
-        // producing errors of same questions appearing
         if (currentQuestion.user_answer === '') {
             alert('Please select an option')
-        } else if (questionNum === noOfQuestions) {
+        } else if (questions[questionNum+1].user_answer!=='') {
             setQuestionNum(prev => prev + 1);
         } 
         else {
@@ -110,6 +96,19 @@ export default function Quiz(props: QuizProps):JSX.Element {
             else if (nouns.length <= 1) setVerbOrNoun('verb');
             else setVerbOrNoun(generateRandomOption(['verb', 'noun']));
         }
+    }
+
+    const handleFinishClick = () => {
+        setQuestionNum((prev) => prev+1) 
+        axios.post(`/api/post-score`, {
+            score: questions.filter(question => question.is_correct).length,
+            chapter_number: props.chapter_number,
+            user_email: props.user_email
+        })
+        .catch((error) => {
+            console.log(error);
+            alert('Something went wrong submitting your user score.')
+        })    
     }
 
     const handlePreviousClick = () => {
@@ -174,9 +173,9 @@ export default function Quiz(props: QuizProps):JSX.Element {
                         {questionNum}
                     </div>
                 </div>
-                <button className="flex flex-row items-center" onClick={handleNextClick}>
+                <button className="flex flex-row items-center" onClick={questionNum < noOfQuestions ? handleNextClick : handleFinishClick}>
                     {/* T0DO: change above onclick to questionNum < noOfQuestions ? handleNextClick : () => setQuestionNum((prev) => prev+1) */}
-                    {questionNum < noOfQuestions ? 'Next' : 'Finish'}
+                    {questionNum < noOfQuestions ? 'Next' : 'Submit'}
                     <ChevronRightIcon className="size-5"/>
                 </button>
             </div>

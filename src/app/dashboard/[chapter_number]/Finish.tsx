@@ -68,7 +68,8 @@ export const Finish = ({questions,noOfQuestions}: FinishProps):JSX.Element => {
                     )
                 })}
                 <Link href={'/dashboard'} className="bg-gradient-to-bl from-white font-bold text-sky-800 dark:text-white dark:from-sky-800 p-2 w-32 rounded-md drop-shadow-xl text-center mt-5">
-                    Home
+                    Home 
+                    {/* to-white */}
                 </Link>
             </main>
         </>

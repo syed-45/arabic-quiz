@@ -13,10 +13,11 @@ export default function Login() {
                     action={async (formData: FormData) => {
                         'use server';
                         await signIn('credentials', {
-                        redirectTo: '/protected',
+                        redirectTo: '/dashboard',
                         email: formData.get('email') as string,
                         password: formData.get('password') as string,
                         });
+                        // TODO: handle wrong credentials error...
                     }} >
                     <SubmitButton>Sign In</SubmitButton>
                 </Form>               

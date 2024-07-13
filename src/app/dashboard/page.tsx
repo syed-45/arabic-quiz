@@ -8,11 +8,11 @@ import Navbar from '../Navbar'
 export default async function Dashboard() {
     let session = await auth();
 
-    const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`)
+    const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`, { next: { revalidate: false } })
     const data = await res.json()
     const allChapters: IChapterData[] = data.result.rows
     
-    const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results?user-email=${session?.user?.email}`)
+    const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results?user-email=${session?.user?.email}`, { next: { tags: ['quiz-results'] } })
     const quizResults: IUserScores[] = await res2.json()
     const quizzesCompleted: number = quizResults.length
     const averageScore = quizzesCompleted ? quizResults.reduce((acc, curr) => acc + curr.last_score, 0) / quizResults.length : 0
