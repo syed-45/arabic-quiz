@@ -3,6 +3,8 @@ import { SubmitButton } from '../submit-button';
 import Image from 'next/image';
 import { signIn } from '../auth';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { AuthError } from 'next-auth';
 
 export default function Login() {
     return (
@@ -12,13 +14,20 @@ export default function Login() {
                 <Form 
                     action={async (formData: FormData) => {
                         'use server';
-                        await signIn('credentials', {
-                        redirectTo: '/dashboard',
-                        email: formData.get('email') as string,
-                        password: formData.get('password') as string,
-                        });
-                        // TODO: handle wrong credentials error...
-                    }} >
+                        try {
+                            await signIn('credentials', {
+                                redirectTo: '/dashboard',
+                                email: formData.get('email') as string,
+                                password: formData.get('password') as string,
+                            });
+                          } catch (error) {
+                            if (error instanceof AuthError && error.type === 'CredentialsSignin') {
+                                redirect('/login/error_401_unauthorised')                                
+                            }
+                            throw error;                            
+                          }
+                    }}
+                >
                     <SubmitButton>Sign In</SubmitButton>
                 </Form>               
                 <form 

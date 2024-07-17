@@ -13,13 +13,17 @@ const Register = () => {
             let email = formData.get('email') as string;
             let password = formData.get('password') as string;
             let name = formData.get('name') as string;
-            let user = await getUser(email);
-        
-            if (user.length > 0) {      
-                redirect('/error_401')
-            } else {
-                await createUser(email, password, name);
-                redirect('/login');
+            try {
+                let user = await getUser(email);
+                if (user.length > 0) {      
+                    redirect('/register/error_409')
+                } else {
+                    await createUser(email, password, name);
+                    redirect('/register/successful');
+                }
+            } catch (error) {
+                console.error(error)
+                throw error
             }
     }
 
