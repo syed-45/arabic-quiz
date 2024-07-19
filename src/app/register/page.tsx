@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getUser, createUser } from "../db";
 import Link from "next/link";
 import Image from "next/image";
-import { RegisterForm } from "../RegisterForm";
+import { RegisterForm } from "./RegisterForm";
 import { SubmitButton } from "../submit-button";
 import { signIn } from "../auth";
 

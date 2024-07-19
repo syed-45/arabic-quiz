@@ -1,4 +1,4 @@
-import { Form } from '../form';
+import { Form } from './form';
 import { SubmitButton } from '../submit-button';
 import Image from 'next/image';
 import { signIn } from '../auth';
