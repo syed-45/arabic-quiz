@@ -39,7 +39,7 @@ CREATE TABLE chapter_1_verbs (
     english VARCHAR(20),
     arabic_verbal_nouns VARCHAR(20),
     arabic_command VARCHAR(20),
-    arabic_present VARCHAR(20),
+    arabic_present VARCHAR(20),  --primary key?
     arabic_past VARCHAR(20)
 );
 
@@ -59,11 +59,9 @@ INSERT INTO chapter_1_verbs VALUES
     ('To pass by', 'مُرُورٌ', 'مُرَّ', 'يَمُرُّ', 'مَرَّ'),
     ('To copy', 'نَسْخٌ', 'اِنْسَخْ', 'يَنْسَخُ', 'نَسَخَ');
 
-
-
 CREATE TABLE chapter_1_nouns (
     id SERIAL PRIMARY KEY,
-    arabic VARCHAR(255),
+    arabic VARCHAR(255),  --unique?
     english VARCHAR(255),
     arabic_plural VARCHAR(255)
 );
@@ -82,13 +80,13 @@ INSERT INTO chapter_1_nouns (arabic, english, arabic_plural) VALUES
     ('أُخْت', 'Sister', 'أَخَوَات'),
     ('دَرْس', 'Lesson', 'دُرُوس'),
     ('تَدْرِيب', 'Exercise', 'تَدَرِيبَات'),
-    ('عَدَد', 'Number', 'أَعْدَاد'), -- TODO: rid of "duplicate" number
+    --('عَدَد', 'Number', 'أَعْدَاد'), -- DELETED "DUPLICATE"
+    ('رَقْمٌ', 'Number', 'أَرْقَام'),      -- DUPL. HERE.
     ('صُورَة', 'Picture', 'صُوَر'),
     ('جَوَاب', 'Answer', 'أَجْوِبَة'),
     ('سُؤَال', 'Question', 'أَسْئِلَة'),
     ('مِثَال', 'Example', 'أَمْثِلَة'),
     ('زَمِيل', 'Colleague, classmate', 'زُمَلَاء'),
-    ('رَقْمٌ', 'Number', 'أَرْقَام'),      -- DUPL. HERE.
     ('جُمْلَة', 'Sentence', 'جُمَل'),
     ('عَلَامَة', 'Sign, indication', 'عَلَامَات'),
     ('كَلِمَة', 'Word', 'كَلِمَات');
@@ -132,9 +130,45 @@ INSERT INTO chapter_2_nouns (arabic, english, arabic_plural, english_plural) VAL
     ('مَسْجِدٌ', 'Mosque', 'مَسَاجِدٌ', 'Mosques'),
     ('نَظَّارَةٌ', 'Glasses', 'نَظَّارَاتٌ', 'Glasses'),
     ('رَسُولٌ', 'Messenger', 'رُسُلٌ', 'Messengers'),
-    ('أَبٌ', 'Father', 'آبَاءٌ', 'Fathers'),
     ('وَالِدَةٌ', 'Mother', 'وَالِدَاتٌ', 'Mothers'),
-    ('وَالِدٌ', 'Father', 'وَالِدُونَ', 'Fathers'); --TODO: get rid of "2nd" father
+    -- ('أَبٌ', 'Father', 'آبَاءٌ', 'Fathers'),  -- DELETED DUPL
+    ('وَالِدٌ', 'Father', 'وَالِدُونَ', 'Fathers'); -- DUPL
 
+CREATE TABLE chapter_3_verbs (
+    english VARCHAR(255),
+    arabic_verbal_nouns VARCHAR(255),
+    arabic_command VARCHAR(255),
+    arabic_present VARCHAR(255),
+    arabic_past VARCHAR(255)
+);
+
+INSERT INTO chapter_3_verbs (english, arabic_past, arabic_present, arabic_command, arabic_verbal_nouns) VALUES ("To live",'سَكَنَ','يسَكُنُ','أُسْكُنْ','سَكَنٌ');
+INSERT INTO chapter_3_verbs (english, arabic_past, arabic_present, arabic_command, arabic_verbal_nouns) VALUES ('To want; to intend', 'أَرَادَ', 'يُرِيْدُ', 'أَرِدْ', 'إِرَادَةٌ');
+
+CREATE TABLE chapter_3_nouns (
+    id SERIAL PRIMARY KEY,
+    arabic VARCHAR(255),
+    english VARCHAR(255),
+    arabic_plural VARCHAR(255),
+    english_plural VARCHAR(255)
+);
+
+INSERT INTO chapter_3_nouns (arabic, english) VALUES  ('سَكَنٌ','Residence'),--'مَسَاكِنُ','Residences'),
+                            ('حَيٌّ','Area, District'),--'أًحْيَاءُ','Area, Districts'),
+                            ('جَامِعَةٌ','University'), -- need to fill in plurals...
+                            ('بَيْتٌ','House'),
+                            ('شَقَّةٌ','Apartment'),
+                            ('سَرِيْرٌ','Bed'),
+                            ('أَرِيْكِةٌ','Sofa'),
+                            ('مَطْبَخٌ','Kitchen'),
+                            ('ثَلَّاجَةٌ','Fridge'),
+                            ('سَخَّانٌ','Boiler'),
+                            ('مِرْآةٌ','Mirror'),
+                            ('مَطَارٌ','Airport'),
+                            ('دَوْرٌ','Floor'),
+                            ('سِتارَةٌ','Curtains'),
+                            ('سَجَّادَةٌ','Rug'),
+                            ('فُرْنٌ','Oven');
+    
 -- bing command ⬇️
 -- create a sql table for the chapter two verbs table on the page i am on righht now, the columns should be english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past. Answer only using the web page context and do not search the web.

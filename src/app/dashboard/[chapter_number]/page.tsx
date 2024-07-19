@@ -10,12 +10,13 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
     let user_email = session!.user!.email as string 
 
 
-    if (chapter_number > 2 && chapter_number < 17) {
+    if (chapter_number > 3 && chapter_number < 17) {
         return (
-            <div>
+            <>
+                <Navbar/>
                 <LogoHeader/>
-                <div className="text-center pt-10 text-yellow-700 dark:bg-yellow-300">This chapter is being worked on and not ready yet. <br></br> Available chapters are 1-2</div>
-            </div>
+                <div className="text-center pt-10 text-yellow-700 dark:text-yellow-300">This chapter is being worked on and not ready yet. <br></br> Available chapters are 1-3</div>
+            </>
                    
         )
     }

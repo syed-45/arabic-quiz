@@ -16,8 +16,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
     const [nouns, setNouns] = useState<INounsData[]>(props.nouns)
     const [verbOrNoun, setVerbOrNoun] = useState<'verb' | 'noun'>(generateRandomOption(['verb', 'noun']))
     const [questionIsEnglish, setQuestionIsEnglish] = useState<boolean>(generateRandomOption([true, false])) //TODO: add weighting so english questions is more frequent
-    const noOfQuestions = props.verbs.length + props.nouns.length > 12 ? 12 : props.verbs.length + props.nouns.length
-    // TODO: increase noOfQuestions
+    const noOfQuestions = props.verbs.length + props.nouns.length >= 14 ? 12 : props.verbs.length + props.nouns.length - 2
     const [questions, setQuestions] = useState<IQuestion[]>([{question: '', options:[], answer:'', user_answer: 'foo', is_correct: false,}])
     const [questionNum, setQuestionNum] = useState<number>(0)
     const currentQuestion = questions[questionNum]
@@ -114,7 +113,6 @@ export default function Quiz(props: QuizProps):JSX.Element {
     const handlePreviousClick = () => {
         if (questionNum === 1) {
             alert('This is the first question')
-            //TODO: possibly get rid of this, allow user to see start screen?
         } else {
             setQuestionNum(prev => prev - 1);
         }
