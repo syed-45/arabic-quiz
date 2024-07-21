@@ -4,14 +4,14 @@ import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
  
 export async function GET(request: Request) {
-    const { searchParams } = new URL(request.url);
-    const user_email = searchParams.get('user-email')!;
+  const { searchParams } = new URL(request.url);
+  const user_email = searchParams.get('user-email')!;
 
-    try {
-      const result = 
-      await db.select().from(userScores)
-                .where(eq(userScores.user_email, user_email))
-                .orderBy(userScores.chapter_number);
+  try {
+    const result = 
+    await db.select().from(userScores)
+              .where(eq(userScores.user_email, user_email))
+              .orderBy(userScores.chapter_number);
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

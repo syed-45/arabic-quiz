@@ -105,8 +105,8 @@ export default function Quiz(props: QuizProps):JSX.Element {
             user_email: props.user_email
         })
         .catch((error) => {
-            console.log(error);
-            alert('Something went wrong submitting your user score.')
+            console.error(error);
+            alert('Something went wrong saving your score.')
         })    
     }
 

@@ -20,19 +20,19 @@ export default function Login() {
                                 email: formData.get('email') as string,
                                 password: formData.get('password') as string,
                             });
-                          } catch (error) {
+                        } catch (error) {
                             if (error instanceof AuthError && error.type === 'CredentialsSignin') {
                                 redirect('/login/error_401_unauthorised')                                
                             }
                             throw error;                            
-                          }
+                        }
                     }}
                 >
                     <SubmitButton>Sign In</SubmitButton>
                 </Form>               
                 <form 
                     className='mt-4 mb-4'
-                    action={async () => { 
+                    action={async () => {
                         'use server';
                         await signIn('google')
                     }}
