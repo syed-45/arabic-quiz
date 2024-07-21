@@ -17,6 +17,7 @@
     "@vercel/postgres": "^0.5.1",
     "axios": "^1.7.2",
     "bcrypt-ts": "^5.0.0",
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.10",
     "expo": "*",
     "geist": "^1.2.0",

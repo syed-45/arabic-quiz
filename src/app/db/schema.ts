@@ -1,4 +1,4 @@
-import { integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, varchar, primaryKey } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('User', {
     id: serial('id').primaryKey(),
@@ -8,13 +8,18 @@ export const users = pgTable('User', {
   });
   
 export const chapterNames = pgTable('chapters',{
-    chapter_number: integer('chapter_number'),
-    chapter_name: varchar('chapter_name'),
-    chapter_arabic_name: varchar('chapter_arabic_name')
+    chapterNumber: integer('chapter_number').primaryKey(),
+    chapterName: varchar('chapter_name', { length: 255 }),
+    chapterArabicName: varchar('chapter_arabic_name', { length: 255 })
 })
 
 export const userScores = pgTable('user_scores', {
-  user_email: varchar('user_email'),
+  user_email: varchar('user_email', { length: 64 }).notNull(),
   chapter_number: integer('chapter_number'),
   last_score: integer('last_score')
+}, (table) => {
+  return {
+    pk: primaryKey({ columns: [table.user_email, table.chapter_number] }),
+  };
 })
+

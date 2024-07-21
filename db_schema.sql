@@ -169,6 +169,8 @@ INSERT INTO chapter_3_nouns (arabic, english) VALUES  ('سَكَنٌ','Residence
                             ('سِتارَةٌ','Curtains'),
                             ('سَجَّادَةٌ','Rug'),
                             ('فُرْنٌ','Oven');
+
+
     
 -- bing command ⬇️
 -- create a sql table for the chapter two verbs table on the page i am on righht now, the columns should be english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past. Answer only using the web page context and do not search the web.
