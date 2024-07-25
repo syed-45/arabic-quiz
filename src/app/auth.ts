@@ -7,7 +7,7 @@ import Google from 'next-auth/providers/google';
 //TODO: piblish app on google console to allow non test users
 import { DrizzleAdapter } from "@auth/drizzle-adapter"
 import { db } from "./db/index"
-import type { Adapter } from "@auth/core/src/adapters"
+// import type { Adapter } from "@auth/core/src/adapters"
 
 export const { handlers, auth, signIn, signOut,} = NextAuth({
   adapter: DrizzleAdapter(db) as any, //as Adapter,
