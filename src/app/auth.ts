@@ -5,8 +5,12 @@ import { getUser } from './db/index';
 import { authConfig } from '../../auth.config';
 import Google from 'next-auth/providers/google';
 //TODO: piblish app on google console to allow non test users
+import { DrizzleAdapter } from "@auth/drizzle-adapter"
+import { db } from "./db/index"
+import type { Adapter } from "@auth/core/src/adapters"
 
 export const { handlers, auth, signIn, signOut,} = NextAuth({
+  adapter: DrizzleAdapter(db) as any, //as Adapter,
   ...authConfig,
   providers: [
     Google,
@@ -19,4 +23,19 @@ export const { handlers, auth, signIn, signOut,} = NextAuth({
       },
     }),
   ],
+  session: {
+    strategy:"jwt"
+  },
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) { // User is available during sign-in
+        token.id = user.id
+      }
+      return token
+    },
+    session({ session, token }) {
+      session!.user!.id = token.id as string
+      return session
+    },
+  }
 });

@@ -36,6 +36,41 @@
       "when": 1721412225167,
       "tag": "0004_tranquil_zaran",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1721659004704,
+      "tag": "0005_glossy_lockjaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1721659426444,
+      "tag": "0006_aberrant_nebula",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1721659580344,
+      "tag": "0007_kind_riptide",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1721671118890,
+      "tag": "0008_lowly_princess_powerful",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1721919834718,
+      "tag": "0009_real_the_fallen",
+      "breakpoints": true
     }
   ]
 }

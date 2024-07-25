@@ -9,9 +9,8 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
     let session = await auth();
     if (!session) throw new Error('Unable to retrieve session')
     if (!session.user) throw new Error('Unable to retrieve user data from session')
-    if (!session.user.email) throw new Error('Unable to retrieve user email from session')
 
-    let user_email = session.user.email
+    let user_id = session.user.id
 
 
     if (chapter_number > 3 && chapter_number < 17) {
@@ -35,7 +34,7 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
             <>
                 <Navbar/>
                 <LogoHeader/>
-                <Quiz verbs={verbs} nouns={nouns} chapter_number={chapter_number} user_email={user_email}/>
+                <Quiz verbs={verbs} nouns={nouns} chapter_number={chapter_number} user_id={user_id}/>
             </>
         )
     }

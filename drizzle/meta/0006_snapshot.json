@@ -1,0 +1,272 @@
+{
+  "id": "a208697f-93ed-40de-b114-f5e0a35cbbdb",
+  "prevId": "b6eaaa6d-4cdf-4582-aeb0-41a8e912186c",
+  "version": "6",
+  "dialect": "postgresql",
+  "tables": {
+    "public.chapters": {
+      "name": "chapters",
+      "schema": "",
+      "columns": {
+        "chapter_number": {
+          "name": "chapter_number",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "chapter_name": {
+          "name": "chapter_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "chapter_arabic_name": {
+          "name": "chapter_arabic_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.nouns": {
+      "name": "nouns",
+      "schema": "",
+      "columns": {
+        "chapter_number": {
+          "name": "chapter_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arabic": {
+          "name": "arabic",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "english": {
+          "name": "english",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arabic_plural": {
+          "name": "arabic_plural",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "english_plural": {
+          "name": "english_plural",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "nouns_chapter_number_chapters_chapter_number_fk": {
+          "name": "nouns_chapter_number_chapters_chapter_number_fk",
+          "tableFrom": "nouns",
+          "tableTo": "chapters",
+          "columnsFrom": [
+            "chapter_number"
+          ],
+          "columnsTo": [
+            "chapter_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "nouns_arabic_chapter_number_pk": {
+          "name": "nouns_arabic_chapter_number_pk",
+          "columns": [
+            "arabic",
+            "chapter_number"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.user_scores": {
+      "name": "user_scores",
+      "schema": "",
+      "columns": {
+        "user_email": {
+          "name": "user_email",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "chapter_number": {
+          "name": "chapter_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_score": {
+          "name": "last_score",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_scores_user_email_User_email_fk": {
+          "name": "user_scores_user_email_User_email_fk",
+          "tableFrom": "user_scores",
+          "tableTo": "User",
+          "columnsFrom": [
+            "user_email"
+          ],
+          "columnsTo": [
+            "email"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_scores_chapter_number_chapters_chapter_number_fk": {
+          "name": "user_scores_chapter_number_chapters_chapter_number_fk",
+          "tableFrom": "user_scores",
+          "tableTo": "chapters",
+          "columnsFrom": [
+            "chapter_number"
+          ],
+          "columnsTo": [
+            "chapter_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "user_scores_user_email_chapter_number_pk": {
+          "name": "user_scores_user_email_chapter_number_pk",
+          "columns": [
+            "user_email",
+            "chapter_number"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.User": {
+      "name": "User",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "User_email_unique": {
+          "name": "User_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    },
+    "public.verbs": {
+      "name": "verbs",
+      "schema": "",
+      "columns": {
+        "chapter_number": {
+          "name": "chapter_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arabic_verbal_nouns": {
+          "name": "arabic_verbal_nouns",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arabic_command": {
+          "name": "arabic_command",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arabic_present": {
+          "name": "arabic_present",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arabic_past": {
+          "name": "arabic_past",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "verbs_chapter_number_chapters_chapter_number_fk": {
+          "name": "verbs_chapter_number_chapters_chapter_number_fk",
+          "tableFrom": "verbs",
+          "tableTo": "chapters",
+          "columnsFrom": [
+            "chapter_number"
+          ],
+          "columnsTo": [
+            "chapter_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "verbs_arabic_past_chapter_number_pk": {
+          "name": "verbs_arabic_past_chapter_number_pk",
+          "columns": [
+            "arabic_past",
+            "chapter_number"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

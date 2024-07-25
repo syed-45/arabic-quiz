@@ -9,14 +9,15 @@ import { darkGradientColors, gradientColors } from "../utils/chapterGradientColo
 
 export default async function Dashboard() {
     let session = await auth();
-    if (!session) throw new Error('Unable to retrieve session')
-    if (!session.user) throw new Error('Unable to retrieve user data from session')
+    if (!session) throw new Error('Unable to retrieve session');
+    if (!session.user) throw new Error('Unable to retrieve user data from session');
 
     const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`, { next: { revalidate: false } })
+    if (res.status === 500) throw new Error('Error fetching chapter data on the server')
     const data = await res.json()
     const allChapters: IChapterData[] = data.result.rows
     
-    const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results?user-email=${session.user.email}`, { next: { tags: ['quiz-results'] } })
+    const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results?user-id=${session.user.id}`, { next: { tags: ['quiz-results'] } })
     if (res2.status === 500) throw new Error('Error fetching quiz data on the server')
     const quizResults: IUserScores[] = await res2.json()
     const quizzesCompleted: number = quizResults.length

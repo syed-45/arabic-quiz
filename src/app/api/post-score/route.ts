@@ -5,23 +5,23 @@ import { eq, and } from 'drizzle-orm';
 import { revalidatePath, revalidateTag } from 'next/cache';
  
 export async function POST(request: Request) {
-    const { user_email, chapter_number, score }: { user_email: string, chapter_number: number, score: number } = await request.json()
+    const { user_id, chapter_number, score }: { user_id: string, chapter_number: number, score: number } = await request.json()
 
   try {
     let result1 = await db.select().from(userScores).
       where(
         and(
-          eq(userScores.user_email, user_email),
+          eq(userScores.user_id, user_id),
           eq(userScores.chapter_number, chapter_number))
         );
     const isFirstTime = result1.length === 0;
 
     let result2 = isFirstTime ?
-      await db.insert(userScores).values({ user_email, chapter_number, last_score: score }).returning()
+      await db.insert(userScores).values({ user_id, chapter_number, last_score: score }).returning()
         :
       await db.update(userScores).set({ last_score: score }).where(
         and(
-          eq(userScores.user_email, user_email),
+          eq(userScores.user_id, user_id),
           eq(userScores.chapter_number, chapter_number)
           )
         )

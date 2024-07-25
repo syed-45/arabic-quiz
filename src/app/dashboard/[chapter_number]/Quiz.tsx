@@ -102,7 +102,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
         axios.post(`/api/post-score`, {
             score: questions.filter(question => question.is_correct).length,
             chapter_number: props.chapter_number,
-            user_email: props.user_email
+            user_id: props.user_id
         })
         .catch((error) => {
             console.error(error);
