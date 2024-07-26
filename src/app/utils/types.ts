@@ -5,23 +5,24 @@ export interface IChapterData {
 }
 
 export interface IVerbsData {
-    english : string
-    arabic_verbal_nouns : string
-    arabic_command : string
-    arabic_present : string
-    arabic_past : string
+    chapterNumber: number; 
+    english: string;
+    arabicVerbalNouns: string;
+    arabicCommand: string;
+    arabicPresent: string;
+    arabicPast: string;
 }
 
 export interface INounsData {
-    arabic: string;
+    chapterNumber: number;
     english: string;
-    arabic_plural: string;
-    // english_plural: string; 
-    // above exists just for chapter 2 atm
+    arabic: string;
+    arabicPlural: string;
+    englishPlural: string;
 }
 
 export interface IQuestion {
-    question: string;
+    question: string; //TODO: change casing to camelCase, kp consistent
     options: string[];
     answer: string;
     user_answer: string;

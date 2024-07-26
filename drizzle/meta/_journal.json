@@ -71,6 +71,13 @@
       "when": 1721919834718,
       "tag": "0009_real_the_fallen",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1722003645658,
+      "tag": "0010_empty_korath",
+      "breakpoints": true
     }
   ]
 }

@@ -27,8 +27,8 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
     if (chapter_number > 0 && chapter_number < 17) {
         const res = await fetch(`${process.env.API_URL}/api/get-vocab?chapter_number=${chapter_number}`)
         const data = await res.json()
-        const verbs : IVerbsData[] = data.verbs.rows
-        const nouns : INounsData[] = data.nouns.rows
+        const verbs : IVerbsData[] = data.verbsData
+        const nouns : INounsData[] = data.nounsData
         
         return (
             <>

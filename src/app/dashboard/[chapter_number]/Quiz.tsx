@@ -27,9 +27,9 @@ export default function Quiz(props: QuizProps):JSX.Element {
         if (verbOrNoun === 'verb') {
             const questionVerb: IVerbsData = generateRandomOption(verbs);
             console.log('currrent verbs ',verbs) //TODO: remove console.logs
-            let verbProperty: keyof IVerbsData = questionIsEnglish ? 'english' : 'arabic_past'
+            let verbProperty: keyof IVerbsData = questionIsEnglish ? 'english' : 'arabicPast'
             questionWord = questionVerb[verbProperty]
-            verbProperty = questionIsEnglish ? 'arabic_past' : 'english'
+            verbProperty = questionIsEnglish ? 'arabicPast' : 'english'
             answer_option4 = questionVerb[verbProperty]
             option1 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => verb[verbProperty] !== answer_option4))[verbProperty]
             option2 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => ![option1, answer_option4].includes(verb[verbProperty])))[verbProperty]
@@ -54,7 +54,6 @@ export default function Quiz(props: QuizProps):JSX.Element {
             is_correct: false
         }])
         
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [verbs, nouns, verbOrNoun, questionIsEnglish])    
     
     const handleOptionClick = (option: string) => {
@@ -85,7 +84,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
         } 
         else {
             if (verbOrNoun === 'verb') {
-                setVerbs(prev => prev.filter(verb => verb[questionIsEnglish ? 'english' : 'arabic_past'] !== questions[questionNum+1]?.question));
+                setVerbs(prev => prev.filter(verb => verb[questionIsEnglish ? 'english' : 'arabicPast'] !== questions[questionNum+1]?.question));
             } else {
                 setNouns(prev => prev.filter(noun => noun[questionIsEnglish ? 'english' : 'arabic'] !== questions[questionNum+1]?.question));
             }

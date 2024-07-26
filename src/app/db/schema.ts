@@ -97,8 +97,9 @@ export const userScores = pgTable('user_scores', {
   };
 })
 
-export const verbs = pgTable('verbs',{
+export const verbs = pgTable('verbs',{ //todo: types are possibly null make not null, sme w nouns
   chapterNumber: integer('chapter_number').references(() => chapterNames.chapterNumber),
+  english: varchar('english', {length: 64}),
   arabicVerbalNouns: varchar('arabic_verbal_nouns', { length: 64 }),
   arabicCommand:  varchar('arabic_command', { length: 64 }),
   arabicPresent: varchar('arabic_present', { length: 64 }),
