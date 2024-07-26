@@ -32,8 +32,8 @@ export default function Quiz(props: QuizProps):JSX.Element {
             verbProperty = questionIsEnglish ? 'arabicPast' : 'english'
             answer_option4 = questionVerb[verbProperty]
             option1 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => verb[verbProperty] !== answer_option4))[verbProperty]
-            option2 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => ![option1, answer_option4].includes(verb[verbProperty])))[verbProperty]
-            option3 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => ![option1, option2, answer_option4].includes(verb[verbProperty])))[verbProperty]                
+            option2 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => ![option1, answer_option4].includes(verb[verbProperty] as string)))[verbProperty]
+            option3 = generateRandomOption((verbs.length < 4 ? spareVerbs : verbs).filter(verb => ![option1, option2, answer_option4].includes(verb[verbProperty] as string)))[verbProperty]                
         } else {
             const questionNoun: INounsData = generateRandomOption(nouns);
             let nounProperty: keyof INounsData = questionIsEnglish ? 'english' : 'arabic'
@@ -42,8 +42,8 @@ export default function Quiz(props: QuizProps):JSX.Element {
             nounProperty = questionIsEnglish ? 'arabic' : 'english'
             answer_option4 = questionNoun[nounProperty]
             option1 = generateRandomOption((nouns.length < 4 ? spareNouns : nouns).filter(noun => noun[nounProperty] !== answer_option4))[nounProperty]
-            option2 = generateRandomOption((nouns.length < 4 ? spareNouns : nouns).filter(noun => ![option1, answer_option4].includes(noun[nounProperty])))[nounProperty]
-            option3 = generateRandomOption((nouns.length < 4 ? spareNouns : nouns).filter(noun => ![option1, option2, answer_option4].includes(noun[nounProperty])))[nounProperty]
+            option2 = generateRandomOption((nouns.length < 4 ? spareNouns : nouns).filter(noun => ![option1, answer_option4].includes(noun[nounProperty] as string)))[nounProperty]
+            option3 = generateRandomOption((nouns.length < 4 ? spareNouns : nouns).filter(noun => ![option1, option2, answer_option4].includes(noun[nounProperty] as string)))[nounProperty]
         }
         
         setQuestions(prev => [...prev, {
