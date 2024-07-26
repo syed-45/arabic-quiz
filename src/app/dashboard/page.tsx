@@ -15,7 +15,7 @@ export default async function Dashboard() {
     const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`, { next: { revalidate: false } })
     if (res.status === 500) throw new Error('Error fetching chapter data on the server')
     const data = await res.json()
-    const allChapters: IChapterData[] = data.result.rows
+    const allChapters: IChapterData[] = data.result
     
     const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results?user-id=${session.user.id}`, { next: { tags: ['quiz-results'] } })
     if (res2.status === 500) throw new Error('Error fetching quiz data on the server')
@@ -42,7 +42,7 @@ export default async function Dashboard() {
                     <ChapterCard 
                         chapterData={chapter}
                         last_score={quizResults[index] ? quizResults[index].last_score : undefined}
-                        key={chapter.chapter_number} 
+                        key={chapter.chapterNumber} 
                     />
                 ))}
             </main>
@@ -53,12 +53,12 @@ export default async function Dashboard() {
 const ChapterCard = ({chapterData, last_score}: IChapterCard) => {
 
     return(
-        <Link href={`/dashboard/${chapterData.chapter_number}`} className={"flex flex-col px-3 pt-2 sm:px-5 sm:pt-5 h-32 sm:h-40 rounded-md relative text-white shadow-md" + gradientColors[chapterData.chapter_number-1] + darkGradientColors[chapterData.chapter_number-1] }>
+        <Link href={`/dashboard/${chapterData.chapterNumber}`} className={"flex flex-col px-3 pt-2 sm:px-5 sm:pt-5 h-32 sm:h-40 rounded-md relative text-white shadow-md" + gradientColors[chapterData.chapterNumber-1] + darkGradientColors[chapterData.chapterNumber-1] }>
             <div className="text-xs sm:text-lg font-semibold flex items-center gap-2">
-                <div className="text-gray-200 backdrop-blur-xl shadow-xl size-8 rounded-md flex justify-center items-center">{chapterData.chapter_number}</div>
-                {chapterData.chapter_name}
+                <div className="text-gray-200 backdrop-blur-xl shadow-xl size-8 rounded-md flex justify-center items-center">{chapterData.chapterNumber}</div>
+                {chapterData.chapterName}
             </div>
-            <div className="text-right mt-4 sm:text-2xl " style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{chapterData.chapter_arabic_name}</div>
+            <div className="text-right mt-4 sm:text-2xl " style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{chapterData.chapterArabicName}</div>
             <div className="bg-gradient-to-t from-white to-gray-200 dark:from-gray-200 dark:to-gray-300 text-gray-800 font-mono w-full h-7 sm:h-10 absolute bottom-0 left-0 z-10 content-center pl-3 text-xs sm:text-lg rounded-b-md">SCORE {ScoreText(last_score)}</div>
         </Link>
     )

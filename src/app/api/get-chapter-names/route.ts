@@ -1,10 +1,10 @@
-import { sql } from '@vercel/postgres';
+import { db } from '@/app/db';
+import { chapterNames } from '@/app/db/schema';
 import { NextResponse } from 'next/server';
-//TODO: update api routes to use drizzle
  
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const result = await sql`SELECT * FROM chapters;`;
+    const result = await db.select().from(chapterNames).orderBy(chapterNames.chapterNumber);
     return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
