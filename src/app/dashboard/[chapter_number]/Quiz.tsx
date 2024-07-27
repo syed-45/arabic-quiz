@@ -98,15 +98,15 @@ export default function Quiz(props: QuizProps):JSX.Element {
 
     const handleFinishClick = () => {
         setQuestionNum((prev) => prev+1) 
-        // axios.post(`/api/post-score`, {
-        //     score: questions.filter(question => question.is_correct).length,
-        //     chapter_number: props.chapter_number,
-        //     user_id: props.user_id
-        // })
-        // .catch((error) => {
-        //     console.error(error);
-        //     alert('Something went wrong saving your score.')
-        // })    
+        axios.post(`/api/post-score`, {
+            score: questions.filter(question => question.is_correct).length,
+            chapter_number: props.chapter_number,
+            user_id: props.user_id
+        })
+        .catch((error) => {
+            console.error(error);
+            alert('Something went wrong saving your score.')
+        })    
     }
 
     const handlePreviousClick = () => {
