@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     await db.select().from(userScores)
               .where(eq(userScores.user_id, user_id))
               .orderBy(userScores.chapter_number);
-    return NextResponse.json(result, { status: 200 });
+    return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }

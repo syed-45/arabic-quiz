@@ -107,7 +107,22 @@ INSERT INTO nouns (chapter_number, arabic, english) VALUES  (3, 'سَكَنٌ','
                             (3, 'سَجَّادَةٌ','Rug'),
                             (3, 'فُرْنٌ','Oven');
 
+INSERT INTO verbs VALUES (4, 'To sleep', 'نَوْمٌ', 'نَمْ', 'يَنَامُ', 'نَامَ'),
+                         (4, 'To wake up', 'اِسْتِيقَاظٌ', 'اِسْتَيْقِظٌْ', 'يَسْتَيْقِظٌ', 'اِسْتَيْقَظَ'),
+                         (4, 'To go', 'ذَهَا بٌ', 'اِذْهَبْ', 'يَذْهَبُ', 'ذَهَبَ (إِلَى)'),
+                         (4, 'To vaccuum / to sweep', 'كَنْسٌ', 'اُكْنُسْ', 'يَكْنُسُ', 'كَنَسَ'),
+                         (4, 'To wash', 'غَسْلٌ', 'اِغْسِلْ', 'يَغْسِلُ', 'غَسَلَ'),
+                         (4, 'To iron', 'كَيٌّ', 'اِكْوٌِ', 'يَكْوِي', 'كَوَى'),
+                         (4, 'To watch', 'مُشَاهَدَةٌ', 'شَاهِدْ', 'يُشاهِدُ', 'شَاهَدَ');
 
-    
--- bing command ⬇️
--- create a sql table for the chapter two verbs table on the page i am on righht now, the columns should be english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past. Answer only using the web page context and do not search the web.
+INSERT INTO nouns VALUES (4, 'Prayer', 'صَلَاةٌ', 'Prayer (plural)', 'صَلَوَاتٌ'),
+                         (4, 'School', 'مَدْرَسَةٌ', 'Schools', 'مَدَارِسُ'),
+                         (4, 'Holiday', 'عُطْلَةٌ', 'Holidays', 'عُطَلٌ/عُطْلَاتٌ'),
+                         (4, 'Television', 'تِلْفَازٌ', 'Televisions', 'تِلْفَازَاتٌ'),
+                         (4, 'Plate, dish', 'طَبَقٌ', 'Plates, dishes', 'أَطْبَاقٌ'),
+                         (4, 'Car', 'سَيَّارَةٌ', 'Cars', 'سَيَّارَاتٌ'),  
+                         (4, 'Bus', 'حَافِلَةٌ', 'Buses', 'حَافِلَاتٌ'),  
+                         (4, 'Hour, clock', 'سَاعَةٌ', 'Hours, clocks', 'سَاعَاتٌ'),  
+                         (4, 'Newspaper', 'صَحِيفَةٌ', 'Newspapers', 'صُحُفٌ');
+
+

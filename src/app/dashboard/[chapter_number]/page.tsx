@@ -13,7 +13,7 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
     let user_id = session.user.id
 
 
-    if (chapter_number > 3 && chapter_number < 17) {
+    if (chapter_number > 4 && chapter_number < 17) {
         return (
             <>
                 <Navbar/>

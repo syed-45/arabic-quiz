@@ -153,7 +153,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
                             onClick={() => handleOptionClick(option)}
                             //TODO borders are still overlapping NOT URGENT                           
                             style={{backgroundColor:currentQuestion.user_answer === option ? "rgb(80 80 80 / 60%)" : "rgb(0 0 0 / 0%)"}}
-                            className={`h-36 shadow-2xl ${optionRoundedCornerStyles[index]}  ${currentQuestion.user_answer === option ?  "border" : "border-sky-900 " + optionButtonStyles[index]}` }
+                            className={`h-36 p-2 shadow-2xl ${optionRoundedCornerStyles[index]}  ${currentQuestion.user_answer === option ?  "border" : "border-sky-900 " + optionButtonStyles[index]}` }
                         >
                             {option}
                         </button>

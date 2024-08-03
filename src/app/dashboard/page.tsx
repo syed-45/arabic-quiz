@@ -14,12 +14,11 @@ export default async function Dashboard() {
 
     const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`, { next: { revalidate: false } })
     if (res.status === 500) throw new Error('Error fetching chapter data on the server')
-    const data = await res.json()
-    const allChapters: IChapterData[] = data.result
+    const allChapters: IChapterData[] = (await res.json()).result
     
     const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results?user-id=${session.user.id}`, { next: { tags: ['quiz-results'] } })
     if (res2.status === 500) throw new Error('Error fetching quiz data on the server')
-    const quizResults: IUserScores[] = await res2.json()
+    const quizResults: IUserScores[] = (await res2.json()).result
     const quizzesCompleted: number = quizResults.length
     const averageScore = quizzesCompleted ? quizResults.reduce((acc, curr) => acc + curr.last_score, 0) / quizResults.length : 0
     const percentageScore = quizzesCompleted && (100 * averageScore / 12).toFixed(2)
