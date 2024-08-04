@@ -47,7 +47,12 @@ export interface IUserScores {
     chapter_number: number;
 }
 
-export interface IChapterCard {
+export interface IChapterCardProps {
     chapterData: IChapterData;
     last_score? : number;
+}
+
+export interface StatsComponentProps {
+    percentageScore: number;
+    quizzesCompleted: number;
 }

@@ -4,7 +4,7 @@ import { TitleCase } from '../utils/TitleCaseKata'
 import LogoHeader from '../LogoHeader';
 import Navbar from '../Navbar'
 import Link from "next/link";
-import { IChapterCard } from "../utils/types"
+import { IChapterCardProps } from "../utils/types"
 import { darkGradientColors, gradientColors } from "../utils/chapterGradientColours";
 import { StatsComponent } from '../StatsComponent';
 
@@ -22,14 +22,14 @@ export default async function Dashboard() {
     const quizResults: IUserScores[] = (await res2.json()).result
     const quizzesCompleted: number = quizResults.length
     const averageScore = quizzesCompleted ? quizResults.reduce((acc, curr) => acc + curr.last_score, 0) / quizResults.length : 0
-    const percentageScore = quizzesCompleted && (100 * averageScore / 12).toFixed(2)
+    const percentageScore = parseInt((100 * averageScore / 12).toFixed(0))
     
     return (
         <>
             <Navbar/>
             <LogoHeader/>
             <h3 className="text-center mt-8">Welcome back <span className='font-bold'>{TitleCase(session.user.name || 'User', true)}</span></h3>
-            <StatsComponent/>
+            <StatsComponent quizzesCompleted={quizzesCompleted} percentageScore={percentageScore}/>
             <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mt-5 mb-12 px-5 pb-10'>
                 {allChapters.map((chapter,index) => (
                     <ChapterCard 
@@ -43,7 +43,7 @@ export default async function Dashboard() {
     )
 }
 
-const ChapterCard = ({chapterData, last_score}: IChapterCard) => {
+const ChapterCard = ({chapterData, last_score}: IChapterCardProps) => {
 
     return(
         <Link href={`/dashboard/${chapterData.chapterNumber}`} className={"flex flex-col px-3 pt-2 sm:px-5 sm:pt-5 h-32 sm:h-40 rounded-md relative text-white shadow-md" + gradientColors[chapterData.chapterNumber-1] + darkGradientColors[chapterData.chapterNumber-1] }>
