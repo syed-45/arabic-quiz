@@ -6,40 +6,44 @@ export const StatsComponent = ({quizzesCompleted, percentageScore}: StatsCompone
     const [quizzesCompletedDisplay, setQuizzesCompletedDisplay] = useState(0)
     const [percentageScoreDisplay, setPercentageScoreDisplay] = useState(0)
 
-    useEffect(()=>{
-        const lowerStat = quizzesCompleted > percentageScore ? percentageScore : quizzesCompleted
+    useEffect(() => {
 
-        const firstInterval = setInterval(incrementStatDisplay, 100)
-
-        function incrementStatDisplay() {
+        const incrementPercentageScoreDisplay = setInterval(() => {
             setPercentageScoreDisplay(prev => {
-                    if (prev === percentageScore) return prev
-                    return prev + 1
-                })
-            setQuizzesCompletedDisplay(prev => {
-                if (prev === quizzesCompleted) return prev
-                    return prev + 1
+                if (prev === percentageScore - 1) {
+                    clearInterval(incrementPercentageScoreDisplay)
+                }
+                return prev + 1
             })
-        }
+        }, percentageScore < 20 ? 100 : 50)
 
-        if (lowerStat === quizzesCompleted && percentageScoreDisplay === percentageScore) clearInterval(firstInterval)
-        else if (lowerStat === percentageScore && quizzesCompletedDisplay === quizzesCompleted) clearInterval(firstInterval)
+        const incrementQuizzesCompletedDisplay = setInterval(() => {
+            setQuizzesCompletedDisplay(prev => {
+                if (prev === quizzesCompleted - 1) {
+                    clearInterval(incrementQuizzesCompletedDisplay)
+                }
+                return prev + 1
+            })
+        }, quizzesCompleted < 10 ? 150 : 100)
 
-
-    },[])
+    }, [percentageScore, quizzesCompleted])
 
     return (
-        <div className="grid grid-cols-2 pt-5 px-5 text-5xl sm:text-9xl sm:py-10 max-w-screen-sm mx-auto gap-5">
+        <div className="grid grid-cols-2 pt-5 px-5 text-7xl sm:text-9xl sm:py-7 max-w-screen-sm mx-auto gap-x-5 gap-y-2">
             <div className="flex items-end justify-center">
-                <span className="text-xs sm:text-base font-thin mr-2">QUIZZES <br></br> COMPLETED</span>
-                <span className="bg-gradient-to-tr from-sky-100 via-sky-500 to-sky-900 bg-clip-text text-transparent"> {quizzesCompletedDisplay} </span>
-                <span className="text-xs">/ 16</span>
+                <span className={`bg-gradient-to-r ${quizzesCompletedDisplay===quizzesCompleted ? "animate-moving-gradient-bg bg-[length:400%_400%] from-sky-400  via-sky-700 dark:via-sky-200 dark:to-sky-400 to-sky-400" : "from-sky-200 to-sky-500"} bg-clip-text drop-shadow-md text-transparent`}>
+                     {quizzesCompletedDisplay} 
+                </span>
+                {quizzesCompletedDisplay===quizzesCompleted && <span className="text-xs animate-fade-out">/ 16</span>}
             </div>
             <div className="flex items-end justify-center">
-                <span className="text-xs sm:text-base font-thin mr-2">AVERAGE <br></br> SCORE</span>
-                <span className="bg-gradient-to-tr from-green-100 to-green-600 bg-clip-text text-transparent"> {percentageScoreDisplay} </span>
-                <span className="text-xs">%</span>
+                <span className={`bg-gradient-to-r ${percentageScoreDisplay===percentageScore ? "animate-moving-gradient-bg bg-[length:400%_400%] from-green-400 via-green-600 dark:via-green-200 dark:to-green-400 to-green-400" : "from-green-200 to-green-600"} bg-clip-text drop-shadow-md text-transparent`}>
+                    {percentageScoreDisplay} 
+                </span>
+                {percentageScoreDisplay===percentageScore && <span className="text-xs animate-fade-out">%</span>}
             </div>
+            <div className="text-xs sm:text-base text-center font-light">QUIZZES COMPLETED</div>
+            <div className="text-xs sm:text-base text-center font-light">AVERAGE SCORE</div>
         </div>
     )
 }

@@ -23,10 +23,16 @@ const config: Config = {
           "50%" : {opacity:"20%"},
           "0%" : {translate:"0 -30%",opacity:"0%"}
         },
+        "moving-gradient-bg" : {
+          "100%" : {backgroundPosition:"0% 50%"},
+          "50%" : {backgroundPosition:"100% 50%"},
+          "0%" : {backgroundPosition:"0% 50%"}
+        }
       },
       animation: {
         "fade-out": "fade-out 1s",
         "slide-down": "slide-down 1s",
+        "moving-gradient-bg": "moving-gradient-bg 3s ease infinite"
       },
     },
   },

@@ -1,6 +1,5 @@
 import { IChapterData, IUserScores } from '../utils/types'
 import { auth } from '../auth';
-import { TitleCase } from '../utils/TitleCaseKata'
 import LogoHeader from '../LogoHeader';
 import Navbar from '../Navbar'
 import Link from "next/link";
@@ -28,7 +27,6 @@ export default async function Dashboard() {
         <>
             <Navbar/>
             <LogoHeader/>
-            <h3 className="text-center mt-8">Welcome back <span className='font-bold'>{TitleCase(session.user.name || 'User', true)}</span></h3>
             <StatsComponent quizzesCompleted={quizzesCompleted} percentageScore={percentageScore}/>
             <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mt-5 mb-12 px-5 pb-10'>
                 {allChapters.map((chapter,index) => (
