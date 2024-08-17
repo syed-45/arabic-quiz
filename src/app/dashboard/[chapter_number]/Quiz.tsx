@@ -79,34 +79,34 @@ export default function Quiz(props: QuizProps):JSX.Element {
     const handleNextClick = () => {
         if (currentQuestion.user_answer === '') {
             alert('Please select an option')
-        } else if (questions[questionNum+1].user_answer!=='') {
+        } else if (questionNum === noOfQuestions) {
+            setQuestionNum((prev) => prev + 1) 
+            axios.post(`/api/post-score`, {
+                score: questions.filter(question => question.is_correct).length,
+                chapter_number: props.chapter_number,
+                user_id: props.user_id
+            })
+            .catch((error) => {
+                console.error(error);
+                alert('Something went wrong saving your score.')
+            })      
+        } else if (questionNum < questions.length - 2) {
             setQuestionNum(prev => prev + 1);
         } 
         else {
+            // update states for new question generation
+            setQuestionNum(prev => prev + 1);
             if (verbOrNoun === 'verb') {
                 setVerbs(prev => prev.filter(verb => verb[questionIsEnglish ? 'english' : 'arabicPast'] !== questions[questionNum+1]?.question));
             } else {
                 setNouns(prev => prev.filter(noun => noun[questionIsEnglish ? 'english' : 'arabic'] !== questions[questionNum+1]?.question));
             }
-            setQuestionNum(prev => prev + 1);
             setQuestionIsEnglish(generateRandomOption([true, false]));
             if (verbs.length <= 1) setVerbOrNoun('noun');  
             else if (nouns.length <= 1) setVerbOrNoun('verb');
             else setVerbOrNoun(generateRandomOption(['verb', 'noun']));
+            //todo: if both verbs and noun < 1
         }
-    }
-
-    const handleFinishClick = () => {
-        setQuestionNum((prev) => prev+1) 
-        axios.post(`/api/post-score`, {
-            score: questions.filter(question => question.is_correct).length,
-            chapter_number: props.chapter_number,
-            user_id: props.user_id
-        })
-        .catch((error) => {
-            console.error(error);
-            alert('Something went wrong saving your score.')
-        })    
     }
 
     const handlePreviousClick = () => {
@@ -170,8 +170,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
                         {questionNum}
                     </div>
                 </div>
-                <button className="flex flex-row items-center" onClick={questionNum < noOfQuestions ? handleNextClick : handleFinishClick}>
-                    {/* T0DO: change above onclick to questionNum < noOfQuestions ? handleNextClick : () => setQuestionNum((prev) => prev+1) */}
+                <button className="flex flex-row items-center" onClick={handleNextClick}>
                     {questionNum < noOfQuestions ? 'Next' : 'Submit'}
                     <ChevronRightIcon className="size-5"/>
                 </button>
