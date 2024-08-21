@@ -90,7 +90,8 @@ export const chapterNames = pgTable('chapters',{
 export const userScores = pgTable('user_scores', {
   user_id: text('user_id').references(() => users.id),
   chapter_number: integer('chapter_number').references(()=>chapterNames.chapterNumber),
-  last_score: integer('last_score').notNull()
+  last_score: integer('last_score').notNull(),
+  no_of_questions: integer('no_of_questions').notNull(),
 }, (table) => {
   return {
     pk: primaryKey({ columns: [table.user_id, table.chapter_number] }),

@@ -1,0 +1,1 @@
+ALTER TABLE "user_scores" ADD COLUMN "no_of_questions" integer;

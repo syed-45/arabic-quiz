@@ -45,11 +45,18 @@ export interface IUserScores {
     user_email: string;
     last_score: number;
     chapter_number: number;
+    no_of_questions: number;
 }
 
 export interface IChapterCardProps {
     chapterData: IChapterData;
-    last_score? : number;
+    last_score?: number;
+    no_of_questions?: number;
+}
+
+export interface IScoreTextProps {
+    last_score?: number;
+    no_of_questions?: number;
 }
 
 export interface StatsComponentProps {

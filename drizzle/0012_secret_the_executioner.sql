@@ -1,0 +1,1 @@
+ALTER TABLE "user_scores" ALTER COLUMN "no_of_questions" SET NOT NULL;

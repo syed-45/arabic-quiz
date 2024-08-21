@@ -1,4 +1,4 @@
-import { IChapterData, IUserScores } from '../utils/types'
+import { IChapterData, IScoreTextProps, IUserScores } from '../utils/types'
 import { auth } from '../auth';
 import LogoHeader from '../LogoHeader';
 import Navbar from '../Navbar'
@@ -20,8 +20,8 @@ export default async function Dashboard() {
     if (res2.status === 500) throw new Error('Error fetching quiz data on the server')
     const quizResults: IUserScores[] = (await res2.json()).result
     const quizzesCompleted: number = quizResults.length
-    const averageScore = quizzesCompleted ? quizResults.reduce((acc, curr) => acc + curr.last_score, 0) / quizResults.length : 0
-    const percentageScore = parseInt((100 * averageScore / 12).toFixed(0))
+    const averageScore = quizzesCompleted ? quizResults.reduce((acc, curr) => acc + curr.last_score / curr.no_of_questions, 0) / quizResults.length : 0
+    const percentageScore = parseInt((100 * averageScore).toFixed(0))
     
     return (
         <>
@@ -32,7 +32,8 @@ export default async function Dashboard() {
                 {allChapters.map((chapter,index) => (
                     <ChapterCard 
                         chapterData={chapter}
-                        last_score={quizResults[index] ? quizResults[index].last_score : undefined}
+                        last_score={quizResults[index]===undefined ? undefined : quizResults[index].last_score}
+                        no_of_questions={quizResults[index]===undefined ? undefined : quizResults[index].no_of_questions}
                         key={chapter.chapterNumber} 
                     />
                 ))}
@@ -41,7 +42,7 @@ export default async function Dashboard() {
     )
 }
 
-const ChapterCard = ({chapterData, last_score}: IChapterCardProps) => {
+const ChapterCard = ({chapterData, last_score, no_of_questions}: IChapterCardProps) => {
 
     return(
         <Link href={`/dashboard/${chapterData.chapterNumber}`} className={"flex flex-col px-3 pt-2 sm:px-5 sm:pt-5 h-32 sm:h-40 rounded-md relative text-white shadow-md" + gradientColors[chapterData.chapterNumber-1] + darkGradientColors[chapterData.chapterNumber-1] }>
@@ -50,15 +51,15 @@ const ChapterCard = ({chapterData, last_score}: IChapterCardProps) => {
                 {chapterData.chapterName}
             </div>
             <div className="text-right mt-4 sm:text-2xl " style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{chapterData.chapterArabicName}</div>
-            <div className="bg-gradient-to-t from-white to-gray-200 dark:from-gray-200 dark:to-gray-300 text-gray-800 font-mono w-full h-7 sm:h-10 absolute bottom-0 left-0 z-10 content-center pl-3 text-xs sm:text-lg rounded-b-md">SCORE {ScoreText(last_score)}</div>
+            <div className="bg-gradient-to-t from-white to-gray-200 dark:from-gray-200 dark:to-gray-300 text-gray-800 font-mono w-full h-7 sm:h-10 absolute bottom-0 left-0 z-10 content-center pl-3 text-xs sm:text-lg rounded-b-md">SCORE {<ScoreText last_score={last_score} no_of_questions={no_of_questions}/>}</div>
         </Link>
     )
 }
 
-function ScoreText(score: number | undefined): JSX.Element {
-    if (score === undefined) return <span className="text-red-500 font-thin">n/a</span>
-    const percentage = (100*score/12)
+function ScoreText(props: IScoreTextProps): JSX.Element {
+    if (props.last_score === undefined) return <span className="text-red-500 font-thin">n/a</span>
+    const percentage = (100*props.last_score/props.no_of_questions!)
     const fontColour = percentage > 75 ? 'text-green-600' : percentage > 50 ? 'text-yellow-600' : 'text-red-600'
-    return <span className={fontColour+' font-extrabold'}> {(100*score/12).toFixed(2)}% </span>
+    return <span className={fontColour+' font-extrabold'}> {percentage.toFixed(2)}% </span>
 }
 

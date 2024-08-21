@@ -78,6 +78,20 @@
       "when": 1722003645658,
       "tag": "0010_empty_korath",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1724240406264,
+      "tag": "0011_ancient_stick",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1724251417896,
+      "tag": "0012_secret_the_executioner",
+      "breakpoints": true
     }
   ]
 }
