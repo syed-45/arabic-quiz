@@ -8,7 +8,7 @@ export const StatsComponent = ({quizzesCompleted, percentageScore}: StatsCompone
 
     useEffect(() => {
 
-        const incrementPercentageScoreDisplay = setInterval(() => {
+        const incrementPercentageScoreDisplay = percentageScore && setInterval(() => {
             setPercentageScoreDisplay(prev => {
                 if (prev === percentageScore - 1) {
                     clearInterval(incrementPercentageScoreDisplay)
@@ -17,7 +17,7 @@ export const StatsComponent = ({quizzesCompleted, percentageScore}: StatsCompone
             })
         }, percentageScore < 20 ? 100 : 50)
 
-        const incrementQuizzesCompletedDisplay = setInterval(() => {
+        const incrementQuizzesCompletedDisplay = quizzesCompleted && setInterval(() => {
             setQuizzesCompletedDisplay(prev => {
                 if (prev === quizzesCompleted - 1) {
                     clearInterval(incrementQuizzesCompletedDisplay)
