@@ -41,8 +41,8 @@ export interface FinishProps {
     noOfQuestions: number;
 }
 
-export interface IUserScores {
-    user_email: string;
+export interface IUserScore {
+    user_id: string;
     last_score: number;
     chapter_number: number;
     no_of_questions: number;

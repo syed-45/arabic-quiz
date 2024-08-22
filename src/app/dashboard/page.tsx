@@ -1,4 +1,4 @@
-import { IChapterData, IScoreTextProps, IUserScores } from '../utils/types'
+import { IChapterData, IScoreTextProps, IUserScore } from '../utils/types'
 import { auth } from '../auth';
 import LogoHeader from '../LogoHeader';
 import Navbar from '../Navbar'
@@ -18,7 +18,7 @@ export default async function Dashboard() {
     
     const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results?user-id=${session.user.id}`, { next: { tags: ['quiz-results'] } })
     if (res2.status === 500) throw new Error('Error fetching quiz data on the server')
-    const quizResults: IUserScores[] = (await res2.json()).result
+    const quizResults: IUserScore[] = (await res2.json()).result
     const quizzesCompleted: number = quizResults.length
     const averageScore = quizzesCompleted ? quizResults.reduce((acc, curr) => acc + curr.last_score / curr.no_of_questions, 0) / quizResults.length : 0
     const percentageScore = parseInt((100 * averageScore).toFixed(0))

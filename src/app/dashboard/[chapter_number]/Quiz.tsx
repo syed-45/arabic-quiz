@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react"
-import { IVerbsData, INounsData, IQuestion, QuizProps } from "../../utils/types"
+import { IVerbsData, INounsData, IQuestion, QuizProps, IUserScore } from "../../utils/types"
 import generateRandomOption from "../../utils/generateRandomOption"
 import { spareNouns, spareVerbs } from "../../utils/spareVocab"
 import shuffleArray from "../../utils/shuffleArray"
@@ -82,10 +82,11 @@ export default function Quiz(props: QuizProps):JSX.Element {
         } else if (questionNum === noOfQuestions) {
             setQuestionNum((prev) => prev + 1) 
             axios.post(`/api/post-score`, {
-                score: questions.filter(question => question.is_correct).length,
+                last_score: questions.filter(question => question.is_correct).length,
                 chapter_number: props.chapter_number,
-                user_id: props.user_id
-            })
+                user_id: props.user_id,
+                no_of_questions: noOfQuestions
+            } satisfies IUserScore)
             .catch((error) => {
                 console.error(error);
                 alert('Something went wrong saving your score.')
