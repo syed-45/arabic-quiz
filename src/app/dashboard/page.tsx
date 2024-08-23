@@ -56,9 +56,11 @@ const ChapterCard = ({chapterData, last_score, no_of_questions}: IChapterCardPro
     )
 }
 
-function ScoreText(props: IScoreTextProps): JSX.Element {
-    if (props.last_score === undefined) return <span className="text-red-500 font-thin">n/a</span>
-    const percentage = (100*props.last_score/props.no_of_questions!)
+function ScoreText({last_score, no_of_questions}: IScoreTextProps): JSX.Element {
+    if (last_score === undefined || no_of_questions === undefined) {
+        return <span className="text-red-500 font-thin">n/a</span>
+    }
+    const percentage = (100*last_score/no_of_questions)
     const fontColour = percentage > 75 ? 'text-green-600' : percentage > 50 ? 'text-yellow-600' : 'text-red-600'
     return <span className={fontColour+' font-extrabold'}> {percentage.toFixed(2)}% </span>
 }
