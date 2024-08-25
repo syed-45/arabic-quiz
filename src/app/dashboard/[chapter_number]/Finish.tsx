@@ -11,7 +11,9 @@ export const Finish = ({questions,noOfQuestions}: FinishProps):JSX.Element => {
     const numberOfCorrectAnswers = questions.filter(question => question.is_correct).length
 
     useEffect(() => {
+        // console.log('before',darkMode) //TODO: fix dark mode...
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setDarkMode(e.matches));
+        // console.log('after',darkMode)
         
         return () => {
           window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {
