@@ -11,18 +11,6 @@ export default async function ChapterQuiz({ params }: { params: { chapter_number
     if (!session.user) throw new Error('Unable to retrieve user data from session')
     const user_id = session.user.id
 
-
-    if (chapter_number > 7 && chapter_number < 17) {
-        return (
-            <>
-                <Navbar/>
-                <LogoHeader/>
-                <div className="text-center pt-10 text-yellow-700 dark:text-yellow-300">This chapter is being worked on and not ready yet. <br></br> Available chapters are 1-6</div>
-            </>
-                   
-        )
-    }
-
     if (chapter_number > 0 && chapter_number < 17) {
         const res = await fetch(`${process.env.API_URL}/api/get-vocab?chapter_number=${chapter_number}`)
         const data = await res.json()

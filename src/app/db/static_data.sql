@@ -192,11 +192,170 @@ INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plura
                          (7, 'Computer', 'حَاسُوبٌ', 'Computers', 'حَوَاسِيبُ'),
                          (7, 'Month', 'شَهْرٌ', 'Months', 'أَشْهُرٌ\شُهُورٌ');
 
+INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past) VALUES
+                         (8, 'To love; to like', 'حُّبٌّ', 'أَحِبَّ', 'يُحِبُّ', 'أَحَبَّ'),
+                         (8, 'To draw', 'رَسْمٌ', 'اُرْسُمْ', 'يَرْسُمُ', 'رَسَمَ'),
+                         (8, 'To choose', 'اِخْتِيَارٌ', 'اِخْتَرْ', 'يَخْتَارُ', 'اِخْتَارَ'),
+                         (8, 'To become', '', '', '', 'أٌَصْبَحَ'), --TODO fill in rest of empty verbs & pl nouns from here
+                         (8, 'To fill', '', '', '', 'مَلَأَ'),
+                         (8, 'To rest, relax; to take a break', '', '', '', 'اِسْتَرَاحَ');
 
+INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plural) VALUES 
+                         (8, 'Company', 'شَرِكَةٌ', 'Companies', 'شَرِكَاتٌ'),
+                         (8, 'Hospital', 'مُسْتَشْفَى', 'Hospitals', ''),
+                         (8, 'Pharmacist', 'صَيْدَلِيٌّ', 'Pharmacists', ''),
+                         (8, 'Pilot', 'طَيَّارٌ', 'Pilots', ''),
+                         (8, 'Person', 'شَخْصٌ', 'People', ''),
+                         (8, 'Stage, level', 'مَرْحَلَةٌ', 'Stages, levels', ''),
+                         (8, 'List, menu, table', 'قَائِمَةٌ', 'Lists, menus, tables', ''),
+                         (8, 'Blank, space, gap', 'فَرَاغٌ', '(Plural) Blank, space, gap', 'فَرَاغَاتٌ'),
+                         (8, 'Place, location', 'مَكَانٌ', 'Places, locations', ''),
+                         (8, 'Nurse', 'مُمَرِّضٌ', 'Nurses', ''),
+                         (8, 'Phrase, term', 'عِبَارَةٌ', 'Phrases, terms', ''),
+                         (8, 'Occupation', 'مِهْنَةٌ', 'Occupations', ''),
+                         (8, 'Infant; baby; child', 'طِفْلٌ', 'Infants; babies; children', '');
 
-INSERT INTO verbs VALUES (8, '', '', '', '', ''),
+INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past) VALUES
+                         (9, 'To shop', 'تَسَوُّقٌ', 'تَسَوَّقْ', 'يَتَسَوَّقُ', 'تَسَوَّقَ');
 
-INSERT INTO nouns VALUES (8, '', '', '', ''),
+INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plural) VALUES 
+                         (9, 'Dictionary', 'مُعْجَمٌ', '', ''),
+                         (9, 'Notepad', 'دَفْتَرٌ', '', ''),
+                         (9, 'Pen', 'قَلَمٌ', '', ''),
+                         (9, 'Riyal (Saudi currency)', 'رِيَالٌ', '', ''),
+                         (9, 'Shirt', 'قَمِيصٌ', '', ''),
+                         (9, 'Thobe', 'ثَوْبٌ', '', '');
 
-...
+INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past) VALUES
+                         (10, 'To rain', '', '', '', 'أَمْطَرَ'),
+                         (10, 'To leave', '', '', '', 'تَرَكَ'),
+                         (10, 'To bless', '', '', '', 'بَارَكَ'),
+                         (10, 'To stay;remain', '', '', '', 'بَقِيَ'),
+                         (10, 'To speak', '', '', '', 'تَكَلَّمَ (مَعَ)'),
+                         (10, 'To spend (time)', '', '', '', 'قَضَى'),
+                         (10, 'To bring', '', '', '', 'أَحْضَرَ'),
+                         (10, 'To attend', '', '', '', 'حَضَرَ');
 
+INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plural) VALUES 
+                         (10, 'Umbrella', 'مِظَلَّةٌ', '', ''),
+                         (10, 'Night', 'لَيْلَةٌ', '', ''),
+                         (10, 'Degree', 'دَرَجَةٌ', '', ''),
+                         (10, 'Husband; spouse', 'زَوْجٌ', '', ''),
+                         (10, 'Market', 'سُوقٌ', '', ''),
+                         (10, 'Season', 'فَصْ لٌ', '', ''),
+                         (10, 'Tent', 'خَيْمَةٌ', '', ''),
+                         (10, 'Wife', 'زَوْجَةٌ', '', '');
+
+INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past) VALUES
+                         (11, 'To move', '', '', '', 'اِنْتَقَلَ'),
+                         (11, 'To take (time)', '', '', '', 'اِسْتَغْرَقَ'),
+                         (11, 'To marry', '', '', '', 'تَزَوَّجَ'),
+                         (11, 'To visit', '', '', '', 'زَارَ'),
+                         (11, 'To be polluted', '', '', '', 'تَلَوَّثَ'),
+                         (11, 'To be overcrowded', '', '', '', 'اِزْدَحَمَ');
+
+INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plural) VALUES 
+                         (11, 'Director / Manager / Headmaster', 'مُدِيرٌ', '', ''),
+                         (11, 'Country', 'بَلَدٌ', '', ''),
+                         (11, 'Opinion', 'رَأْيٌ', '', ''),
+                         (11, 'City', 'مَدِينَةٌ', '', ''),
+                         (11, 'Problem', 'مُشْكِلَةٌ', '', ''),
+                         (11, 'Time', 'وَقْتٌ', '', ''),
+                         (11, 'Trip', 'رِحْلَةٌ', '', ''),
+                         (11, 'Teacher', 'أُسْتَاذٌ', '', ''),
+                         (11, 'Village', 'قَرْيَةٌ', '', ''),
+                         (11, 'Train', 'قِطَارٌ', '', '');
+
+-- INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past) VALUES
+--                          (12, '', '', '', '', '');
+
+INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plural) VALUES 
+                         (12, 'Hobby', 'هِوَايَةٌ', '', ''),
+                         (12, 'Magazine', 'مَجَلَّةٌ', '', ''),
+                         (12, 'Exhibition', 'مَعْرِضٌ', '', ''),
+                         (12, 'Verse', 'آيَةٌ', '', ''),
+                         (12, 'Wing, section', 'جَنَاحٌ', '', ''),
+                         (12, 'Newspaper', 'صَحِيفَةٌ', '', ''),
+                         (12, 'Club', 'جَمْعِيَّةٌ', '', ''),
+                         (12, 'Hadeeth', 'حَدِيثٌ', '', ''),
+                         (12, 'Stamp', 'طَابَعٌ', '', '');
+
+INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past) VALUES
+                        (13, 'To stay', '', '', '', 'أَقَامَ'),
+                        (13, 'To book', '', '', '', 'حَجَزَ'),
+                        (13, 'To depart', '', '', '', 'غَادَرَ'),
+                        (13, 'To open', '', '', '', 'فَتَحَ'),
+                        (13, 'To lose', '', '', '', 'فَقَدَ'),
+                        (13, 'To confirm', '', '', '', 'أَكَّدَ');
+
+INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plural) VALUES 
+                         (13, 'Booking', 'حَجْزٌ', '', ''),
+                         (13, '(Air)Line', 'خَطٌ', '', ''),
+                         (13, 'Ticket', 'تَذْكِرَةٌ', '', ''),
+                         (13, 'Passport', 'جَوَازٌ', '', ''),
+                         (13, 'Visa', 'تَأْشِيرَةٌ', '', ''),
+                         (13, 'Bag', 'حَقِيبَةٌ', '', ''),
+                         (13, 'Plane', 'طَائِرَةٌ', '', ''),
+                         (13, 'Traveler', 'مُسَافِرٌ', '', ''),
+                         (13, 'Hotel', 'فُنْدُقٌ', '', ''),
+                         (13, 'Colour', 'لَوْنٌ', '', ''),
+                         (13, 'Worker', 'مُوَظَّفٌ', '', '');
+
+INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past) VALUES
+                        (14, 'To shave', '', '', '', 'حَلَقَ'),
+                        (14, 'To make umrah', '', '', '', 'اِعْتَمَرَ'),
+                        (14, 'To slaughter / sacrifice', '', '', '', 'ذَبَحَ'),
+                        (14, 'To throw', '', '', '', 'رَمَى'),
+                        (14, "To make sa`ee", '', '', '', 'سَعَى'),
+                        (14, 'To feel', '', '', '', 'شَعَرَ'),
+                        (14, 'To take off / undress', '', '', '', 'خَلَعَ'),
+                        (14, 'To fast', '', '', '', 'صَامَ'),
+                        (14, 'To make tawaaf', '', '', '', 'طَافَ'),
+                        (14, 'To wear', '', '', '', 'لَبِسَ'),
+                        (14, 'To make the Talbiyaa', '', '', '', 'لَبَّى'),
+                        (14, 'To arrive', '', '', '', 'وَصَلَ');
+
+INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plural) VALUES 
+                         (14, 'Circuit / Lap', 'شَوْطٌ', '', ''),
+                         (14, 'Unit of prayer', 'رَكْعَةٌ', '', ''),
+                         (14, 'Head', 'رَأْسٌ', '', ''),
+                         (14, 'Sacrifice', 'هَدْيَةٌ', '', '');
+
+INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past) VALUES
+                        (15, 'To be afflicted', '', '', '', 'أَصَابَ'),
+                        (15, 'To rise', '', '', '', 'اِرْتَفَعَ'),
+                        (15, 'To be absent', '', '', '', 'تَغَيَّبَ'),
+                        (15, 'To cure', '', '', '', 'شَفَى'),
+                        (15, 'To check', '', '', '', 'فَحَصَ'),
+                        (15, 'To meet', '', '', '', 'قَابَلَ'),
+                        (15, 'To advise', '', '', '', 'نَصَحَ');
+
+INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plural) VALUES 
+                         (15, 'Tooth', 'سِنٌ', '', ''),
+                         (15, 'Nose', 'أَنْفٌ', '', ''),
+                         (15, 'Visit', 'زِيَارَةٌ', '', ''),
+                         (15, 'Ambulance', 'إِسْعَافٌ', '', ''),
+                         (15, 'Kidney', 'كُلْيَةٌ', '', ''),
+                         (15, 'Ear', 'أُذُنٌ', '', ''),
+                         (15, 'Throat', 'حَنْجَرَةٌ', '', ''),
+                         (15, 'Appointment', 'مَوعِدٌ', '', ''),
+                         (15, 'Medicine', 'دَوَاءٌ', '', ''),
+                         (15, 'Chest', 'صَدْرٌ', '', '');
+
+INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command, arabic_present, arabic_past) VALUES
+                        (16, 'To give', '', '', '', 'أَعْطَى'),
+                        (16, 'To approach', '', '', '', 'اِقْتَرَبَ'),
+                        (16, 'To move away from', '', '', '', 'اِبْتَعَدَ'),
+                        (16, 'To help', '', '', '', 'سَاعَدَ'),
+                        (16, 'To see', '', '', '', 'رَأَى');
+
+INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plural) VALUES 
+                         (16, 'Celebration / Festival', 'عِيدٌ', '', ''),
+                         (16, 'River', 'نَهْرٌ', '', ''),
+                         (16, 'Museum', 'مَتْحَفٌ', '', ''),
+                         (16, 'Farm', 'مَزْرَعَةٌ', '', ''),
+                         (16, 'Team / Group', 'فَرِيقٌ', '', ''),
+                         (16, 'Sacrifice', 'أُضْحِيَةٌ', '', ''),
+                         (16, 'Capital City', 'عَاصِمَةٌ', '', ''),
+                         (16, 'Mountain', 'جَبَلٌ', '', '');
+                         (16, 'Poor', 'فَقِيرٌ', '', '');

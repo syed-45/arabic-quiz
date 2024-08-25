@@ -14,7 +14,7 @@ const optionRoundedCornerStyles = ['rounded-tl-md','rounded-tr-md','rounded-bl-m
 export default function Quiz(props: QuizProps):JSX.Element {
     const [verbs, setVerbs] = useState<IVerbsData[]>(props.verbs)
     const [nouns, setNouns] = useState<INounsData[]>(props.nouns)
-    const [verbOrNoun, setVerbOrNoun] = useState<'verb' | 'noun'>(generateRandomOption(['verb', 'noun']))
+    const [verbOrNoun, setVerbOrNoun] = useState<'verb' | 'noun'>(props.verbs.length === 0 ? 'noun' : props.nouns.length === 0 ? 'verb' : generateRandomOption(['verb', 'noun']))
     const [questionIsEnglish, setQuestionIsEnglish] = useState<boolean>(generateRandomOption([true, false])) //TODO: add weighting so english questions is more frequent
     const noOfQuestions = props.verbs.length + props.nouns.length >= 14 ? 12 : props.verbs.length + props.nouns.length - 2
     const [questions, setQuestions] = useState<IQuestion[]>([{question: '', options:[], answer:'', user_answer: 'foo', is_correct: false,}])
@@ -106,7 +106,6 @@ export default function Quiz(props: QuizProps):JSX.Element {
             if (verbs.length <= 1) setVerbOrNoun('noun');  
             else if (nouns.length <= 1) setVerbOrNoun('verb');
             else setVerbOrNoun(generateRandomOption(['verb', 'noun']));
-            //todo: if both verbs and noun < 1
         }
     }
 
@@ -146,7 +145,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
                     Chapter <span className="backdrop-blur-xl drop-shadow-2xl size-7 rounded-[7px] flex justify-center items-center mr-1">{props.chapter_number}</span>Quiz
             </h3>
             <div className={`mb-10 mt-10 ${currentQuestion.question.length > 20 ? "text-2xl" : "text-3xl"}`}>{currentQuestion.question}</div>
-            <div className="grid grid-cols-2 gap-0 mt-5 bg-gradient-to-bl text-white from-sky-950 via-sky-500 via-70% to-sky-200 dark:from-sky-800 dark:to-transparent rounded-md text-xl">
+            <div className="grid grid-cols-2 gap-0 mt-5 bg-gradient-to-bl text-white from-sky-950 via-sky-500 via-70% to-sky-200 dark:from-sky-800 dark:to-transparent rounded-md">
                 {currentQuestion.options.map((option:string, index:number):JSX.Element => {
                     return (
                         <button
@@ -154,7 +153,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
                             onClick={() => handleOptionClick(option)}
                             //TODO borders are still overlapping NOT URGENT                           
                             style={{backgroundColor:currentQuestion.user_answer === option ? "rgb(80 80 80 / 60%)" : "rgb(0 0 0 / 0%)"}}
-                            className={`h-36 p-2 shadow-2xl ${optionRoundedCornerStyles[index]}  ${currentQuestion.user_answer === option ?  "border" : "border-sky-900 " + optionButtonStyles[index]}` }
+                            className={`h-36 p-2 shadow-2xl ${option.length > 25 ? "text-lg" : "text-xl"} ${optionRoundedCornerStyles[index]} ${currentQuestion.user_answer === option ?  "border" : "border-sky-900 " + optionButtonStyles[index]}` }
                         >
                             {option}
                         </button>
