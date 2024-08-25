@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import {
   Bars3Icon,
-  UserCircleIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -26,7 +25,7 @@ export default function Navbar(): JSX.Element {
           <Bars3Icon className='size-10' aria-hidden='true' />
         </button>
         <Link href="/dashboard/profile">
-            <UserCircleIcon className="size-16"/>
+          pr
         </Link>
       </nav>
       <Dialog
