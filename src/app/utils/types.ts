@@ -63,3 +63,18 @@ export interface StatsComponentProps {
     percentageScore: number;
     quizzesCompleted: number;
 }
+
+export interface INavbarProps extends IProfileIconProps {}
+
+export interface IProfileIconProps {
+    gradientNum?: number,
+    name?: string,
+    onDashboard?: boolean,
+}
+
+export interface IProfileFormProps {
+    name: string;
+    email: string;
+    gradientNum: number;
+    userId : string;
+}

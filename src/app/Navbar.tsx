@@ -6,8 +6,10 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { INavbarProps } from './utils/types';
+import ProfileIcon from './ProfileIcon';
 
-export default function Navbar(): JSX.Element {
+export default function Navbar({onDashboard=false, name, gradientNum} : INavbarProps): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -24,9 +26,15 @@ export default function Navbar(): JSX.Element {
           <span className='sr-only'>Open main menu</span>
           <Bars3Icon className='size-10' aria-hidden='true' />
         </button>
-        <Link href="/dashboard/profile">
-          pr
-        </Link>
+        {onDashboard && 
+          <Link href="/dashboard/profile">
+            <ProfileIcon 
+              gradientNum={gradientNum}
+              onDashboard={true}
+              name={name}
+            />
+          </Link>
+        }
       </nav>
       <Dialog
         as='div'

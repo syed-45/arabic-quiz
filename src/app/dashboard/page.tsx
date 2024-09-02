@@ -8,11 +8,14 @@ import { darkGradientColors, gradientColors } from "../utils/chapterGradientColo
 import { StatsComponent } from '../StatsComponent';
 
 export default async function Dashboard() {
-    let session = await auth();
+    const session = await auth();
     if (!session) throw new Error('Unable to retrieve session');
-    if (!session.user) throw new Error('Unable to retrieve user data from session');
+    if (!session.user) throw new Error('Unable to retrieve user from session');
+    if (!session.user.id) throw new Error('Unable to retrieve user data from session');
+    const gradientNum = session.user.gradientNum
 
     const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`, { next: { revalidate: false } })
+    //todo: promise.all the two fetches...
     if (res.status === 500) throw new Error('Error fetching chapter data on the server')
     const allChapters: IChapterData[] = (await res.json()).result
     
@@ -25,7 +28,7 @@ export default async function Dashboard() {
     
     return (
         <>
-            <Navbar/>
+            <Navbar onDashboard={true} name={session.user.name || 'Z'} gradientNum={gradientNum}/>
             <LogoHeader/>
             <StatsComponent quizzesCompleted={quizzesCompleted} percentageScore={percentageScore}/>
             <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mt-5 mb-12 px-5 pb-10'>

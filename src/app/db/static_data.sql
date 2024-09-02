@@ -242,7 +242,7 @@ INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plura
                          (10, 'Degree', 'دَرَجَةٌ', '', ''),
                          (10, 'Husband; spouse', 'زَوْجٌ', '', ''),
                          (10, 'Market', 'سُوقٌ', '', ''),
-                         (10, 'Season', 'فَصْ لٌ', '', ''),
+                         (10, 'Season', 'فَصْلٌ', '', ''),
                          (10, 'Tent', 'خَيْمَةٌ', '', ''),
                          (10, 'Wife', 'زَوْجَةٌ', '', '');
 

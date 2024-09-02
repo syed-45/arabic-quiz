@@ -1,5 +1,5 @@
 import Quiz from "./Quiz"
-import { INounsData, IQuestion, IVerbsData } from "../../utils/types"
+import { INounsData, IVerbsData } from "../../utils/types"
 import { auth } from "../../auth"
 import LogoHeader from "@/app/LogoHeader";
 import Navbar from "@/app/Navbar";

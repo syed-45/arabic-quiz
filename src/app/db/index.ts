@@ -4,9 +4,6 @@ import postgres from 'postgres';
 import { genSaltSync, hashSync } from 'bcrypt-ts';
 import { users, chapterNames } from './schema';
 
-// Optionally, if not using email/pass login, you can
-// use the Drizzle adapter for Auth.js / NextAuth
-// https://authjs.dev/reference/adapter/drizzle
 let client = postgres(process.env.POSTGRES_URL!);
 export let db = drizzle(client);
 
@@ -31,7 +28,20 @@ export async function createUser(email: string, password: string, name: string) 
   }
 }
 
+export async function updateUser(email: string, name: string, gradientNum: number, id: string) {
+  try {
+    await db.update(users).set({
+      email: email,
+      name: name,
+      gradientNum: gradientNum,
+    }).where(
+      eq(users.id, id)
+    )
+    //TODO: drizzle issue found where ERROR does NOT appear when WHERE conditional parameter does not match.
 
-export async function testGetChapterNames() {
-  return await db.select().from(chapterNames)
+    return
+  } catch (error) {
+    console.error('Failed to update user data: ', error);
+    throw new Error('Failed to update user data.');
+  }
 }

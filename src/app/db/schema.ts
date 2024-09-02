@@ -1,4 +1,5 @@
 import { integer, pgTable, varchar, primaryKey, text, timestamp, boolean } from 'drizzle-orm/pg-core';
+import { generateRandomNumber } from '../utils/generateRandomOption';
 type AdapterAccountType = "email" | "oidc" | "oauth" | "webauthn"
 
 export const users = pgTable("user", {
@@ -9,6 +10,7 @@ export const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  gradientNum: integer("gradientNum").$defaultFn(() => generateRandomNumber(0,10)),
   password: varchar("password", {length: 64})
 })
 

@@ -37,7 +37,7 @@ importers:
         version: 16.4.5
       drizzle-orm:
         specifier: ^0.30.10
-        version: 0.30.10(@neondatabase/serverless@0.6.0)(@types/pg@8.6.6)(@types/react@18.2.45)(postgres@3.4.3)(react@18.2.0)
+        version: 0.30.10(@neondatabase/serverless@0.6.0)(@types/pg@8.6.6)(@types/react@18.2.45)(postgres@3.4.4)(react@18.2.0)
       geist:
         specifier: ^1.2.0
         version: 1.2.0(next@14.0.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
@@ -48,8 +48,8 @@ importers:
         specifier: 5.0.0-beta.4
         version: 5.0.0-beta.4(next@14.0.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       postgres:
-        specifier: ^3.4.3
-        version: 3.4.3
+        specifier: ^3.4.4
+        version: 3.4.4
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1871,8 +1871,8 @@ packages:
     resolution: {integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==}
     engines: {node: '>=0.10.0'}
 
-  postgres@3.4.3:
-    resolution: {integrity: sha512-iHJn4+M9vbTdHSdDzNkC0crHq+1CUdFhx+YqCE+SqWxPjm+Zu63jq7yZborOBF64c8pc58O5uMudyL1FQcHacA==}
+  postgres@3.4.4:
+    resolution: {integrity: sha512-IbyN+9KslkqcXa8AO9fxpk97PA4pzewvpi2B3Dwy9u4zpV32QicaEdgmF3eSQUzdRk7ttDHQejNgAEr4XoeH4A==}
     engines: {node: '>=12'}
 
   preact-render-to-string@5.2.3:
@@ -2996,12 +2996,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.30.10(@neondatabase/serverless@0.6.0)(@types/pg@8.6.6)(@types/react@18.2.45)(postgres@3.4.3)(react@18.2.0):
+  drizzle-orm@0.30.10(@neondatabase/serverless@0.6.0)(@types/pg@8.6.6)(@types/react@18.2.45)(postgres@3.4.4)(react@18.2.0):
     optionalDependencies:
       '@neondatabase/serverless': 0.6.0
       '@types/pg': 8.6.6
       '@types/react': 18.2.45
-      postgres: 3.4.3
+      postgres: 3.4.4
       react: 18.2.0
 
   eastasianwidth@0.2.0: {}
@@ -4054,7 +4054,7 @@ snapshots:
       xtend: 4.0.2
     optional: true
 
-  postgres@3.4.3: {}
+  postgres@3.4.4: {}
 
   preact-render-to-string@5.2.3(preact@10.11.3):
     dependencies:
