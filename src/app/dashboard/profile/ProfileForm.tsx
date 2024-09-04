@@ -5,7 +5,7 @@ import { updateUserAction } from "./action";
 import { IProfileFormProps } from "@/app/utils/types";
 import { gradientColors } from "@/app/utils/chapterGradientColours";
 import ProfileIcon from "@/app/ProfileIcon";
-// import Modal from "@/app/Modal";
+import Modal from "@/app/Modal";
 
 export function ProfileForm({name, email, gradientNum, userId,}: IProfileFormProps) {
     const [isEditable, setIsEditable] = useState(false)
@@ -15,7 +15,6 @@ export function ProfileForm({name, email, gradientNum, userId,}: IProfileFormPro
     return (
       <>
         <ProfileIcon gradientNum={gradientNumState} name={name}/>
-        {/* <Modal/> */}
         <form
           action={updateUserAction.bind(null, gradientNumState.toString())}
           onSubmit={() => {
@@ -94,6 +93,7 @@ interface IEditUpdateButtons {
 
 const EditUpdateButtons = ({isEditable, setIsEditable, submitted, setSubmitted}: IEditUpdateButtons):JSX.Element => {
   const { pending } = useFormStatus();
+  const [isModalOpen, setModalIsOpen] = useState(false)
 
   /**
    * editable = false
@@ -111,7 +111,7 @@ const EditUpdateButtons = ({isEditable, setIsEditable, submitted, setSubmitted}:
   useEffect(() => {
     setSubmitted((prev) => {
       if (prev && !pending) {
-        alert('Your details have been updated and saved!')
+        setModalIsOpen(true)
       }
       else if (pending) return true
       return false
@@ -121,6 +121,12 @@ const EditUpdateButtons = ({isEditable, setIsEditable, submitted, setSubmitted}:
 
   return (
     <div>
+      <Modal 
+        isOpen={isModalOpen}
+        setIsOpen={setModalIsOpen}
+        title="Updated details saved"
+        body="Note: If you are logged in to other devices, you will have to log out and log back in to see updated data on those devices."
+      />
       <button 
             className={`px-4 py-1 ${isEditable || pending ? 'text-gray-400 border-gray-300 dark:border-gray-600' : 'border-gray-800 dark:border-white text-black dark:text-white'} text-center rounded-md border-[1.5px] bg-transparent mr-3`}
             aria-hidden='true'

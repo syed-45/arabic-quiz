@@ -15,7 +15,7 @@ export default function Navbar({onDashboard=false, name, gradientNum} : INavbarP
   return (
     <header className=''>
       <nav
-        className='flex justify-between items-center max-w-screen-lg px-5 pt-7 mx-auto'
+        className='flex justify-between items-center max-w-screen-lg px-5 pt-7 h-[76px] mx-auto'
         aria-label='Global'
       >
         <button

@@ -14,7 +14,6 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       let isLoggedIn = !!auth?.user;
       let isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-      //TODO: prevent unauthorized users from accessing the api routes, attempted solution no fix yet
 
       if (isOnDashboard) {
         if (isLoggedIn) return true;

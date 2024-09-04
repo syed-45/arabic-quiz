@@ -8,6 +8,7 @@ import { Finish } from "./Finish"
 import axios from "axios"
 import { darkGradientColors, gradientColors } from "@/app/utils/chapterGradientColours"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
+import Modal from "@/app/Modal"
 const optionButtonStyles = ['border ','border-y border-r ','border-x border-b ','border-r border-b ']
 const optionRoundedCornerStyles = ['rounded-tl-md','rounded-tr-md','rounded-bl-md','rounded-br-md']
 
@@ -20,6 +21,9 @@ export default function Quiz(props: QuizProps):JSX.Element {
     const [questions, setQuestions] = useState<IQuestion[]>([{question: '', options:[], answer:'', user_answer: 'foo', is_correct: false,}])
     const [questionNum, setQuestionNum] = useState<number>(0)
     const currentQuestion = questions[questionNum]
+    
+    const [isModalOpen, setModalIsOpen] = useState(false)
+    const [modalTitle, setModalTitle] = useState("")
 
     useEffect(() => {
         let [questionWord, option1, option2, option3, answer_option4]: string[] = [];
@@ -89,7 +93,8 @@ export default function Quiz(props: QuizProps):JSX.Element {
             } satisfies IUserScore)
             .catch((error) => {
                 console.error(error);
-                alert('Something went wrong saving your score.')
+                setModalIsOpen(true);
+                setModalTitle("Something went wrong saving your score")
             })      
         } else if (questionNum < questions.length - 2) {
             setQuestionNum(prev => prev + 1);
@@ -111,7 +116,8 @@ export default function Quiz(props: QuizProps):JSX.Element {
 
     const handlePreviousClick = () => {
         if (questionNum === 1) {
-            alert('This is the first question')
+            setModalIsOpen(true);
+            setModalTitle("This is the first question.")
         } else {
             setQuestionNum(prev => prev - 1);
         }
@@ -119,7 +125,10 @@ export default function Quiz(props: QuizProps):JSX.Element {
 
     if (questionNum === noOfQuestions + 1) {
         return (
-            <Finish questions={questions} noOfQuestions={noOfQuestions} />
+            <>
+                <Finish questions={questions} noOfQuestions={noOfQuestions} />
+                <Modal title={modalTitle} isOpen={isModalOpen} setIsOpen={setModalIsOpen} />
+            </>
         )
     }
     else if (questionNum === 0) {
@@ -175,6 +184,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
                     <ChevronRightIcon className="size-5"/>
                 </button>
             </div>
+            <Modal title={modalTitle} isOpen={isModalOpen} setIsOpen={setModalIsOpen} />
         </main>
     )
 }
