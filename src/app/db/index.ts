@@ -2,7 +2,7 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import { eq } from 'drizzle-orm';
 import postgres from 'postgres';
 import { genSaltSync, hashSync } from 'bcrypt-ts';
-import { users, chapterNames } from './schema';
+import { users } from './schema';
 
 let client = postgres(process.env.POSTGRES_URL!);
 export let db = drizzle(client);
