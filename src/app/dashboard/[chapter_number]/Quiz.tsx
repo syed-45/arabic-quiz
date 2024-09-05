@@ -16,7 +16,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
     const [verbs, setVerbs] = useState<IVerbsData[]>(props.verbs)
     const [nouns, setNouns] = useState<INounsData[]>(props.nouns)
     const [verbOrNoun, setVerbOrNoun] = useState<'verb' | 'noun'>(props.verbs.length === 0 ? 'noun' : props.nouns.length === 0 ? 'verb' : generateRandomOption(['verb', 'noun']))
-    const [questionIsEnglish, setQuestionIsEnglish] = useState<boolean>(generateRandomOption([true, false])) //TODO: add weighting so english questions is more frequent
+    const [questionIsEnglish, setQuestionIsEnglish] = useState<boolean>(generateRandomOption([true, true, false]))
     const noOfQuestions = props.verbs.length + props.nouns.length >= 14 ? 12 : props.verbs.length + props.nouns.length - 2
     const [questions, setQuestions] = useState<IQuestion[]>([{question: '', options:[], answer:'', user_answer: 'foo', is_correct: false,}])
     const [questionNum, setQuestionNum] = useState<number>(0)
