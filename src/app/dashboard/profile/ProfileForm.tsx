@@ -39,7 +39,7 @@ export function ProfileForm({name, email, gradientNum, userId,}: IProfileFormPro
                   placeholder=""
                   autoComplete="name"
                   required
-                  className={`${isEditable ? "text-black" : "text-gray-600"} w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
+                  className={`${isEditable ? "text-black" : "text-gray-600"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
               />
           </div>
           <div>
@@ -58,7 +58,7 @@ export function ProfileForm({name, email, gradientNum, userId,}: IProfileFormPro
               placeholder=""
               autoComplete="email"
               required
-              className={`${isEditable ? "text-black" : "text-gray-600"} w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
+              className={`${isEditable ? "text-black" : "text-gray-600"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
             />
           </div>
           <div>
@@ -129,7 +129,6 @@ const EditUpdateButtons = ({isEditable, setIsEditable, submitted, setSubmitted}:
       />
       <button 
             className={`px-4 py-1 ${isEditable || pending ? 'text-gray-400 border-gray-300 dark:border-gray-600' : 'border-gray-800 dark:border-white text-black dark:text-white'} text-center rounded-md border-[1.5px] bg-transparent mr-3`}
-            aria-hidden='true'
             disabled={isEditable || pending}
             onClick={() => setIsEditable(prev => !prev)}
         >

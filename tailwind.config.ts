@@ -32,10 +32,11 @@ const config: Config = {
       animation: {
         "fade-out": "fade-out 1s",
         "slide-down": "slide-down 1s",
-        "moving-gradient-bg": "moving-gradient-bg 3s ease infinite"
+        "moving-gradient-bg": "moving-gradient-bg 3.5s ease-in-out infinite"
       },
     },
   },
   plugins: [],
+  darkMode: 'class', // add to shadcn docs add dark theme https://github.com/shadcn-ui/ui/blob/f4ca57a79cf2d56f9c55021242a55cf0e1018b72/apps/www/content/docs/dark-mode/next.mdx
 }
 export default config

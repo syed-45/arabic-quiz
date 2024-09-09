@@ -1,19 +1,23 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useTheme } from "next-themes"
 import { Dialog, DialogPanel } from '@headlessui/react';
 import {
   Bars3Icon,
   XMarkIcon,
+  MoonIcon,
+  SunIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { INavbarProps } from './utils/types';
+import { Switch } from '@headlessui/react'
 import ProfileIcon from './ProfileIcon';
 
 export default function Navbar({onDashboard=false, name, gradientNum} : INavbarProps): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className=''>
+    <header>
       <nav
         className='flex justify-between items-center max-w-screen-lg px-5 pt-7 h-[76px] mx-auto'
         aria-label='Global'
@@ -74,8 +78,37 @@ export default function Navbar({onDashboard=false, name, gradientNum} : INavbarP
               </div>
             </div>
           </div>
+          <DarkModeToggle/>
         </DialogPanel>
       </Dialog>
     </header>
   );
 }
+
+const DarkModeToggle = () => {
+  const { setTheme, theme } = useTheme();
+  const [darkMode, setDarkMode] = useState(theme==="dark")
+
+  useEffect(() => {
+    setTheme(prev => darkMode === true ? "dark" : "light");
+    // console.log(theme)
+  }, [darkMode, setTheme])
+
+  return (
+    <div className='flex flex-grow gap-3 mt-2'>
+      <SunIcon className='size-6 block dark:hidden ' />
+      <MoonIcon className='size-6 hidden dark:block' />
+      <Switch
+        checked={darkMode}
+        onChange={setDarkMode}
+        className="group relative flex h-7 w-14 cursor-pointer rounded-full bg-gray-400 p-1 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-gray-600"
+      >
+        <span
+          aria-hidden="true"
+          className="pointer-events-none inline-block size-5 translate-x-0 rounded-full bg-white ring-0 shadow-lg transition duration-200 ease-in-out group-data-[checked]:translate-x-7"
+        />
+      </Switch>
+    </div>
+  )
+}
+

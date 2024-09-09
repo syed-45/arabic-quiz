@@ -8,6 +8,7 @@ import { darkGradientColors, gradientColors } from "../utils/chapterGradientColo
 import { StatsComponent } from '../StatsComponent';
 
 export default async function Dashboard() {
+    //todo: check how long this promise takes and maybe move to child components
     const session = await auth();
     if (!session) throw new Error('Unable to retrieve session');
     if (!session.user) throw new Error('Unable to retrieve user from session');

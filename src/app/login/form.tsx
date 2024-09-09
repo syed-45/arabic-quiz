@@ -24,7 +24,7 @@ export function Form({
           placeholder="user@acme.com"
           autoComplete="email"
           required
-          className="text-black w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none "
+          className="bg-white text-black w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none "
         />
       </div>
       <div>
@@ -39,7 +39,7 @@ export function Form({
           name="password"
           type="password"
           required
-          className="text-black w-full px-4 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none"
+          className="bg-white text-black w-full px-4 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none"
         />
       </div>
       {children}

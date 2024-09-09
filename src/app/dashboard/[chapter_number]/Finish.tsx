@@ -7,19 +7,7 @@ const optionRoundedCornerStyles = ['','','rounded-bl-md','rounded-br-md']
 
 export const Finish = ({questions,noOfQuestions}: FinishProps):JSX.Element => {
     const [openedQuestionNum, setOpenedQuestionNum] = useState<number | undefined>()
-    const [darkMode, setDarkMode] = useState<boolean>()
-    const numberOfCorrectAnswers = questions.filter(question => question.is_correct).length
-
-    useEffect(() => {
-        // console.log('before',darkMode) //TODO: fix dark mode...
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => setDarkMode(e.matches));
-        // console.log('after',darkMode)
-        
-        return () => {
-          window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {
-          });
-        }
-      }, []);
+    const noOfCorrectAnswers = questions.filter(question => question.is_correct).length
 
     const handleQuestionClick = (questionNum: number):void => {
        if (questionNum === openedQuestionNum) {
@@ -32,7 +20,7 @@ export const Finish = ({questions,noOfQuestions}: FinishProps):JSX.Element => {
     return (
         <>
             <h3 className="text-center mt-10">Quiz complete</h3>
-            <h4 className="text-center">You scored {numberOfCorrectAnswers} out of {noOfQuestions}</h4>
+            <h4 className="text-center">You scored {noOfCorrectAnswers} out of {noOfQuestions}</h4>
             <main className="mx-auto px-5 mt-7 max-w-screen-lg flex flex-col items-center gap-5 w-full pb-10">
                 {questions.slice(1,noOfQuestions+1).map((question: IQuestion, index: number):JSX.Element => {
                     const questionNo = index + 1
@@ -47,30 +35,31 @@ export const Finish = ({questions,noOfQuestions}: FinishProps):JSX.Element => {
                                     : <ChevronDownIcon className={`${openedQuestionNum !== undefined ? "animate-fade-out" : ""}`} key={question.user_answer}/>}
                                 </div>
                             </button>
-                            <div className={questionNo === openedQuestionNum ?  "" : "hidden" }>
+                            {questionNo === openedQuestionNum && 
+                            <div className={`text-base sm:text-lg`}>
                                 <div className="h-32 content-center text-center">{question.question}</div>
                                 <div className="grid grid-cols-2 gap-0 w-full rounded-b-lg text-center animate-slide-down bg-gradient-to-bl text-white from-sky-950 via-sky-500 via-70% to-sky-200 dark:from-sky-800 dark:to-transparent">
                                     {question.options.map((option:string,index):JSX.Element => {
-                                        const { bgColour, optionHighlight } = determineOptionType(question.user_answer,question.answer,option,darkMode!)                             
+                                        const { bgColour, optionHighlight } = determineOptionType(question.user_answer,question.answer,option)                             
                                         return (
                                             <div
                                                 key={option}
                                                 style={{backgroundColor:bgColour}}
-                                                className={`h-32 content-center relative shadow-xl ${optionRoundedCornerStyles[index]} ${(optionHighlight !== "highlightNone") ?  "border" : "border-sky-900 " + optionButtonStyles[index]} `}
+                                                className={`h-32 px-3 box-content content-center relative shadow-xl ${optionRoundedCornerStyles[index]} ${(optionHighlight !== "highlightNone") ?  "border" : "border-sky-900 " + optionButtonStyles[index]} `}
                                             >
-                                                {(optionHighlight === "highlightCorrectAnswer" || optionHighlight === "highlightUserIsCorrect") && <CheckIcon className="text-[#ffffff8f] size-7 sm:size-9 absolute top-5 left-5" strokeWidth={3} /> /*Heroicons issue: path not inheriting stroke-line-cap*/} 
-                                                {optionHighlight === "highlightWrongAnswer" && <XMarkIcon className="text-[#ffffff8f] size-7 sm:size-9 absolute top-5 left-5" strokeWidth={3} /> }
+                                                {(optionHighlight === "highlightCorrectAnswer" || optionHighlight === "highlightUserIsCorrect") && <CheckIcon className="text-[#ffffff8f] size-7 sm:size-9 absolute top-3 left-3 sm:left-5 stroke-2"/> /*Heroicons issue: path not inheriting stroke-line-cap*/} 
+                                                {optionHighlight === "highlightWrongAnswer" && <XMarkIcon className="text-[#ffffff8f] size-7 sm:size-9 absolute top-3 left-3 sm:left-5 stroke-2" /> }
                                                 {option}
                                             </div>
                                         )
                                     })}
                                 </div>
-                            </div>
+                            </div>}
                         </div>
                     )
                 })}
                 <Link href={'/dashboard'} className="bg-gradient-to-bl from-white font-bold text-sky-800 dark:text-white dark:from-sky-800 p-2 w-32 rounded-md drop-shadow-xl text-center mt-5">
-                    Home 
+                    Dashboard 
                     {/* to-white */}
                 </Link>
             </main>
@@ -78,13 +67,13 @@ export const Finish = ({questions,noOfQuestions}: FinishProps):JSX.Element => {
     )
 }
 
-function determineOptionType(user_answer: string, answer: string, option: string, darkMode: boolean): { optionHighlight: keyof IBgColours, bgColour: string} {
+function determineOptionType(user_answer: string, answer: string, option: string,): { optionHighlight: keyof IBgColours, bgColour: string} {
 
     const bgColours: IBgColours = {
-        highlightUserIsCorrect : darkMode ?    "rgb(20 83 45 / 0.5)"     :  "rgb(14 101 22 / 0.6)" ,
-        highlightWrongAnswer : darkMode ?      "rgb(127 29 29 / 0.53)"   :  "rgb(255 0 0 / 0.53)" ,
-        highlightCorrectAnswer : darkMode ?    "rgb(194 65 12 / 0.53)"   :  "rgb(255 74 0 / 0.6)" ,
-        highlightNone : darkMode ?             "rgb(0 0 0 / 0)"          :  "rgb(0 0 0 / 0)" 
+        highlightUserIsCorrect : "rgb(20 83 45 / 0.5)",
+        highlightWrongAnswer : "rgb(127 29 29 / 0.53)",
+        highlightCorrectAnswer : "rgb(194 65 12 / 0.53)",
+        highlightNone :  "rgb(0 0 0 / 0)"          
     }
 
     let optionHighlight: keyof IBgColours

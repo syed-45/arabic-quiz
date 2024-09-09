@@ -30,7 +30,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
 
         if (verbOrNoun === 'verb') {
             const questionVerb: IVerbsData = generateRandomOption(verbs);
-            console.log('currrent verbs ',verbs); //TODO: remove console.logs
+            // console.log('currrent verbs ',verbs); //TODO: remove console.logs
             let verbProperty: keyof IVerbsData = questionIsEnglish ? 'english' : 'arabicPast';
             questionWord = questionVerb[verbProperty];
             verbProperty = questionIsEnglish ? 'arabicPast' : 'english';
@@ -41,7 +41,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
         } else {
             const questionNoun: INounsData = generateRandomOption(nouns);
             let nounProperty: keyof INounsData = questionIsEnglish ? 'english' : 'arabic';
-            console.log('current nouns ', nouns);
+            // console.log('current nouns ', nouns);
             questionWord = questionNoun[nounProperty];
             nounProperty = questionIsEnglish ? 'arabic' : 'english';
             answer_option4 = questionNoun[nounProperty];
@@ -61,7 +61,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
     }, [verbs, nouns, verbOrNoun, questionIsEnglish])    
     
     const handleOptionClick = (option: string) => {
-        console.log('current questions',questions)
+        // console.log('current questions',questions)
         if (currentQuestion.user_answer === option) {
             setQuestions((prev: IQuestion[]):IQuestion[] => {
                 const newQuestions = [...prev];
@@ -82,17 +82,18 @@ export default function Quiz(props: QuizProps):JSX.Element {
 
     const handleNextClick = () => {
         if (currentQuestion.user_answer === '') {
-            alert('Please select an option')
+            setModalIsOpen(true);
+            setModalTitle("Please select an option")
         } else if (questionNum === noOfQuestions) {
             setQuestionNum((prev) => prev + 1) 
             axios.post(`/api/post-score`, {
                 last_score: questions.filter(question => question.is_correct).length,
                 chapter_number: props.chapter_number,
                 user_id: props.user_id,
-                no_of_questions: noOfQuestions
+                no_of_questions: noOfQuestions,
             } satisfies IUserScore)
             .catch((error) => {
-                console.error(error);
+                // console.error(error);
                 setModalIsOpen(true);
                 setModalTitle("Something went wrong saving your score")
             })      
@@ -153,16 +154,15 @@ export default function Quiz(props: QuizProps):JSX.Element {
             <h3 className={"py-2 text-gray-100 px-10 rounded-md flex items-center justify-center font-semibold shadow-xl w-[210px] mx-auto"+gradientColors[props.chapter_number-1]+darkGradientColors[props.chapter_number-1]} >
                     Chapter <span className="backdrop-blur-xl drop-shadow-2xl size-7 rounded-[7px] flex justify-center items-center mr-1">{props.chapter_number}</span>Quiz
             </h3>
-            <div className={`mb-10 mt-10 ${currentQuestion.question.length > 20 ? "text-2xl" : "text-3xl"}`}>{currentQuestion.question}</div>
-            <div className="grid grid-cols-2 gap-0 mt-5 bg-gradient-to-bl text-white from-sky-950 via-sky-500 via-70% to-sky-200 dark:from-sky-800 dark:to-transparent rounded-md">
+            <div className={`h-[116px] content-center ${currentQuestion.question.length > 20 ? "text-2xl" : "text-3xl"}`}>{currentQuestion.question}</div>
+            <div className="grid grid-cols-2 gap-0 bg-gradient-to-bl text-white from-sky-950 via-sky-500 via-80% to-sky-200 dark:from-sky-800 dark:to-transparent rounded-md">
                 {currentQuestion.options.map((option:string, index:number):JSX.Element => {
                     return (
                         <button
                             key={option}
                             onClick={() => handleOptionClick(option)}
                             //TODO borders are still overlapping NOT URGENT                           
-                            style={{backgroundColor:currentQuestion.user_answer === option ? "rgb(80 80 80 / 60%)" : "rgb(0 0 0 / 0%)"}}
-                            className={`h-36 p-2 shadow-2xl ${option.length > 25 ? "text-lg" : "text-xl"} ${optionRoundedCornerStyles[index]} ${currentQuestion.user_answer === option ?  "border" : "border-sky-900 " + optionButtonStyles[index]}` }
+                            className={`h-36 p-2 shadow-2xl ${option.length > 25 ? "text-lg" : "text-xl"} ${optionRoundedCornerStyles[index]} ${currentQuestion.user_answer === option ?  "border bg-gray-400/40 dark:bg-gray-400/25" : "border-sky-900 " + optionButtonStyles[index]}` }
                         >
                             {option}
                         </button>
