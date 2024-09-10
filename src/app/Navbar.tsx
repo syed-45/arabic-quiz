@@ -86,8 +86,8 @@ export default function Navbar({onDashboard=false, name, gradientNum} : INavbarP
 }
 
 const DarkModeToggle = () => {
-  const { setTheme, theme } = useTheme();
-  const [darkMode, setDarkMode] = useState(theme==="dark")
+  const { setTheme, resolvedTheme } = useTheme();
+  const [darkMode, setDarkMode] = useState(resolvedTheme==="dark")
 
   useEffect(() => {
     setTheme(prev => darkMode === true ? "dark" : "light");
