@@ -7,7 +7,7 @@ import { gradientColors } from "@/app/utils/chapterGradientColours";
 import ProfileIcon from "@/app/ProfileIcon";
 import Modal from "@/app/Modal";
 
-export function ProfileForm({name, email, gradientNum, userId,}: IProfileFormProps) {
+export function ProfileForm({name, email, gradientNum}: IProfileFormProps) {
     const [isEditable, setIsEditable] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [gradientNumState, setGradientNumState] = useState(gradientNum)
@@ -39,7 +39,7 @@ export function ProfileForm({name, email, gradientNum, userId,}: IProfileFormPro
                   placeholder=""
                   autoComplete="name"
                   required
-                  className={`${isEditable ? "text-black" : "text-gray-600"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
+                  className={`${isEditable ? "text-black" : "text-gray-500"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
               />
           </div>
           <div>
@@ -58,7 +58,7 @@ export function ProfileForm({name, email, gradientNum, userId,}: IProfileFormPro
               placeholder=""
               autoComplete="email"
               required
-              className={`${isEditable ? "text-black" : "text-gray-600"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
+              className={`${isEditable ? "text-black" : "text-gray-500"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
             />
           </div>
           <div>
@@ -91,7 +91,7 @@ interface IEditUpdateButtons {
   setSubmitted: (value: SetStateAction<boolean>) => void 
 }
 
-const EditUpdateButtons = ({isEditable, setIsEditable, submitted, setSubmitted}: IEditUpdateButtons):JSX.Element => {
+const EditUpdateButtons = ({isEditable, setIsEditable, setSubmitted}: IEditUpdateButtons):JSX.Element => {
   const { pending } = useFormStatus();
   const [isModalOpen, setModalIsOpen] = useState(false)
 
@@ -147,7 +147,7 @@ const EditUpdateButtons = ({isEditable, setIsEditable, submitted, setSubmitted}:
 )
 }
 
-interface IGradientOptions { 
+interface IGradientOptions {
   gradientNumState: number,
   setGradientNumState: (value: SetStateAction<number>) => void,
   disabled: boolean
@@ -155,7 +155,7 @@ interface IGradientOptions {
 
 const GradientOptions = ({gradientNumState, setGradientNumState, disabled}: IGradientOptions): JSX.Element => {
   return (
-    <div className="border-white border-[0.7] rounded-sm py-2 px-2 flex justify-evenly w-full">
+    <div className="rounded-sm py-2 px-2 flex justify-evenly w-full">
       {gradientColors.slice(0,11).map((gradientColor, index) => {
         return (
           <button 
