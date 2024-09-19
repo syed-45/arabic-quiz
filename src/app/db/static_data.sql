@@ -33,29 +33,29 @@ INSERT INTO verbs VALUES
     (1, 'To copy', 'نَسْخٌ', 'اِنْسَخْ', 'يَنْسَخُ', 'نَسَخَ');
 
 INSERT INTO nouns VALUES
-    (1, 'طَالِب', 'Student', 'طُلَّاب','Students'),
-    (1, 'كِتَاب', 'Book', 'كُتُب', 'Books'),
-    (1, 'وَحْدَة', 'Chapter', 'وَحَدَات', 'Chapters'),
-    (1, 'لُغَة', 'Language', 'لُغَات', 'Languages'),
-    (1, 'جِنْسِيَّة', 'Nationality', 'جِنْسِيَّات', 'Nationalities'),
-    (1, 'اِسْم', 'Name', 'أَسْمَاء', 'Names'),
-    (1, 'أَخ', 'Brother', 'إِخْوَة', 'Brothers'),
-    (1, 'مُهَنْدِس', 'Engineer', 'مُهَنْدِسُون', 'Engineers'),
-    (1, 'صَدِيق', 'Friend', 'أَصْدِقَاء', 'Friends'),
-    (1, 'طَبِّيب', 'Doctor', 'الأَطِبّاءُ', 'Doctors'),
-    (1, 'أُخْت', 'Sister', 'أَخَوَات', 'Sisters'),
-    (1, 'دَرْس', 'Lesson', 'دُرُوس', 'Lessons'),
-    (1, 'تَدْرِيب', 'Exercise', 'تَدَرِيبَات', 'Exercises'),
+    (1, 'طَالِبٌ', 'Student', 'طُلَّابٌ', 'Students'),
+    (1, 'كِتَابٌ', 'Book', 'كُتُبٌ', 'Books'),
+    (1, 'وَحْدَةٌ', 'Chapter', 'وَحَدَاتٌ', 'Chapters'),
+    (1, 'لُغَةٌ', 'Language', 'لُغَاتٌ', 'Languages'),
+    (1, 'جِنْسِيَّةٌ', 'Nationality', 'جِنْسِيَّاتٌ', 'Nationalities'),
+    (1, 'اِسْمٌ', 'Name', 'أَسْمَاءٌ', 'Names'),
+    (1, 'أَخٌ', 'Brother', 'إِخْوَةٌ', 'Brothers'),
+    (1, 'مُهَنْدِسٌ', 'Engineer', 'مُهَنْدِسُونَ', 'Engineers'),
+    (1, 'صَدِيقٌ', 'Friend', 'أَصْدِقَاءُ', 'Friends'),
+    (1, 'طَبِيبٌ', 'Doctor', 'الأَطِبّاءُ', 'Doctors'),
+    (1, 'أُخْتٌ', 'Sister', 'أَخَوَاتٌ', 'Sisters'),
+    (1, 'دَرْسٌ', 'Lesson', 'دُرُوسٌ', 'Lessons'),
+    (1, 'تَدْرِيبٌ', 'Exercise', 'تَدْرِيبَاتٌ', 'Exercises'),
     --(1, 'عَدَد', 'Number', 'أَعْدَاد'), -- DELETED "DUPLICATE"
-    (1, 'رَقْمٌ', 'Number', 'أَرْقَام', 'Numbers'),      -- DUPL. HERE.
-    (1, 'صُورَة', 'Picture', 'صُوَر', 'Pictures'),
-    (1, 'جَوَاب', 'Answer', 'أَجْوِبَة', 'Answers'),
-    (1, 'سُؤَال', 'Question', 'أَسْئِلَة', 'Questions'),
-    (1, 'مِثَال', 'Example', 'أَمْثِلَة', 'Examples'),
-    (1, 'زَمِيل', 'Colleague, classmate', 'زُمَلَاء', 'Colleagues, classmates'),
-    (1, 'جُمْلَة', 'Sentence', 'جُمَل', 'Sentences'),
-    (1, 'عَلَامَة', 'Sign, indication', 'عَلَامَات', 'Signs, indications'),
-    (1, 'كَلِمَة', 'Word', 'كَلِمَات', 'Words');
+    (1, 'رَقْمٌ', 'Number', 'أَرْقَامٌ', 'Numbers'), -- DUPL. HERE.
+    (1, 'صُورَةٌ', 'Picture', 'صُوَرٌ', 'Pictures'),
+    (1, 'جَوَابٌ', 'Answer', 'أَجْوِبَةٌ', 'Answers'),
+    (1, 'سُؤَالٌ', 'Question', 'أَسْئِلَةٌ', 'Questions'),
+    (1, 'مِثَالٌ', 'Example', 'أَمْثِلَةٌ', 'Examples'),
+    (1, 'زَمِيلٌ', 'Colleague, classmate', 'زُمَلَاءُ', 'Colleagues, classmates'),
+    (1, 'جُمْلَةٌ', 'Sentence', 'جُمَلٌ', 'Sentences'),
+    (1, 'عَلَامَةٌ', 'Sign, indication', 'عَلَامَاتٌ', 'Signs, indications'),
+    (1, 'كَلِمَةٌ', 'Word', 'كَلِمَاتٌ', 'Words');
 
 
 INSERT INTO verbs VALUES
