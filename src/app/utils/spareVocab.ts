@@ -244,7 +244,7 @@ export const spareNouns: INounsData[] = [
     {
         english: "star",
         englishPlural: "",
-        arabic: "نَجْمَة",
+        arabic: "نَجْم",
         arabicPlural: "نُجُوم",
         chapterNumber: 100,
     },
