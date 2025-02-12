@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Arabic Quiz App',
-  description: 'An app which quizzes you on Arabic vocabulary based on the Al Arabiyyah Bayna Yadayk series',
+  description: 'An app to quiz you on Arabic vocabulary based on the Al Arabiyyah Bayna Yadayk series',
 }
 
 export default function RootLayout({

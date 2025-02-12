@@ -8,8 +8,10 @@ import { darkGradientColors, gradientColors } from "../utils/chapterGradientColo
 import { StatsComponent } from '../StatsComponent';
 
 export default async function Dashboard() {
-    //todo: check how long this promise takes and maybe move to child components
+    // let timeBefore = Date.now()
     const session = await auth();
+    // let timeElapsed = Date.now() - timeBefore
+    //console.log(timeEnd('fetch session'))
     if (!session) throw new Error('Unable to retrieve session');
     if (!session.user) throw new Error('Unable to retrieve user from session');
     if (!session.user.id) throw new Error('Unable to retrieve user data from session');
@@ -54,7 +56,7 @@ const ChapterCard = ({chapterData, last_score, no_of_questions}: IChapterCardPro
                 <div className="text-gray-200 backdrop-blur-xl shadow-xl size-8 rounded-md flex justify-center items-center">{chapterData.chapterNumber}</div>
                 {chapterData.chapterName}
             </div>
-            <div className="text-right mt-4 sm:text-2xl " style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{chapterData.chapterArabicName}</div>
+            <div className="text-right mt-4 sm:text-2xl drop-shadow-[2px_1px_8px_black]">{chapterData.chapterArabicName}</div>
             <div className="bg-gradient-to-t from-white to-gray-200 dark:from-gray-200 dark:to-gray-300 text-gray-800 font-mono w-full h-7 sm:h-10 absolute bottom-0 left-0 z-10 content-center pl-3 text-xs sm:text-lg rounded-b-md">SCORE {<ScoreText last_score={last_score} no_of_questions={no_of_questions}/>}</div>
         </Link>
     )

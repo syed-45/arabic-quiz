@@ -7,7 +7,7 @@ import { SubmitButton } from "../submit-button";
 import { signIn } from "../auth";
 
 
-const Register = () => {
+const Register = (): JSX.Element => {
     async function register(formData: FormData) {
         'use server'
             let email = formData.get('email') as string;
@@ -40,7 +40,6 @@ const Register = () => {
                     action={async () => { 
                         'use server';
                         await signIn('google')
-                        // add production url to google console
                     }}
                 >
                     <button
@@ -58,7 +57,7 @@ const Register = () => {
                     </Link>
                     {' instead.'}
                 </p>                        
-        </div>
+            </div>
         </div>
     );
 };

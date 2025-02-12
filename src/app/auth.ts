@@ -4,7 +4,6 @@ import { compare } from 'bcrypt-ts';
 import { getUser } from './db/index';
 import { authConfig } from '../../auth.config';
 import Google from 'next-auth/providers/google';
-//TODO: piblish app on google console to allow non test users
 import { DrizzleAdapter } from "@auth/drizzle-adapter"
 import { db } from "./db/index"
 import { accounts, users } from './db/schema';
