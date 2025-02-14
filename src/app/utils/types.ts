@@ -48,6 +48,10 @@ export interface IUserScore {
     no_of_questions: number;
 }
 
+export interface ITransformedQuizResultsData {
+    [chapter_number: number]: { last_score: number; no_of_questions: number }; 
+}
+
 export interface IChapterCardProps {
     chapterData: IChapterData;
     last_score?: number;

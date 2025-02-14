@@ -1,4 +1,4 @@
-import { IChapterData, IScoreTextProps, IUserScore } from '../utils/types'
+import { IChapterData, IScoreTextProps, ITransformedQuizResultsData, IUserScore } from '../utils/types'
 import { auth } from '../auth';
 import LogoHeader from '../LogoHeader';
 import Navbar from '../Navbar'
@@ -26,6 +26,14 @@ export default async function Dashboard() {
     if (res2.status === 500) throw new Error('Error fetching quiz data on the server')
     const quizResults: IUserScore[] = (await res2.json()).result
     const quizzesCompleted: number = quizResults.length
+    const transformedQuizResultsData = quizResults.reduce((acc: ITransformedQuizResultsData, curr) => {
+         acc[curr.chapter_number] = { 
+           last_score: curr.last_score, 
+           no_of_questions: curr.no_of_questions 
+         };
+         return acc;
+     }, {});
+
     const averageScore = quizzesCompleted ? quizResults.reduce((acc, curr) => acc + curr.last_score / curr.no_of_questions, 0) / quizResults.length : 0
     const percentageScore = parseInt((100 * averageScore).toFixed(0))
     
@@ -35,14 +43,15 @@ export default async function Dashboard() {
             <LogoHeader/>
             <StatsComponent quizzesCompleted={quizzesCompleted} percentageScore={percentageScore}/>
             <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mt-5 mb-12 px-5 pb-10'>
-                {allChapters.map((chapter,index) => (
-                    <ChapterCard 
+                {allChapters.map((chapter) => {
+                    const chapterIsAttempted = transformedQuizResultsData[chapter.chapterNumber] !== undefined
+                    return (<ChapterCard 
                         chapterData={chapter}
-                        last_score={quizResults[index]===undefined ? undefined : quizResults[index].last_score}
-                        no_of_questions={quizResults[index]===undefined ? undefined : quizResults[index].no_of_questions}
+                        last_score={chapterIsAttempted ? transformedQuizResultsData[chapter.chapterNumber].last_score : undefined}
+                        no_of_questions={chapterIsAttempted ? transformedQuizResultsData[chapter.chapterNumber].no_of_questions : undefined}
                         key={chapter.chapterNumber} 
-                    />
-                ))}
+                    />)
+                })}
             </main>
         </>
     )
