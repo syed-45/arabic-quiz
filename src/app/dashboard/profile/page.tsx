@@ -1,6 +1,8 @@
 import Navbar from '@/app/Navbar';
 import { auth, signOut } from '../../auth';
 import { ProfileForm } from './ProfileForm';
+import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline"
+
 
 export default async function Profile() {
     const session = await auth();
@@ -22,7 +24,7 @@ export default async function Profile() {
   function SignOut() {
     return (
       <form
-        className='mt-5'
+        className='my-5'
         action={async () => {
           'use server';
           await signOut({
@@ -30,7 +32,10 @@ export default async function Profile() {
           });
         }}
       >
-        <button type="submit">Sign out</button>
+        <button className="flex items-center gap-1" type="submit">
+          Sign out
+          <ArrowLeftEndOnRectangleIcon className="size-6"/>
+        </button>
       </form>
     );
   }

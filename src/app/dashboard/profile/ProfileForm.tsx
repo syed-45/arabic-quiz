@@ -21,7 +21,7 @@ export function ProfileForm({name, email, gradientNum}: IProfileFormProps) {
             setIsEditable(prev => !prev)
             setSubmitted(true)
           }}
-          className="flex flex-col gap-8 mt-4 w-full max-w-md text-[14px]"
+          className="flex flex-col gap-8 mt-2 w-full max-w-md text-[14px]"
         >
           <div>   
               <label
