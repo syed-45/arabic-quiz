@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Arabic Quiz App",
+  "short_name": "ArabicQuizApp",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
