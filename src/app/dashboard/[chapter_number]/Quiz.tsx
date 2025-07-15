@@ -134,14 +134,14 @@ export default function Quiz(props: QuizProps):JSX.Element {
     }
     else if (questionNum === 0) {
         return (
-            <main className="text-center mx-auto mt-10 max-w-screen-lg flex flex-col gap-10 items-center">
+            <main className="text-center mx-auto mt-5 max-w-screen-lg flex flex-col gap-10 items-center">
                 <h3 className={"py-2 text-gray-100 px-10 w-max-content rounded-md flex items-center justify-center font-semibold shadow-xl"+gradientColors[props.chapter_number-1]+darkGradientColors[props.chapter_number-1]} >
                     Chapter <span className="backdrop-blur-xl drop-shadow-2xl size-7 rounded-md flex justify-center items-center mr-1">{props.chapter_number}</span>Quiz
                 </h3>
                 <div className="text-left px-5">
                     <h4 className="font-extrabold mb-3 text-lg">Quiz Information</h4>
                     <div className="mb-3"> This quiz will test you on verbs and nouns which are specific to this chapter. You will be asked to select the correct translation etiher from english to arabic or english to arabic.</div>
-                    <div>There are {noOfQuestions} questions in this chapter.</div>
+                    <div>There are {noOfQuestions} questions in this quiz.</div>
                 </div>
                 <button onClick={handleNextClick} className="bg-white font-bold text-sky-800 dark:bg-gradient-to-bl dark:from-gray-300 dark:to-white p-2 w-32 rounded-md drop-shadow-xl">
                         Start
@@ -150,7 +150,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
         )
     }
     return ( 
-        <main className='text-center mx-5 mt-10 max-w-screen-lg sm:mx-auto sm:px-5 pb-10'>
+        <main className='text-center mx-5 mt-5 max-w-screen-lg sm:mx-auto sm:px-5 pb-10'>
             <h3 className={"py-2 text-gray-100 px-10 rounded-md flex items-center justify-center font-semibold shadow-xl w-[210px] mx-auto"+gradientColors[props.chapter_number-1]+darkGradientColors[props.chapter_number-1]} >
                     Chapter <span className="backdrop-blur-xl drop-shadow-2xl size-7 rounded-[7px] flex justify-center items-center mr-1">{props.chapter_number}</span>Quiz
             </h3>

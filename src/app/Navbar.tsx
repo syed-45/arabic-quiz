@@ -12,26 +12,43 @@ import Link from 'next/link';
 import { INavbarProps } from './utils/types';
 import { Switch } from '@headlessui/react'
 import ProfileIcon from './ProfileIcon';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar({onDashboard=false, name, gradientNum} : INavbarProps): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme } = useTheme()
+  const pathname = usePathname()
 
   return (
     <header>
       <nav
-        className='flex justify-between items-center max-w-screen-lg px-5 pt-7 h-[76px] mx-auto'
+        className='max-w-screen-lg px-5 pt-7 h-[76px] w-full flex mx-auto'
         aria-label='Global'
       >
         <button
           type='button'
-          className=''
+          className='w-1/3 flex justify-start'
           onClick={() => setMobileMenuOpen(true)}
         >
           <span className='sr-only'>Open main menu</span>
           <Bars3Icon className='size-10' aria-hidden='true' />
         </button>
-        {onDashboard && 
-          <Link href="/dashboard/profile">
+        <div className='w-1/3 flex justify-center'>
+          <Link href={'/dashboard'}>
+            {pathname !== '/dashboard/profile' && <>
+              <Image 
+                src={"/icon1.png"} alt="arabic app logo white" width={50} height={50} className="rounded-md block dark:hidden" 
+              />
+              <Image 
+                src={"/icon2.png"} alt="arabic app logo" width={50} height={50} className="rounded-md hidden dark:block" 
+              />
+              </>
+            }
+          </Link>
+        </div>
+        {onDashboard &&
+          <Link href="/dashboard/profile" className='w-1/3 flex justify-end'>
             <ProfileIcon 
               gradientNum={gradientNum}
               onDashboard={true}
