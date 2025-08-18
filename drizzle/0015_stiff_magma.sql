@@ -1,0 +1,1 @@
+ALTER TABLE "classes" ADD COLUMN "code" varchar(16) NOT NULL;

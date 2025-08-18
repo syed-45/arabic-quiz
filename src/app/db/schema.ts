@@ -1,5 +1,5 @@
-import { integer, pgTable, varchar, primaryKey, text, timestamp, boolean } from 'drizzle-orm/pg-core';
-import { generateRandomNumber } from '../utils/generateRandomOption';
+import { integer, pgTable, varchar, primaryKey, text, timestamp, boolean, foreignKey } from 'drizzle-orm/pg-core';
+import { generateRandomNumber, generateRandomPasscode } from '../utils/generateRandomOption';
 type AdapterAccountType = "email" | "oidc" | "oauth" | "webauthn"
 
 export const users = pgTable("user", {
@@ -11,8 +11,34 @@ export const users = pgTable("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
   gradientNum: integer("gradientNum").$defaultFn(() => generateRandomNumber(0,10)),
-  password: varchar("password", {length: 64})
+  password: varchar("password", {length: 64}),
+  school: text("school"),
+  class: text("class"),
+}, (table) => {
+  return {
+    fk: foreignKey({
+      columns: [table.school, table.class],
+      foreignColumns: [classes.schoolName, classes.name],
+      name: "user_school_class_fk"
+    })
+  }
 })
+
+export const schools = pgTable('schools', {
+  name: text('name').primaryKey(),
+})
+
+export const classes = pgTable('classes', {
+  name: text('name').notNull(),
+  schoolName: text('school_name').notNull().references(() => schools.name, { onDelete: 'cascade' }),
+  code: varchar('code',{length:16}).$defaultFn(() => generateRandomPasscode()).notNull()
+}, (table) => {
+  return {
+    pk: primaryKey({ columns: [table.name, table.schoolName] }),
+  };
+})
+
+
 
 // TODO: null passwords mean ERROR when signinng in with credentials but email for different provider account
  

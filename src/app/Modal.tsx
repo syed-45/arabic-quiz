@@ -1,15 +1,43 @@
 "use client"
-import { Button, Dialog, DialogPanel, DialogTitle, DialogBackdrop } from '@headlessui/react'
-import { Dispatch, SetStateAction } from 'react'
+import { Button, Dialog, DialogPanel, DialogTitle, DialogBackdrop, } from '@headlessui/react'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { ClipboardIcon, CheckIcon } from '@heroicons/react/24/outline'
 
 interface IModalProps {
   isOpen: boolean,
   setIsOpen: Dispatch<SetStateAction<boolean>>,
   title: string,
-  body?: string
+  body?: string,
+  code?: string,
 }
 
-export default function Modal({isOpen, setIsOpen, title, body}: IModalProps) {
+const copyToClipboard = (code: string): void => {
+  navigator.clipboard.writeText(code).then(
+    () => {
+      // code copied to clipboard
+    },
+    (err) => {
+      console.log("Error: ", err);
+    }
+  );
+}
+
+const ClipboardToCheck = ({code}: {code: string}) => {
+  const [showCheck, setShowCheck] = useState(false)
+  return (
+    showCheck ? 
+    <CheckIcon className='size-5 animate-fade-out' color='lightgreen'></CheckIcon>
+    : 
+    <ClipboardIcon className='size-4 cursor-pointer' 
+      onClick={() => {
+        copyToClipboard(code)
+        setShowCheck(true)
+      }}
+    />
+  )
+}
+
+export default function Modal({isOpen, setIsOpen, title, body, code}: IModalProps) {
 
   function close() {
     setIsOpen(false)
@@ -30,6 +58,7 @@ export default function Modal({isOpen, setIsOpen, title, body}: IModalProps) {
               </DialogTitle>
               <p className="mt-2 text-sm/6 text-white/90">
                 {body}
+                {code!==undefined && body!=="" && <p className='mt-2 backdrop-blur-xl px-4 py-1 rounded-md w-max mx-auto flex justify-center items-center gap-1'>{code} <ClipboardToCheck code={code}/> </p>}
               </p>
               <div className="mt-4">
                 <Button

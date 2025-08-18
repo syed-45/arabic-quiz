@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from "./theme-provider"
 
+export const fetchCache = 'default-cache'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

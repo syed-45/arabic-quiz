@@ -6,6 +6,7 @@ import Link from "next/link";
 import { IChapterCardProps } from "../utils/types"
 import { darkGradientColors, gradientColors } from "../utils/chapterGradientColours";
 import { StatsComponent } from '../StatsComponent';
+import { JSX } from 'react';
 
 export default async function Dashboard() {
     // let timeBefore = Date.now()

@@ -1,16 +1,19 @@
 "use client"
-import { SetStateAction, useEffect, useState } from "react";
+import { JSX, SetStateAction, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { updateUserAction } from "./action";
 import { IProfileFormProps } from "@/app/utils/types";
 import { gradientColors } from "@/app/utils/chapterGradientColours";
 import ProfileIcon from "@/app/ProfileIcon";
 import Modal from "@/app/Modal";
+import { LinkIcon } from "@heroicons/react/24/outline"
+import Link from "next/link";
 
 export function ProfileForm({name, email, gradientNum}: IProfileFormProps) {
     const [isEditable, setIsEditable] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [gradientNumState, setGradientNumState] = useState(gradientNum)
+    const classCode = ""
 
     return (
       <>
@@ -37,7 +40,7 @@ export function ProfileForm({name, email, gradientNum}: IProfileFormProps) {
                   name="name"
                   type="name"
                   placeholder=""
-                  autoComplete="name"
+                  autoComplete="name" //TODO: change to on or off
                   required
                   className={`${isEditable ? "text-black" : "text-gray-500"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
               />
@@ -56,11 +59,12 @@ export function ProfileForm({name, email, gradientNum}: IProfileFormProps) {
               defaultValue={email}
               readOnly={!isEditable}
               placeholder=""
-              autoComplete="email"
+              autoComplete="email" //TODO: change to on or off
               required
               className={`${isEditable ? "text-black" : "text-gray-500"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
             />
           </div>
+          <SchoolClassSelect isEditable={isEditable}/>              
           <div>
             <div 
               className="block mb-1 font-medium"
@@ -83,6 +87,20 @@ export function ProfileForm({name, email, gradientNum}: IProfileFormProps) {
       </>
     );
   }
+
+const SchoolClassSelect = ({isEditable}: {isEditable: boolean}):JSX.Element => {
+  return (
+    <div className="flex justify-center">
+        <Link 
+            className={`px-4 py-1 ${!isEditable ? 'text-gray-400 border-gray-300 dark:border-gray-600' : 'border-gray-800 dark:border-white text-black dark:text-white'} text-center rounded-md border-[1.5px] bg-transparent flex items-center gap-[5px]`}
+            href={"/dashboard/join-class-leaderboard"}
+            
+        >
+            Join a Class Leaderboard <LinkIcon className="size-4"/>
+        </Link>        
+    </div>
+  )
+}
 
 interface IEditUpdateButtons { 
   isEditable: boolean,

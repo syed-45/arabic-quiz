@@ -13,7 +13,7 @@ export default async function Profile() {
     return (
       <>
         <Navbar />
-        <div className="flex flex-col items-center pt-10 px-5">
+        <div className="flex flex-col items-center pt-2 px-5">
           <ProfileForm name={session.user.name} email={session.user.email} userId={session.user.id} gradientNum={session.user.gradientNum} />
           <SignOut />
         </div>
