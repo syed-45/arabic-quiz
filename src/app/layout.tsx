@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en"  suppressHydrationWarning={true}>
       <body className={inter.className+' '+'mx-auto max-w-screen-xl min-w-96'}>
         <ThemeProvider
             attribute="class"
