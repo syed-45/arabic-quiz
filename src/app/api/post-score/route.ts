@@ -3,15 +3,11 @@ import { userScores } from '../../db/schema';
 import { NextResponse } from 'next/server';
 import { revalidateTag } from 'next/cache';
 import { IUserScore } from '@/app/utils/types';
- 
-
 import { auth } from "@/app/auth"
 
- 
 export const POST = auth(async function POST(req) {
-  
   try {
-    let session = req.auth
+    const session = req.auth
     if (!session) throw new Error('Unable to retrieve session')
     if (!session.user?.id) throw new Error('Unable to retrieve user data from session')
     const user_id = session.user.id

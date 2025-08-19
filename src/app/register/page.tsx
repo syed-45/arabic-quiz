@@ -5,6 +5,7 @@ import Image from "next/image";
 import { RegisterForm } from "./RegisterForm";
 import { SubmitButton } from "../submit-button";
 import { signIn } from "../auth";
+import { JSX } from "react";
 
 
 const Register = (): JSX.Element => {

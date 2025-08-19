@@ -7,23 +7,30 @@ import { IChapterCardProps } from "../utils/types"
 import { darkGradientColors, gradientColors } from "../utils/chapterGradientColours";
 import { StatsComponent } from '../StatsComponent';
 import { JSX } from 'react';
+import { cookies } from 'next/headers';
 
 export default async function Dashboard() {
 
     const session = await auth();
-
     if (!session) throw new Error('Unable to retrieve session');
     if (!session.user) throw new Error('Unable to retrieve user from session');
-    if (!session.user.id) throw new Error('Unable to retrieve user data from session');
+    if (!session.user.id || !session.user.name) throw new Error('Unable to retrieve user data from session');
     const gradientNum = session.user.gradientNum
 
-    const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`, { next: { revalidate: false } })
+    const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`, {
+         next: { revalidate: false },
+        })
     //todo: promise.all the two fetches...
     if (res.status === 500) throw new Error('Error fetching chapter data on the server')
     const allChapters: IChapterData[] = (await res.json()).result
     
-    const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results?user-id=${session.user.id}`, { next: { tags: ['quiz-results'] } })
-    if (res2.status === 500) throw new Error('Error fetching quiz data on the server')
+    const res2 = await fetch(`${process.env.API_URL}/api/get-quiz-results`, { 
+        next: { tags: ['quiz-results'] },
+        headers: {
+            Cookie: (await cookies()).toString() 
+        }
+     },)
+    if (res2.status === 500 || res2.status === 401) throw new Error('Error fetching quiz data on the server')
     const quizResults: IUserScore[] = (await res2.json()).result
     const quizzesCompleted: number = quizResults.length
     const transformedQuizResultsData = quizResults.reduce((acc: ITransformedQuizResultsData, curr) => {
@@ -39,7 +46,7 @@ export default async function Dashboard() {
     
     return (
         <>
-            <Navbar onDashboard={true} name={session.user.name || 'Z'} gradientNum={gradientNum}/>
+            <Navbar onDashboard={true} name={session.user.name} gradientNum={gradientNum}/>
             <LogoHeader/>
             <StatsComponent quizzesCompleted={quizzesCompleted} percentageScore={percentageScore}/>
             <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mt-5 mb-12 px-5 pb-10'>

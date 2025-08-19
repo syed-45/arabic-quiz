@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
+import { JSX, useEffect, useState } from "react"
 import { StatsComponentProps } from "./utils/types"
 
 export const StatsComponent = ({quizzesCompleted, percentageScore}: StatsComponentProps): JSX.Element => {

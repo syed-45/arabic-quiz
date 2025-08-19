@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import { gradientColors } from "./utils/chapterGradientColours";
 import { IProfileIconProps } from "./utils/types";
 
