@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from "react"
+import { useState, useEffect, JSX } from "react"
 import { IVerbsData, INounsData, IQuestion, QuizProps, IUserScore } from "../../utils/types"
 import generateRandomOption from "../../utils/generateRandomOption"
 import { spareNouns, spareVerbs } from "../../utils/spareVocab"
@@ -89,11 +89,12 @@ export default function Quiz(props: QuizProps):JSX.Element {
             axios.post(`/api/post-score`, {
                 last_score: questions.filter(question => question.is_correct).length,
                 chapter_number: props.chapter_number,
-                user_id: props.user_id,
                 no_of_questions: noOfQuestions,
-            } satisfies IUserScore)
+            } satisfies IUserScore,
+                {withCredentials:true}
+            )
             .catch((error) => {
-                // console.error(error);
+                console.error(error);
                 setModalIsOpen(true);
                 setModalTitle("Something went wrong saving your score")
             })      
@@ -142,7 +143,7 @@ export default function Quiz(props: QuizProps):JSX.Element {
                     <h4 className="font-extrabold mb-3 text-lg">Quiz Information</h4>
                     <div className="mb-3"> This quiz will test you on verbs and nouns which are specific to this chapter. You will be asked to select the correct translation etiher from english to arabic or english to arabic.</div>
                     <div>There are {noOfQuestions} questions in this quiz.</div>
-                </div>
+                </div>                
                 <button onClick={handleNextClick} className="bg-white font-bold text-sky-800 dark:bg-gradient-to-bl dark:from-gray-300 dark:to-white p-2 w-32 rounded-md drop-shadow-xl">
                         Start
                 </button>

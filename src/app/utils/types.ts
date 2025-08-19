@@ -33,7 +33,6 @@ export interface QuizProps {
     verbs: IVerbsData[];
     nouns: INounsData[];
     chapter_number: number;
-    user_id: string;
 }
 
 export interface FinishProps {
@@ -42,7 +41,6 @@ export interface FinishProps {
 }
 
 export interface IUserScore {
-    user_id: string;
     last_score: number;
     chapter_number: number;
     no_of_questions: number;

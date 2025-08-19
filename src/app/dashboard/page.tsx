@@ -9,10 +9,9 @@ import { StatsComponent } from '../StatsComponent';
 import { JSX } from 'react';
 
 export default async function Dashboard() {
-    // let timeBefore = Date.now()
+
     const session = await auth();
-    // let timeElapsed = Date.now() - timeBefore
-    //console.log(timeEnd('fetch session'))
+
     if (!session) throw new Error('Unable to retrieve session');
     if (!session.user) throw new Error('Unable to retrieve user from session');
     if (!session.user.id) throw new Error('Unable to retrieve user data from session');

@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { useTheme } from "next-themes"
 import { Dialog, DialogPanel } from '@headlessui/react';
 import {
@@ -17,7 +17,6 @@ import { usePathname } from 'next/navigation';
 
 export default function Navbar({onDashboard=false, name, gradientNum} : INavbarProps): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme } = useTheme()
   const pathname = usePathname()
 
   return (

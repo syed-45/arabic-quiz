@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { JSX, useState } from "react"
 import { FinishProps, IQuestion } from "../../utils/types"
 import { ChevronDownIcon, CheckIcon, XMarkIcon, ChevronUpIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
