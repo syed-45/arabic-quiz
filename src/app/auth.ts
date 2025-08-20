@@ -15,7 +15,7 @@ declare module "next-auth" {
   }
 }
 
-export const { handlers, auth, signIn, signOut, update} = NextAuth({
+export const { handlers, auth, signIn, signOut, unstable_update} = NextAuth({
   adapter: DrizzleAdapter(db, {
     usersTable: users,
     accountsTable: accounts,
@@ -46,17 +46,15 @@ export const { handlers, auth, signIn, signOut, update} = NextAuth({
         token.name = session.user.name
         token.email = session.user.email
         token.gradientNum = session.user.gradientNum
-        console.log('in jwt update callback')
       }
       return token
     },
     session({ session, token, trigger }) {
       if (!session || !session.user) return session
       if (trigger==="update") {
-        session.user.name = token.name
-        session.user.email = token.email
+        session.user.name = token.name as string
+        session.user.email = token.email as string
         session.user.gradientNum = token.gradientNum as number
-        console.log('in session update callback')
       }
       session.user.id = token.id as string
       session.user.gradientNum = token.gradientNum as number

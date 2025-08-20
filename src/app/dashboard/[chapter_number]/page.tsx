@@ -1,6 +1,5 @@
 import Quiz from "./Quiz"
 import { INounsData, IVerbsData } from "../../utils/types"
-import { auth } from "../../auth"
 import LogoHeader from "@/app/LogoHeader";
 import Navbar from "@/app/Navbar";
 export const dynamicParams = false // true | false,
@@ -22,6 +21,7 @@ export async function generateStaticParams() {
 export default async function ChapterQuiz(props: { params: Promise<IStaticParams> }) {
     const params = await props.params;
     const chapter_number = parseInt(params.chapter_number)
+    console.log(chapter_number)
 
     const res = await fetch(`${process.env.API_URL}/api/get-vocab?chapter_number=${chapter_number}`)
     const data = await res.json()
