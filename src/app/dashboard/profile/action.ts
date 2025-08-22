@@ -27,6 +27,7 @@ export const updateUserAction = async (prevState: IUpdateProfileRes, formData: F
             class: session.user.class,
             school: session.user.school
         }});
+        revalidatePath('/dashboard/profile','page')
         return {
             msg: "success",
             data: {

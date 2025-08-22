@@ -1,6 +1,5 @@
 "use client"
 import { JSX, SetStateAction, useActionState, useEffect, useState } from "react";
-import { useFormStatus } from "react-dom";
 import { updateUserAction } from "./action";
 import { IProfileFormProps } from "@/app/utils/types";
 import { gradientColors } from "@/app/utils/chapterGradientColours";
@@ -12,7 +11,6 @@ import Link from "next/link";
 export function ProfileForm({name, email, gradientNum, school, classGroup}: IProfileFormProps) {
     const [isModalOpen, setModalIsOpen] = useState(false)
     const [isEditable, setIsEditable] = useState(false)
-    const [submitted, setSubmitted] = useState(false)
     const [gradientNumState, setGradientNumState] = useState(gradientNum)
     const [res, formAction, pending] = useActionState(updateUserAction,{msg:"",data:null})
 
@@ -34,10 +32,6 @@ export function ProfileForm({name, email, gradientNum, school, classGroup}: IPro
         <ProfileIcon gradientNum={gradientNumState} name={res.data?.name || name}/>
         <form        
           action={formAction}
-          onSubmit={() => {
-            setIsEditable(prev => !prev)
-            setSubmitted(true)
-          }}
           className="flex flex-col gap-7 mt-2 w-full max-w-md text-[14px]"
         >
           <div>   

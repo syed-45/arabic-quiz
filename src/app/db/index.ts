@@ -70,7 +70,7 @@ export async function checkIfClassExists(schoolName:string,groupClassName:string
 
 export async function createNewGroupClass(groupClassName:string, schoolName: string) {
   try {
-    const code: { code: string | null }[] = await db.insert(classes).values({name: groupClassName, schoolName: schoolName}).returning({code: classes.code})
+    const code: { code: string }[] = await db.insert(classes).values({name: groupClassName, schoolName: schoolName}).returning({code: classes.code})
     return code
   } catch (error) {
     console.error('Failed to insert group / class into database: ', error);
