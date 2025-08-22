@@ -1,7 +1,8 @@
 "use server"
 
-import { auth } from "@/app/auth";
+import { auth, unstable_update } from "@/app/auth";
 import { IJoinClassRes, joinClassLeaderboard } from "@/app/db";
+import { revalidatePath } from "next/cache";
 
 export async function joinClassLeaderboardAction(prevState:IJoinClassRes,formData: FormData) {
     const session = await auth();
@@ -12,6 +13,16 @@ export async function joinClassLeaderboardAction(prevState:IJoinClassRes,formDat
 
     try {
         const res = await joinClassLeaderboard(code, session.user.id)
+        if (res.msg==='Success') {            
+            const newSession = await unstable_update({user: {
+                name: session.user.name,
+                email: session.user.email,
+                gradientNum: session.user.gradientNum,
+                class: res.data!.class,
+                school: res.data!.school
+            }});            
+        }
+        revalidatePath("/dashboard/page")
         return res
     } catch (error) {
         throw error

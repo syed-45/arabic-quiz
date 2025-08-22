@@ -19,7 +19,7 @@ export default async function Dashboard() {
 
     const res = await fetch(`${process.env.API_URL}/api/get-chapter-names`, {
          next: { revalidate: false },
-        })
+    })
     //todo: promise.all the two fetches...
     if (res.status === 500) throw new Error('Error fetching chapter data on the server')
     const allChapters: IChapterData[] = (await res.json()).result
@@ -29,7 +29,7 @@ export default async function Dashboard() {
         headers: {
             Cookie: (await cookies()).toString() 
         }
-     },)
+     })
     if (res2.status === 500 || res2.status === 401) throw new Error('Error fetching quiz data on the server')
     const quizResults: IUserScore[] = (await res2.json()).result
     const quizzesCompleted: number = quizResults.length

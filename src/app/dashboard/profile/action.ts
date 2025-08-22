@@ -25,7 +25,6 @@ export const updateUserAction = async (gradientNumState: string, formData: FormD
             email:email,
             gradientNum:gradientNum,
         }});
-        // Will not update session across other devices which are signed in, possible fix if switch to DB strategy in auth
         return
     } catch (error) {
         throw error

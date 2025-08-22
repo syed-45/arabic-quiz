@@ -38,11 +38,11 @@ const [res, formAction, pending] = useActionState(joinClassLeaderboardAction, {m
                 name="classCode"
                 type="classCode"
                 defaultValue={""}
-                readOnly={false}
+                readOnly={pending}
                 placeholder=""
-                autoComplete="on"
+                autoComplete="off"
                 required
-                className={`${true ? "text-black" : "text-gray-500"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none mb-4`}
+                className={`${pending ? "text-black" : "text-gray-500"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none mb-4`}
             />
             <EnterButton pending={pending}/>
             <Modal 

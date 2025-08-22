@@ -11,7 +11,9 @@ import { accounts, users } from './db/schema';
 
 declare module "next-auth" {
   interface User {
-   gradientNum: number
+   gradientNum: number,
+   school?:string,
+   class?: string,
   }
 }
 
@@ -27,7 +29,7 @@ export const { handlers, auth, signIn, signOut, unstable_update} = NextAuth({
       async authorize({ email, password }: any) {
         let user = await getUser(email);
         if (user.length === 0) return null;
-        // if user[0].password! { ... }
+        // if !user[0].password { ... }
         let passwordsMatch = await compare(password, user[0].password!);
         if (passwordsMatch) return user[0] as any;
       },
@@ -41,11 +43,15 @@ export const { handlers, auth, signIn, signOut, unstable_update} = NextAuth({
       if (user) { // User is available during sign-in
         token.id = user.id
         token.gradientNum = user.gradientNum
+        token.class = user.class
+        token.school = user.school
       }
       if (trigger==="update") {
         token.name = session.user.name
         token.email = session.user.email
         token.gradientNum = session.user.gradientNum
+        token.class = session.user.class
+        token.school = session.user.school
       }
       return token
     },
@@ -55,9 +61,13 @@ export const { handlers, auth, signIn, signOut, unstable_update} = NextAuth({
         session.user.name = token.name as string
         session.user.email = token.email as string
         session.user.gradientNum = token.gradientNum as number
+        session.user.class = token.class as string || undefined
+        session.user.school = token.school as string || undefined
       }
       session.user.id = token.id as string
       session.user.gradientNum = token.gradientNum as number
+      session.user.class = token.class as string || undefined
+      session.user.school = token.school as string || undefined
       return session
     },
   }

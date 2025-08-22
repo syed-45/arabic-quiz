@@ -79,4 +79,6 @@ export interface IProfileFormProps {
     email: string;
     gradientNum: number;
     userId : string;
+    classGroup? : string;
+    school? : string;
 }

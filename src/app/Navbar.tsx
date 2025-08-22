@@ -91,6 +91,27 @@ export default function Navbar({onDashboard=false, name, gradientNum} : INavbarP
                 >
                   Dashboard
                 </Link>
+                <Link
+                  scroll={false}
+                  className='smooth-scroll -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:hover:bg-gray-900 hover:bg-gray-50'
+                  href='/dashboard/leaderboard'
+                >
+                  Leaderboard
+                </Link>
+                <Link
+                  scroll={false}
+                  className='smooth-scroll -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:hover:bg-gray-900 hover:bg-gray-50'
+                  href='/dashboard/register-class-leaderboard'
+                >
+                  Register a new group / class
+                </Link>
+                <Link
+                  scroll={false}
+                  className='smooth-scroll -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:hover:bg-gray-900 hover:bg-gray-50'
+                  href='/dashboard/profile'
+                >
+                  Profile
+                </Link>
               </div>
             </div>
           </div>
