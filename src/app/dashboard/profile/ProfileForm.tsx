@@ -1,5 +1,5 @@
 "use client"
-import { JSX, SetStateAction, useEffect, useState } from "react";
+import { JSX, SetStateAction, useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { updateUserAction } from "./action";
 import { IProfileFormProps } from "@/app/utils/types";
@@ -10,15 +10,30 @@ import { LinkIcon } from "@heroicons/react/24/outline"
 import Link from "next/link";
 
 export function ProfileForm({name, email, gradientNum, school, classGroup}: IProfileFormProps) {
+    const [isModalOpen, setModalIsOpen] = useState(false)
     const [isEditable, setIsEditable] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [gradientNumState, setGradientNumState] = useState(gradientNum)
+    const [res, formAction, pending] = useActionState(updateUserAction,{msg:"",data:null})
+
+  useEffect(() => {
+    if (res.msg!=="") {
+      setModalIsOpen(true)
+      setIsEditable(false)
+    }
+  }, [res])
 
     return (
       <>
-        <ProfileIcon gradientNum={gradientNumState} name={name}/>
+        <Modal 
+          isOpen={isModalOpen}
+          setIsOpen={setModalIsOpen}
+          title="Updated details saved"
+          body="Note: If you are logged in to other devices, you will have to log out and log back in to see updated data on those devices."
+        />
+        <ProfileIcon gradientNum={gradientNumState} name={res.data?.name || name}/>
         <form        
-          action={updateUserAction.bind(null, gradientNumState.toString())}
+          action={formAction}
           onSubmit={() => {
             setIsEditable(prev => !prev)
             setSubmitted(true)
@@ -34,7 +49,7 @@ export function ProfileForm({name, email, gradientNum, school, classGroup}: IPro
               </label>
               <input
                   id="name"
-                  defaultValue={name}
+                  defaultValue={res.data?.name || name}
                   readOnly={!isEditable}
                   name="name"
                   type="name"
@@ -55,7 +70,7 @@ export function ProfileForm({name, email, gradientNum, school, classGroup}: IPro
               id="email"
               name="email"
               type="email"
-              defaultValue={email}
+              defaultValue={res.data?.email ||email}
               readOnly={!isEditable}
               placeholder=""
               autoComplete="email" //TODO: change to on or off
@@ -79,12 +94,12 @@ export function ProfileForm({name, email, gradientNum, school, classGroup}: IPro
               setGradientNumState={setGradientNumState} 
               disabled={!isEditable}
             />
+            <input type="hidden" name="gradientNum" value={gradientNumState}></input>
           </div>
           <EditUpdateButtons 
             isEditable={isEditable}
             setIsEditable={setIsEditable}
-            submitted={submitted}
-            setSubmitted={setSubmitted}
+            pending={pending}
           />
         </form>
       </>
@@ -140,46 +155,13 @@ const LinkWhenEditableBtn = ({isEditable, href, linkText}: {isEditable: boolean,
 interface IEditUpdateButtons { 
   isEditable: boolean,
   setIsEditable: (value: SetStateAction<boolean>) => void,
-  submitted: boolean,
-  setSubmitted: (value: SetStateAction<boolean>) => void 
+  pending: boolean;
 }
 
-const EditUpdateButtons = ({isEditable, setIsEditable, setSubmitted}: IEditUpdateButtons):JSX.Element => {
-  const { pending } = useFormStatus();
-  const [isModalOpen, setModalIsOpen] = useState(false)
-
-  /**
-   * editable = false
-   * user clicks edit => editable = true
-   * user clicks update => editable = false and pending = true...
-   * form finishes POST so pending = false => repeat...
-   * PSUEDOCODE above helped clear thinking alhamdulillah
-   * 
-   * 
-   * init => pending = false
-   * form submitted => pending = true, submit = true
-   * no error in action & pending = false => trigger succes modal, submit = false
-   */
-
-  useEffect(() => {
-    setSubmitted((prev) => {
-      if (prev && !pending) {
-        setModalIsOpen(true)
-      }
-      else if (pending) return true
-      return false
-    })
-  }, [pending, setSubmitted])
-
+const EditUpdateButtons = ({isEditable, setIsEditable, pending}: IEditUpdateButtons):JSX.Element => {
 
   return (
-    <div>
-      <Modal 
-        isOpen={isModalOpen}
-        setIsOpen={setModalIsOpen}
-        title="Updated details saved"
-        body="Note: If you are logged in to other devices, you will have to log out and log back in to see updated data on those devices."
-      />
+    <div>      
       <button 
             className={`px-4 py-1 ${isEditable || pending ? 'text-gray-400 border-gray-300 dark:border-gray-600' : 'border-gray-800 dark:border-white text-black dark:text-white'} text-center rounded-md border-[1.5px] bg-transparent mr-3`}
             disabled={isEditable || pending}

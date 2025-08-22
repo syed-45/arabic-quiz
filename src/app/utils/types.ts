@@ -82,3 +82,11 @@ export interface IProfileFormProps {
     classGroup? : string;
     school? : string;
 }
+
+export interface IUpdateProfileRes {
+    msg: string,
+    data: {
+        name: string
+        email: string,
+    } | null
+}
