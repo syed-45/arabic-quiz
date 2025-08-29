@@ -1,4 +1,4 @@
-import { integer, pgTable, varchar, primaryKey, text, timestamp, boolean, foreignKey } from 'drizzle-orm/pg-core';
+import { integer, pgTable, varchar, primaryKey, text, timestamp, boolean, foreignKey, AnyPgColumn } from 'drizzle-orm/pg-core';
 import { generateRandomNumber, generateRandomPasscode } from '../utils/generateRandomOption';
 type AdapterAccountType = "email" | "oidc" | "oauth" | "webauthn"
 
@@ -10,10 +10,11 @@ export const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-  gradientNum: integer("gradientNum").$defaultFn(() => generateRandomNumber(0,10)),
+  gradientNum: integer("gradientNum").$defaultFn(() => generateRandomNumber(0,10)).notNull(),
   password: varchar("password", {length: 64}),
   school: text("school"),
   class: text("class"),
+  isRegistrant: boolean("isRegistrant").$default(() => false).notNull(),
 }, (table) => {
   return {
     fk: foreignKey({
@@ -23,6 +24,7 @@ export const users = pgTable("user", {
     })
   }
 })
+// TODO: null passwords mean ERROR when signinng in with credentials but email for different provider account
 
 export const schools = pgTable('schools', {
   name: text('name').primaryKey(),
@@ -31,7 +33,8 @@ export const schools = pgTable('schools', {
 export const classes = pgTable('classes', {
   name: text('name').notNull(),
   schoolName: text('school_name').notNull().references(() => schools.name, { onDelete: 'cascade' }),
-  code: varchar('code',{length:16}).$defaultFn(() => generateRandomPasscode()).notNull()
+  code: varchar('code',{length:16}).$defaultFn(() => generateRandomPasscode()).notNull().unique(),
+  registrantId: text('registrantId').notNull().references(():AnyPgColumn => users.id, { onDelete: 'cascade' }),
 }, (table) => {
   return {
     pk: primaryKey({ columns: [table.name, table.schoolName] }),
@@ -40,7 +43,6 @@ export const classes = pgTable('classes', {
 
 
 
-// TODO: null passwords mean ERROR when signinng in with credentials but email for different provider account
  
 export const accounts = pgTable(
   "account",

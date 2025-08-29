@@ -19,7 +19,8 @@ export async function joinClassLeaderboardAction(prevState:IJoinClassRes,formDat
                 email: session.user.email,
                 gradientNum: session.user.gradientNum,
                 class: res.data!.class,
-                school: res.data!.school
+                school: res.data!.school,
+                isRegistrant: res.data!.isRegistrant
             }});            
         }
         revalidatePath("/dashboard/page")

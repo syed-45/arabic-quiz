@@ -1,33 +1,44 @@
 "use client"
-import { JSX, SetStateAction, useActionState, useEffect, useState } from "react";
+import { JSX, SetStateAction, use, useActionState, useEffect, useState } from "react";
 import { updateUserAction } from "./action";
 import { IProfileFormProps } from "@/app/utils/types";
 import { gradientColors } from "@/app/utils/chapterGradientColours";
 import ProfileIcon from "@/app/ProfileIcon";
 import Modal from "@/app/Modal";
-import { LinkIcon } from "@heroicons/react/24/outline"
+import { LinkIcon, ShareIcon } from "@heroicons/react/24/outline"
 import Link from "next/link";
 
-export function ProfileForm({name, email, gradientNum, school, classGroup}: IProfileFormProps) {
-    const [isModalOpen, setModalIsOpen] = useState(false)
+export function ProfileForm({name, email, gradientNum, school, classGroup, isRegistrant, classCode}: IProfileFormProps) {
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [modalTitle, setModalTitle] = useState("")
+    const [modalBody, setModalBody] = useState("Note: If you are logged in to other devices, you will have to log out and log back in to see your updated details on those devices.")
     const [isEditable, setIsEditable] = useState(false)
     const [gradientNumState, setGradientNumState] = useState(gradientNum)
     const [res, formAction, pending] = useActionState(updateUserAction,{msg:"",data:null})
 
   useEffect(() => {
     if (res.msg!=="") {
-      setModalIsOpen(true)
+      setIsModalOpen(true)
+      setModalTitle("Updated details saved")
+      setModalBody("Note: If you are logged in to other devices, you will have to log out and log back in to see your updated details on those devices.")
       setIsEditable(false)
     }
   }, [res])
+
+  const shareCodeClick = ():void => {
+    setIsModalOpen(true)
+    setModalTitle("My class code")
+    setModalBody("")
+  }
 
     return (
       <>
         <Modal 
           isOpen={isModalOpen}
-          setIsOpen={setModalIsOpen}
-          title="Updated details saved"
-          body="Note: If you are logged in to other devices, you will have to log out and log back in to see updated data on those devices."
+          setIsOpen={setIsModalOpen}
+          title={modalTitle}
+          body={modalBody}
+          code={(modalTitle === "My class code" && classCode) || undefined}
         />
         <ProfileIcon gradientNum={gradientNumState} name={res.data?.name || name}/>
         <form        
@@ -48,7 +59,7 @@ export function ProfileForm({name, email, gradientNum, school, classGroup}: IPro
                   name="name"
                   type="name"
                   placeholder=""
-                  autoComplete="name" //TODO: change to on or off
+                  autoComplete="name"
                   required
                   className={`${isEditable ? "text-black" : "text-gray-500"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
               />
@@ -67,7 +78,7 @@ export function ProfileForm({name, email, gradientNum, school, classGroup}: IPro
               defaultValue={res.data?.email ||email}
               readOnly={!isEditable}
               placeholder=""
-              autoComplete="email" //TODO: change to on or off
+              autoComplete="email"
               required
               className={`${isEditable ? "text-black" : "text-gray-500"} bg-white w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none`}
             />
@@ -76,6 +87,8 @@ export function ProfileForm({name, email, gradientNum, school, classGroup}: IPro
             isEditable={isEditable}
             classGroup={classGroup}
             school={school}
+            isRegistrant={isRegistrant}
+            shareCodeClick={shareCodeClick}
           />
           <div>
             <div 
@@ -100,13 +113,13 @@ export function ProfileForm({name, email, gradientNum, school, classGroup}: IPro
     );
   }
 
-const ClassDetails = ({isEditable, classGroup, school}: {isEditable: boolean, classGroup: string | undefined, school: string | undefined}):JSX.Element => {
+const ClassDetails = ({isEditable, classGroup, school, isRegistrant, shareCodeClick}: {isEditable: boolean, classGroup: string | undefined, school: string | undefined, isRegistrant: boolean, shareCodeClick: () => void}):JSX.Element => {
   return (
     <>
         {classGroup === undefined ? 
           <LinkWhenEditableBtn 
             isEditable={isEditable}
-            linkText={"Join a Class"}
+            linkText={"Join a class"}
             href={"/dashboard/join-class-leaderboard"}
           />          
           :
@@ -115,12 +128,22 @@ const ClassDetails = ({isEditable, classGroup, school}: {isEditable: boolean, cl
         >
           <p>My class: <b>{classGroup}</b></p> 
           <p>My school: <b>{school}</b></p>
-          <div className="flex gap-3">
+          <div className="flex gap-4">
             <LinkWhenEditableBtn 
               isEditable={isEditable}
-              linkText={"Change Class"}
+              linkText={"Join different class"}
               href={"/dashboard/join-class-leaderboard"}
             />
+            {isRegistrant && 
+              <button 
+                disabled={!isEditable}
+                type="button"
+                className={`px-4 py-1 ${isEditable ? 'border-gray-800 dark:border-white text-black dark:text-white' : 'text-gray-400 border-gray-300 dark:border-gray-600'} text-center rounded-md border-[1.5px] bg-transparent flex items-center gap-[5px] mx-auto w-max`}
+                onClick={shareCodeClick}
+              >
+                  Share my code <ShareIcon className="size-4"/>
+              </button> 
+            }
           </div>
         </div> 
         }
@@ -132,14 +155,14 @@ const LinkWhenEditableBtn = ({isEditable, href, linkText}: {isEditable: boolean,
   return (
     isEditable ? 
     <Link 
-        className={`px-4 py-1 ${isEditable ? 'border-gray-800 dark:border-white text-black dark:text-white' : 'text-gray-400 border-gray-300 dark:border-gray-600'} text-center rounded-md border-[1.5px] bg-transparent flex items-center gap-[5px] mx-auto w-max`}
+        className={`px-4 py-1 border-gray-800 dark:border-white text-black dark:text-white text-center rounded-md border-[1.5px] bg-transparent flex items-center gap-[5px] mx-auto w-max`}
         href={href}                      
     >
         {linkText} <LinkIcon className="size-4"/>
     </Link>
     :
     <div
-      className={`px-4 py-1 ${isEditable ? 'border-gray-800 dark:border-white text-black dark:text-white' : 'text-gray-400 border-gray-300 dark:border-gray-600'} text-center rounded-md border-[1.5px] bg-transparent flex items-center gap-[5px] mx-auto w-max`}
+      className={`px-4 py-1 text-gray-400 border-gray-300 dark:border-gray-600 text-center rounded-md border-[1.5px] bg-transparent flex items-center gap-[5px] mx-auto w-max`}
     >
         {linkText} <LinkIcon className="size-4"/>
     </div>

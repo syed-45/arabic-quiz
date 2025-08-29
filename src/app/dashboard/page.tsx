@@ -46,7 +46,7 @@ export default async function Dashboard() {
     
     return (
         <>
-            <Navbar onDashboard={true} name={session.user.name} gradientNum={gradientNum}/>
+            <Navbar name={session.user.name} gradientNum={gradientNum}/>
             <LogoHeader/>
             <StatsComponent quizzesCompleted={quizzesCompleted} percentageScore={percentageScore}/>
             <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mt-5 mb-12 px-5 pb-10'>

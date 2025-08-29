@@ -15,7 +15,7 @@ import ProfileIcon from './ProfileIcon';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
-export default function Navbar({onDashboard=false, name, gradientNum} : INavbarProps): JSX.Element {
+export default function Navbar({name, gradientNum} : INavbarProps): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname()
 
@@ -35,26 +35,24 @@ export default function Navbar({onDashboard=false, name, gradientNum} : INavbarP
         </button>
         <div className='w-1/3 flex justify-center'>
           <Link href={'/dashboard'}>
-            {pathname !== '/dashboard/profile' && <>
+            {pathname !== '/dashboard/profile' && 
+            <>
               <Image 
                 src={"/icon1.png"} alt="arabic app logo white" width={50} height={50} className="rounded-md block dark:hidden" 
               />
               <Image 
                 src={"/icon2.png"} alt="arabic app logo" width={50} height={50} className="rounded-md hidden dark:block" 
               />
-              </>
-            }
+            </>}
           </Link>
         </div>
-        {onDashboard &&
+        {pathname==='/dashboard' &&
           <Link href="/dashboard/profile" className='w-1/3 flex justify-end'>
             <ProfileIcon 
               gradientNum={gradientNum}
-              onDashboard={true}
               name={name}
             />
-          </Link>
-        }
+          </Link>}
       </nav>
       <Dialog
         as='div'

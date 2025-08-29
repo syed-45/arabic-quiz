@@ -68,9 +68,14 @@ export async function checkIfClassExists(schoolName:string,groupClassName:string
   return res[0]!==undefined 
 }
 
-export async function createNewGroupClass(groupClassName:string, schoolName: string) {
+export async function createNewGroupClass(groupClassName:string, schoolName: string, userId: string) {
   try {
-    const code: { code: string }[] = await db.insert(classes).values({name: groupClassName, schoolName: schoolName}).returning({code: classes.code})
+    const code: { code: string }[] = await db.insert(classes)
+                                              .values({name: groupClassName, schoolName: schoolName, registrantId: userId})
+                                              .returning({code: classes.code})
+    await db.update(users)
+            .set({school: schoolName, class: groupClassName, isRegistrant: true})
+            .where(eq(users.id,userId))
     return code
   } catch (error) {
     console.error('Failed to insert group / class into database: ', error);
@@ -82,14 +87,26 @@ export interface IJoinClassRes {
   msg: string,
   data: {
     class: string,
-    school: string
+    school: string,
+    isRegistrant: boolean
   } | null
 }
 
 export async function joinClassLeaderboard(code: string, userId: string): Promise<IJoinClassRes> {
   const res1 = (await db.select().from(classes).where(eq(classes.code,code)))[0]
-  if (res1===undefined) return {msg:'The code you have entered does not match any existing class', data:null}
-  const classData = {school: res1.schoolName, class:res1.name}
+  if (res1===undefined) return {
+    msg:'The code you have entered does not match any existing class',
+    data:null
+  }
+  const isRegistrant = res1.registrantId === userId // if user joins their registered class back from a different one
+  const classData = {
+    school: res1.schoolName,
+    class: res1.name,
+    isRegistrant: isRegistrant
+  }
   await db.update(users).set(classData).where(eq(users.id,userId))
-  return {msg:'Success', data:classData}
+  return {
+    msg:'Success', 
+    data:classData
+  }
 }

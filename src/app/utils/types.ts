@@ -71,7 +71,6 @@ export interface INavbarProps extends IProfileIconProps {}
 export interface IProfileIconProps {
     gradientNum?: number,
     name?: string,
-    onDashboard?: boolean,
 }
 
 export interface IProfileFormProps {
@@ -81,6 +80,8 @@ export interface IProfileFormProps {
     userId : string;
     classGroup? : string;
     school? : string;
+    isRegistrant: boolean;
+    classCode: Promise<string>
 }
 
 export interface IUpdateProfileRes {

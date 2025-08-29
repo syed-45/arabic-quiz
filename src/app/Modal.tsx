@@ -1,6 +1,6 @@
 "use client"
 import { Button, Dialog, DialogPanel, DialogTitle, DialogBackdrop, } from '@headlessui/react'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, Suspense, use, useState } from 'react'
 import { ClipboardIcon, CheckIcon } from '@heroicons/react/24/outline'
 
 interface IModalProps {
@@ -8,30 +8,23 @@ interface IModalProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>,
   title: string,
   body?: string,
-  code?: string,
-}
-
-const copyToClipboard = (code: string): void => {
-  navigator.clipboard.writeText(code).then(
-    () => {
-      // code copied to clipboard
-    },
-    (err) => {
-      console.log("Error: ", err);
-    }
-  );
+  code?: string | Promise<string>, 
 }
 
 const ClipboardToCheck = ({code}: {code: string}) => {
   const [showCheck, setShowCheck] = useState(false)
+
   return (
     showCheck ? 
-    <CheckIcon className='size-5 animate-fade-out' color='lightgreen'></CheckIcon>
+    <CheckIcon className='size-4 animate-fade-out' color='lightgreen'></CheckIcon>
     : 
     <ClipboardIcon className='size-4 cursor-pointer' 
       onClick={() => {
-        copyToClipboard(code)
-        setShowCheck(true)
+        navigator.clipboard.writeText(code)
+        .then(() => setShowCheck(true))
+        .catch((err) => {
+          console.log("Error: ", err);
+        })        
       }}
     />
   )
@@ -56,10 +49,19 @@ export default function Modal({isOpen, setIsOpen, title, body, code}: IModalProp
               <DialogTitle as="h3" className="text-base/7 font-medium text-white">
                 {title}
               </DialogTitle>
-              <p className="mt-2 text-sm/6 text-white/90">
+              <div className="mt-2 text-sm/6 text-white/90">
                 {body}
-                {code!==undefined && body!=="" && <p className='mt-2 backdrop-blur-xl px-4 py-1 rounded-md w-max mx-auto flex justify-center items-center gap-1'>{code} <ClipboardToCheck code={code}/> </p>}
-              </p>
+                {typeof code === 'string' && body!=="" &&
+                <div className='mt-2 backdrop-blur-xl px-4 py-1 rounded-md w-max mx-auto flex justify-center items-center gap-1'>
+                  {code} <ClipboardToCheck code={code}/> 
+                </div>}
+                {typeof code === 'object' &&
+                <Suspense fallback={<div className='mt-2 backdrop-blur-xl h-8 w-32 rounded-md mx-auto animate-pulse'></div>}>
+                  <Code codePromise={code} />
+                </Suspense>
+                }
+                
+              </div>
               <div className="mt-4">
                 <Button
                   className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
@@ -73,5 +75,14 @@ export default function Modal({isOpen, setIsOpen, title, body, code}: IModalProp
         </div>
       </Dialog>
     </>
+  )
+}
+
+const Code = ({codePromise}: {codePromise: Promise<string>}) => {
+  const code = use(codePromise)
+  return (
+    <div className='mt-2 backdrop-blur-xl px-4 py-1 h-8 w-32 rounded-md mx-auto flex justify-center items-center gap-1'>
+      {code} <ClipboardToCheck code={code}/>
+    </div>
   )
 }

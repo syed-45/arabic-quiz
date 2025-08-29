@@ -14,6 +14,7 @@ declare module "next-auth" {
    gradientNum: number,
    school?:string,
    class?: string,
+   isRegistrant: boolean
   }
 }
 
@@ -45,6 +46,7 @@ export const { handlers, auth, signIn, signOut, unstable_update} = NextAuth({
         token.gradientNum = user.gradientNum
         token.class = user.class
         token.school = user.school
+        token.isRegistrant = user.isRegistrant
       }
       if (trigger==="update") {
         token.name = session.user.name
@@ -52,6 +54,7 @@ export const { handlers, auth, signIn, signOut, unstable_update} = NextAuth({
         token.gradientNum = session.user.gradientNum
         token.class = session.user.class
         token.school = session.user.school
+        token.isRegistrant = session.user.isRegistrant
       }
       return token
     },
@@ -63,11 +66,14 @@ export const { handlers, auth, signIn, signOut, unstable_update} = NextAuth({
         session.user.gradientNum = token.gradientNum as number
         session.user.class = token.class as string || undefined
         session.user.school = token.school as string || undefined
+        session.user.isRegistrant = token.isRegistrant as boolean
       }
       session.user.id = token.id as string
       session.user.gradientNum = token.gradientNum as number
       session.user.class = token.class as string || undefined
       session.user.school = token.school as string || undefined
+      session.user.isRegistrant = token.isRegistrant as boolean
+
       return session
     },
   }
