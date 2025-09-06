@@ -1,11 +1,9 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { and, eq } from 'drizzle-orm';
-import postgres from 'postgres';
 import { genSaltSync, hashSync } from 'bcrypt-ts';
 import { classes, schools, users } from './schema';
 
-let client = postgres(process.env.POSTGRES_URL!);
-export let db = drizzle(client);
+export let db = drizzle({connection:process.env.POSTGRES_URL!,casing:'snake_case'});
 
 export async function getUser(email: string) {
   try {
