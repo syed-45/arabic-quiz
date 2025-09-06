@@ -66,11 +66,12 @@ export interface StatsComponentProps {
     quizzesCompleted: number;
 }
 
-export interface INavbarProps extends IProfileIconProps {}
 
 export interface IProfileIconProps {
     gradientNum?: number,
     name?: string,
+    route: '/dashboard' | '/dashboard/profile' | '/dashboard/leaderboard',
+    loading?: boolean
 }
 
 export interface IProfileFormProps {
@@ -90,4 +91,10 @@ export interface IUpdateProfileRes {
         name: string
         email: string,
     } | null
+}
+
+export interface ILeaderboardData {
+    name: string | null;
+    gradientNum: number;
+    overallScore: string | null;
 }

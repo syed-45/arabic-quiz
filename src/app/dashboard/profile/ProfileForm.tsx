@@ -11,7 +11,7 @@ import Link from "next/link";
 export function ProfileForm({name, email, gradientNum, school, classGroup, isRegistrant, classCode}: IProfileFormProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalTitle, setModalTitle] = useState("")
-    const [modalBody, setModalBody] = useState("Note: If you are logged in to other devices, you will have to log out and log back in to see your updated details on those devices.")
+    const [modalBody, setModalBody] = useState("")
     const [isEditable, setIsEditable] = useState(false)
     const [gradientNumState, setGradientNumState] = useState(gradientNum)
     const [res, formAction, pending] = useActionState(updateUserAction,{msg:"",data:null})
@@ -40,7 +40,11 @@ export function ProfileForm({name, email, gradientNum, school, classGroup, isReg
           body={modalBody}
           code={(modalTitle === "My class code" && classCode) || undefined}
         />
-        <ProfileIcon gradientNum={gradientNumState} name={res.data?.name || name}/>
+        <ProfileIcon 
+          gradientNum={gradientNumState} 
+          name={res.data?.name || name}
+          route="/dashboard/profile"
+        />
         <form        
           action={formAction}
           className="flex flex-col gap-7 mt-2 w-full max-w-md text-[14px]"

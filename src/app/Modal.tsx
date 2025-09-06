@@ -51,11 +51,11 @@ export default function Modal({isOpen, setIsOpen, title, body, code}: IModalProp
               </DialogTitle>
               <div className="mt-2 text-sm/6 text-white/90">
                 {body}
-                {typeof code === 'string' && body!=="" &&
+                {typeof code === 'string' && body!=="" && //show when initially registering classs
                 <div className='mt-2 backdrop-blur-xl px-4 py-1 rounded-md w-max mx-auto flex justify-center items-center gap-1'>
                   {code} <ClipboardToCheck code={code}/> 
-                </div>}
-                {typeof code === 'object' &&
+                </div>} 
+                {typeof code === 'object' &&  // when fetching code from profile pge
                 <Suspense fallback={<div className='mt-2 backdrop-blur-xl h-8 w-32 rounded-md mx-auto animate-pulse'></div>}>
                   <Code codePromise={code} />
                 </Suspense>

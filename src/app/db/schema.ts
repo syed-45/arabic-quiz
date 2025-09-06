@@ -15,15 +15,13 @@ export const users = pgTable("user", {
   school: text("school"),
   class: text("class"),
   isRegistrant: boolean("isRegistrant").$default(() => false).notNull(),
-}, (table) => {
-  return {
-    fk: foreignKey({
+  }, (table) => [   
+    foreignKey({
       columns: [table.school, table.class],
       foreignColumns: [classes.schoolName, classes.name],
       name: "user_school_class_fk"
-    })
-  }
-})
+    })]
+  )
 // TODO: null passwords mean ERROR when signinng in with credentials but email for different provider account
 
 export const schools = pgTable('schools', {

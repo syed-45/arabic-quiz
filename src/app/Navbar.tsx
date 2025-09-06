@@ -9,13 +9,13 @@ import {
   SunIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { INavbarProps } from './utils/types';
 import { Switch } from '@headlessui/react'
 import ProfileIcon from './ProfileIcon';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react'
 
-export default function Navbar({name, gradientNum} : INavbarProps): JSX.Element {
+export default function Navbar(): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname()
 
@@ -47,12 +47,8 @@ export default function Navbar({name, gradientNum} : INavbarProps): JSX.Element 
           </Link>
         </div>
         {pathname==='/dashboard' &&
-          <Link href="/dashboard/profile" className='w-1/3 flex justify-end'>
-            <ProfileIcon 
-              gradientNum={gradientNum}
-              name={name}
-            />
-          </Link>}
+        <ProfileLink/>
+        }
       </nav>
       <Dialog
         as='div'
@@ -120,22 +116,48 @@ export default function Navbar({name, gradientNum} : INavbarProps): JSX.Element 
   );
 }
 
+const ProfileLink = () => {
+  const {data, status} = useSession()
+  if (status==='loading') {
+    return(
+    <div className='w-1/3 flex justify-end'>
+      <ProfileIcon
+        gradientNum={0}
+        name='name' // intended
+        route='/dashboard'
+        loading={true}
+      />
+    </div>
+    )
+  }
+  if (!data?.user?.name) return <></>
+  const {name, gradientNum} = data.user
+  return (
+    <Link href="/dashboard/profile" className='w-1/3 flex justify-end'>
+      <ProfileIcon 
+        gradientNum={gradientNum}
+        name={name}
+        route='/dashboard'
+      />
+    </Link>
+  )
+}
+
 const DarkModeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme();
-  const [darkMode, setDarkMode] = useState(resolvedTheme==="dark")
+  const [isDarkMode, setIsDarkMode] = useState(resolvedTheme==="dark")
 
   useEffect(() => {
-    setTheme(prev => darkMode === true ? "dark" : "light");
-    // console.log(theme)
-  }, [darkMode, setTheme])
+    setTheme(prev => isDarkMode === true ? "dark" : "light");
+  }, [isDarkMode, setTheme])
 
   return (
     <div className='flex flex-grow gap-3 mt-2'>
       <SunIcon className='size-6 block dark:hidden ' />
       <MoonIcon className='size-6 hidden dark:block' />
       <Switch
-        checked={darkMode}
-        onChange={setDarkMode}
+        checked={isDarkMode}
+        onChange={setIsDarkMode}
         className="group relative flex h-7 w-14 cursor-pointer rounded-full bg-gray-400 p-1 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-gray-600"
       >
         <span
