@@ -35,11 +35,9 @@ export const classes = pgTable('classes', {
   registrantId: text('registrantId').notNull().references(():AnyPgColumn => users.id, { onDelete: 'cascade' }),
 }, (table) => {
   return {
-    pk: primaryKey({ columns: [table.name, table.schoolName] }),
+    pk: primaryKey({ columns: [table.name, table.schoolName] }), //todo change from deprecated version
   };
 })
-
-
 
  
 export const accounts = pgTable(

@@ -1,14 +1,14 @@
-export function Form({
-  action,
-  children,
-}: {
-  action: any;
-  children: React.ReactNode;
-}) {
+'use client'
+
+import { useActionState } from "react";
+import { signInAction } from "./action";
+
+export function Form({children,}: {children: React.ReactNode;}) {
+  const [res, formAction] = useActionState(signInAction,null)
   return (
     <form
-      action={action}
-      className="space-y-4"
+      action={formAction}
+      className="text-sm"
     >
       <div>
         <label
@@ -24,7 +24,7 @@ export function Form({
           placeholder="user@acme.com"
           autoComplete="email"
           required
-          className="bg-white text-black w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none "
+          className={`mb-4 bg-white text-black w-full px-4 py-2 ${res?.invalidCredentials ? 'border-2 border-red-500' : 'border border-gray-300'} rounded-md focus:outline-none`}
         />
       </div>
       <div>
@@ -39,8 +39,9 @@ export function Form({
           name="password"
           type="password"
           required
-          className="bg-white text-black w-full px-4 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none"
+          className={`mb-6 bg-white text-black w-full px-4 py-2 ${res?.invalidCredentials ? 'border-2 border-red-500' : 'border border-gray-300'} rounded-md focus:outline-none`}
         />
+        {res?.invalidCredentials && <p className="text-red-600 dark:text-red-400 -mt-4 mb-2">Invalid login</p>} 
       </div>
       {children}
     </form>

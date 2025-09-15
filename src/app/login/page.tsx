@@ -1,33 +1,16 @@
 import { Form } from './form';
-import { SubmitButton } from '../submit-button';
+import { SubmitButton } from '../register/submit-button';
 import Image from 'next/image';
 import { signIn } from '../auth';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { AuthError } from 'next-auth';
+
 
 export default function Login() {
     return (
         <div className="flex flex-col justify-center items-center h-screen">
             <div className="w-min-content sm:w-[500px] px-10 py-12 border-2 border-gray-700 dark:border-gray-200 dark:bg-gradient-to-tr dark:from-black dark:to-gray-700 bg-gradient-to-t from-gray-200 via-gray-100 to-gray-200 shadow-md rounded-md">
                 <h1 className="text-2xl font-semibold mb-6">Sign In</h1>                
-                <Form 
-                    action={async (formData: FormData) => {
-                        'use server';
-                        try {
-                            await signIn('credentials', {
-                                redirectTo: '/dashboard',
-                                email: formData.get('email') as string,
-                                password: formData.get('password') as string,
-                            });
-                        } catch (error) {
-                            if (error instanceof AuthError && error.type === 'CredentialsSignin') {
-                                redirect('/login/error_401_unauthorised')                                
-                            }
-                            throw error;                            
-                        }
-                    }}
-                >
+                <Form>
                     <SubmitButton>Sign In</SubmitButton>
                 </Form>               
                 <form 
@@ -39,7 +22,7 @@ export default function Login() {
                 >
                     <button
                         type="submit"
-                        className="w-full py-2 px-4 bg-gradient-to-r from-gray-800 via-gray-700 to bg-gray-800 text-white rounded-md transition-colors flex items-center justify-center gap-2"
+                        className="mb-4 w-4/5 sm:w-3/5 mx-auto py-2 px-4 text-sm bg-gradient-to-r from-gray-800 via-gray-700 to bg-gray-800 text-white rounded-md transition-colors flex items-center justify-center gap-2"
                     >
                         <Image src="https://img.icons8.com/color/48/000000/google-logo.png" alt="google logo" width={20} height={20} />
                         Sign In with Google

@@ -54,8 +54,8 @@ export function Leaderboard({leaderboardData}: ILeaderboardProps):JSX.Element {
                                 <td colSpan={7}>No scores recorded yet for this class...</td>
                             </tr> //todo show users with 0 score instead
                             :
-                        leaderboardData.slice(rowPositions.rowStartPosition,rowPositions.rowEndPosition).map((user, idx) => {
-                            if (!user.name || !user.overallScore) return <></>
+                        leaderboardData.slice(rowPositions.rowStartPosition,rowPositions.rowEndPosition).map((student, idx) => {
+                            if (!student.name || !student.overallScore) return <></>
                             const animationStyle = {
                                 animation: 'puff-in-center 0.3s cubic-bezier(0.470, 0.000, 0.745, 0.715) both',
                                 animationDelay: `${rowPositions.rowStartPosition < 10 ? idx * 300 : idx * 125}ms`,
@@ -67,16 +67,16 @@ export function Leaderboard({leaderboardData}: ILeaderboardProps):JSX.Element {
                                     </td>
                                     <td className="">
                                         <ProfileIcon 
-                                            gradientNum={user.gradientNum} 
-                                            name={user.name}
+                                            gradientNum={student.gradientNum} 
+                                            name={student.name}
                                             route='/dashboard/leaderboard'
                                         />
                                     </td> 
                                     <td className={``} colSpan={4}>
-                                        {user.name.length > 25 ? user.name.slice(0,25) + '...' : user.name }
+                                        {student.name.length > 25 ? student.name.slice(0,25) + '...' : student.name }
                                     </td>
                                     <td className="">
-                                        {parseInt(user.overallScore)*150}
+                                        {parseInt(student.overallScore)*150}
                                     </td>
                                 </tr>
                             )})                                

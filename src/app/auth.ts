@@ -28,10 +28,9 @@ export const { handlers, auth, signIn, signOut, unstable_update} = NextAuth({
     Google,
     Credentials({
       async authorize({ email, password }: any) {
-        let user = await getUser(email);
-        if (user.length === 0) return null;
-        // if !user[0].password { ... }
-        let passwordsMatch = await compare(password, user[0].password!);
+        const user = await getUser(email);
+        if (user.length === 0 || !user[0].password) return null;
+        const passwordsMatch = await compare(password, user[0].password);
         if (passwordsMatch) return user[0] as any;
       },
     }),
@@ -58,15 +57,10 @@ export const { handlers, auth, signIn, signOut, unstable_update} = NextAuth({
       }
       return token
     },
-    session({ session, token, trigger }) {
-      if (!session || !session.user) return session
-      if (trigger==="update") {
-        session.user.name = token.name as string
-        session.user.email = token.email as string
-        session.user.gradientNum = token.gradientNum as number
-        session.user.class = token.class as string || undefined
-        session.user.school = token.school as string || undefined
-        session.user.isRegistrant = token.isRegistrant as boolean
+    session({ session, token , trigger}) {
+      if (!session || !session.user) return session 
+      if (trigger==='update') {
+        // todo get token expiry n keep sme
       }
       session.user.id = token.id as string
       session.user.gradientNum = token.gradientNum as number

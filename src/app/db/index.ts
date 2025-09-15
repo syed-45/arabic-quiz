@@ -1,17 +1,17 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { and, eq } from 'drizzle-orm';
 import { genSaltSync, hashSync } from 'bcrypt-ts';
-import { classes, schools, users } from './schema';
+import { accounts, classes, schools, users } from './schema';
 
 export let db = drizzle({connection:process.env.POSTGRES_URL!,casing:'snake_case'});
 
 export async function getUser(email: string) {
-  try {
-    return await db.select().from(users).where(eq(users.email, email));
-  } catch (error) {
-    console.error('Failed to fetch user:', error);
-    throw new Error('Failed to fetch user.');
-  }
+    return await db.select().from(users).where(eq(users.email, email)); 
+}
+
+export async function checkForProviderAccount(userId: string):Promise<string | null> {
+  const providerAccountSearch = await db.select().from(accounts).where(eq(accounts.userId, userId))
+  return providerAccountSearch[0].provider
 }
 
 export async function createUser(email: string, password: string, name: string) {

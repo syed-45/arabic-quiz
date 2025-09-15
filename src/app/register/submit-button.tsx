@@ -9,8 +9,7 @@ export function SubmitButton({ children }: { children: React.ReactNode }) {
     <button
       type={pending ? 'button' : 'submit'}
       aria-disabled={pending}
-      className="flex justify-center items-center w-full py-2 px-4 bg-gradient-to-r from-gray-800 via-gray-700 to bg-gray-800 text-white rounded-md transition-colors focus:outline-none"
-      // className="flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none"
+      className="flex justify-center items-center mb-4 w-4/5 sm:w-3/5 mx-auto py-2 px-4 bg-gradient-to-r from-gray-800 via-gray-700 to bg-gray-800 text-white rounded-md transition-colors focus:outline-none"      
     >
       {children}
       {pending && (
