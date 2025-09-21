@@ -24,7 +24,7 @@ export const signInAction = async(prevState: IFormResponse | null, formData: For
         if (parsedUser.success) {
             const {email, password} = parsedUser.data
             await signIn('credentials', {
-                redirect: true,
+                redirectTo: '/dashboard',
                 email: email,
                 password: password
             });
