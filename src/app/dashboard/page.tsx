@@ -16,7 +16,7 @@ export default async function Dashboard() {
          next: { revalidate: false },
     })
     if (res.status === 500) throw new Error('Error fetching chapter data on the server')
-    const allChapters: IChapterData[] = (await res.json()).result    
+    const allChapters: IChapterData[] = (await res.json()).result
 
     return (
         <>
@@ -46,8 +46,8 @@ const StatsFetchToComponents = async ({allChapters}: {allChapters: IChapterData[
 
     const transformedQuizResultsData = quizResults.reduce((acc: ITransformedQuizResultsData, curr) => {
         acc[curr.chapter_number] = { 
-        last_score: curr.last_score, 
-        no_of_questions: curr.no_of_questions 
+            last_score: curr.last_score, 
+            no_of_questions: curr.no_of_questions 
         };
         return acc;
      }, {});

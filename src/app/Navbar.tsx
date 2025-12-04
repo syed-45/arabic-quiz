@@ -117,6 +117,7 @@ export default function Navbar(): JSX.Element {
 }
 
 const ProfileLink = () => {
+  // todo: user has isRegistered TRUE when not TRUE initial login...
   const {data, status} = useSession()
   if (status==='loading') {
     return(

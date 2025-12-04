@@ -22,7 +22,6 @@ export const users = pgTable("user", {
       name: "user_school_class_fk"
     })]
   )
-// TODO: null passwords mean ERROR when signinng in with credentials but email for different provider account
 
 export const schools = pgTable('schools', {
   name: text('name').primaryKey(),
