@@ -1,7 +1,7 @@
 'use client'
 
 import { ILeaderboardData } from "@/app/utils/types";
-import ProfileIcon from "@/app/ProfileIcon";
+import ProfileIcon from "@/app/components/ProfileIcon";
 import { JSX, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 

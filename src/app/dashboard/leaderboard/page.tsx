@@ -1,7 +1,7 @@
 import { auth } from "@/app/auth";
 import { db } from "@/app/db";
 import { users, userScores } from "@/app/db/schema";
-import Navbar from "@/app/Navbar";
+import Navbar from "@/app/components/Navbar";
 import { ILeaderboardData } from "@/app/utils/types";
 import { and, desc, eq, sum } from "drizzle-orm";
 import Link from "next/link";

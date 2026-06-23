@@ -3,7 +3,7 @@
 import { JSX, useActionState, useEffect, useState } from "react";
 import { registerClassLeaderboardAction } from "./action";
 import { ISchool } from "./page";
-import Modal from "@/app/Modal";
+import Modal from "@/app/components/Modal";
 
 
 export const Form = ({listOfSchools}: {listOfSchools: ISchool[]}): JSX.Element => {

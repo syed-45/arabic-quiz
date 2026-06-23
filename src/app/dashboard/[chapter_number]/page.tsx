@@ -1,7 +1,7 @@
 import Quiz from "./Quiz"
 import { INounsData, IVerbsData } from "../../utils/types"
-import LogoHeader from "@/app/LogoHeader";
-import Navbar from "@/app/Navbar";
+import LogoHeader from "@/app/components/LogoHeader";
+import Navbar from "@/app/components/Navbar";
 export const dynamicParams = false // true | false,
 
 interface IStaticParams {

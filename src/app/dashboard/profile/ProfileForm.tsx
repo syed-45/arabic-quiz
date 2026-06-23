@@ -3,8 +3,8 @@ import { JSX, SetStateAction, use, useActionState, useEffect, useState } from "r
 import { updateUserAction } from "./action";
 import { IProfileFormProps } from "@/app/utils/types";
 import { gradientColors } from "@/app/utils/chapterGradientColours";
-import ProfileIcon from "@/app/ProfileIcon";
-import Modal from "@/app/Modal";
+import ProfileIcon from "@/app/components/ProfileIcon";
+import Modal from "@/app/components/Modal";
 import { LinkIcon, ShareIcon } from "@heroicons/react/24/outline"
 import Link from "next/link";
 

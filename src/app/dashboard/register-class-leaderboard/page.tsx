@@ -1,4 +1,4 @@
-import Navbar from '@/app/Navbar';
+import Navbar from '@/app/components/Navbar';
 import { Form } from './Form';
 export interface ISchool {
     name: string

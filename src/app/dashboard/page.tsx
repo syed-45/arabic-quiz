@@ -1,10 +1,10 @@
 import { IChapterData, IScoreTextProps, ITransformedQuizResultsData, IUserScore } from '../utils/types'
-import LogoHeader from '../LogoHeader';
-import Navbar from '../Navbar'
+import LogoHeader from '../components/LogoHeader';
+import Navbar from '../components/Navbar'
 import Link from "next/link";
 import { IChapterCardProps } from "../utils/types"
 import { darkGradientColors, gradientColors } from "../utils/chapterGradientColours";
-import { StatsComponent } from '../StatsComponent';
+import { StatsComponent } from '../components/StatsComponent';
 import { JSX, Suspense } from 'react';
 import { cookies } from 'next/headers';
 import { SessionProvider } from 'next-auth/react';
@@ -23,7 +23,7 @@ export default async function Dashboard() {
             <SessionProvider>
                 <Navbar/>
             </SessionProvider>
-            <LogoHeader/>
+            <LogoHeader/>            
             <Suspense fallback={<StatsFetchToComponentsFallback allChapters={allChapters}/>}>
                 <StatsFetchToComponents allChapters={allChapters}/>           
             </Suspense>
@@ -55,7 +55,10 @@ const StatsFetchToComponents = async ({allChapters}: {allChapters: IChapterData[
     return (
         <>
             <StatsComponent quizzesCompleted={quizzesCompleted} percentageScore={percentageScore}/>
-            <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mt-5 mb-12 px-5 pb-10'>                
+            <Link href={'/dashboard/sarf-quiz'} className='text-center tracking-wider my-4 mx-auto px-5 rounded-md w-fit block'>
+                Try the <span className='bg-clip-text text-transparent animate-moving-gradient-bg bg-[length:200%_200%] bg-gradient-to-tr from-yellow-500 to-red-500 font-semibold'>ṣarf</span> quiz
+            </Link>
+            <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mb-12 px-5 pb-10'>                
                 {allChapters.map((chapter) => {
                     const chapterIsAttempted = transformedQuizResultsData[chapter.chapterNumber] !== undefined
                     return (
@@ -75,13 +78,13 @@ const StatsFetchToComponents = async ({allChapters}: {allChapters: IChapterData[
 const StatsFetchToComponentsFallback = ({allChapters}: {allChapters: IChapterData[]}) => {
     return (
         <>
-            <div className='grid grid-cols-2 pt-5 px-5 text-7xl sm:text-9xl sm:py-7 max-w-screen-sm mx-auto gap-x-5 gap-y-2'>
+            <div className='grid grid-cols-2 pt-5 pb-5 px-5 text-7xl sm:text-9xl sm:py-7 max-w-screen-sm mx-auto gap-x-5 gap-y-2'>
                 <div className="text-transparent bg-gradient-to-bl from-gray-400 to-gray-300 dark:from-gray-600 dark:to-gray-400 animate-pulse leading-[0.83] sm:leading-[0.79] w-[60px] sm:w-[130px] mx-auto rounded-md">16</div>
                 <div className="text-transparent bg-gradient-to-bl from-gray-400 to-gray-300 dark:from-gray-600 dark:to-gray-400 animate-pulse leading-[0.83] sm:leading-[0.79] w-[60px] sm:w-[130px] mx-auto rounded-md">16</div>
                 <div className="text-xs sm:text-base text-center font-light">QUIZZES COMPLETED</div>
                 <div className="text-xs sm:text-base text-center font-light">AVERAGE SCORE</div>
             </div>
-            <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mt-5 mb-12 px-5 pb-10'>                
+            <main className='grid grid-cols-2 max-w-screen-lg mx-auto gap-4 mb-12 px-5 pb-10'>                
                 {allChapters.map((chapter) => {
                     return (
                         <div 
