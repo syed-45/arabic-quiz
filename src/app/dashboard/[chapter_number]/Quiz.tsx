@@ -8,7 +8,7 @@ import { Finish } from "./Finish"
 import axios from "axios"
 import { darkGradientColors, gradientColors } from "@/app/utils/chapterGradientColours"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
-import Modal from "@/app/Modal"
+import Modal from "@/app/components/Modal"
 const optionButtonStyles = ['border ','border-y border-r ','border-x border-b ','border-r border-b ']
 const optionRoundedCornerStyles = ['rounded-tl-md','rounded-tr-md','rounded-bl-md','rounded-br-md']
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { JSX, useActionState, useEffect, useState } from "react";
-import Modal from "@/app/Modal";
+import Modal from "@/app/components/Modal";
 import { joinClassLeaderboardAction } from "./action";
 
 

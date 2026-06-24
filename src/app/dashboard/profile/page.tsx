@@ -1,4 +1,4 @@
-import Navbar from '@/app/Navbar';
+import Navbar from '@/app/components/Navbar';
 import { auth, signOut } from '../../auth';
 import { ProfileForm } from './ProfileForm';
 import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline"

@@ -306,7 +306,7 @@ INSERT INTO verbs (chapter_number, english, arabic_verbal_nouns, arabic_command,
                         (14, 'To make umrah', '', '', '', 'اِعْتَمَرَ'),
                         (14, 'To slaughter / sacrifice', '', '', '', 'ذَبَحَ'),
                         (14, 'To throw', '', '', '', 'رَمَى'),
-                        (14, "To make sa`ee", '', '', '', 'سَعَى'),
+                        (14, 'To make sa`ee', '', '', '', 'سَعَى'),
                         (14, 'To feel', '', '', '', 'شَعَرَ'),
                         (14, 'To take off / undress', '', '', '', 'خَلَعَ'),
                         (14, 'To fast', '', '', '', 'صَامَ'),
@@ -357,5 +357,5 @@ INSERT INTO nouns (chapter_number, english, arabic, english_plural, arabic_plura
                          (16, 'Team / Group', 'فَرِيقٌ', '', ''),
                          (16, 'Sacrifice', 'أُضْحِيَةٌ', '', ''),
                          (16, 'Capital City', 'عَاصِمَةٌ', '', ''),
-                         (16, 'Mountain', 'جَبَلٌ', '', '');
+                         (16, 'Mountain', 'جَبَلٌ', '', ''),
                          (16, 'Poor', 'فَقِيرٌ', '', '');

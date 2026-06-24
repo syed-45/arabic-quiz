@@ -1,6 +1,6 @@
 import { JSX } from "react";
-import { gradientColors } from "./utils/chapterGradientColours";
-import { IProfileIconProps } from "./utils/types";
+import { gradientColors } from "../utils/chapterGradientColours";
+import { IProfileIconProps } from "../utils/types";
 
 export default function ProfileIcon({gradientNum, name, route, loading=false}: IProfileIconProps):JSX.Element {
     type RoutesToDisplayIcon = typeof route

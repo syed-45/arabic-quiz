@@ -1,6 +1,6 @@
 'use client'
 import { JSX, useEffect, useState } from "react"
-import { StatsComponentProps } from "./utils/types"
+import { StatsComponentProps } from "../utils/types"
 
 export const StatsComponent = ({quizzesCompleted, percentageScore}: StatsComponentProps): JSX.Element => {
     const [quizzesCompletedDisplay, setQuizzesCompletedDisplay] = useState(0)
