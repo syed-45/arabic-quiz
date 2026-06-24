@@ -20,7 +20,7 @@
     "dotenv": "^16.6.1",
     "drizzle-orm": "^0.44.7",
     "geist": "^1.5.1",
-    "next": "^15.5.9",
+    "next": "^15.5.19",
     "next-auth": "5.0.0-beta.29",
     "next-themes": "^0.3.0",
     "postgres": "^3.4.7",
